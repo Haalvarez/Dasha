@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dasha Estudia 🌟</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --coral:#FF6B6B;--coral-light:#FFE5E5;--coral-dark:#CC4444;
+  --yellow:#FFD93D;--yellow-light:#FFFBE6;
+  --mint:#6BCB77;--mint-light:#E6F9E8;--mint-dark:#3A8A44;
+  --purple:#A855F7;--purple-light:#F5F0FF;
+  --blue:#4ECDC4;--blue-light:#E0F9F7;
+  --gray:#6B7280;--gray-light:#F9FAFB;--gray-border:#E5E7EB;
+  --text:#1F2937;--text-soft:#6B7280;
+  --radius:16px;--radius-sm:10px;
+  --shadow:0 4px 20px rgba(0,0,0,0.10);
+  --shadow-lg:0 8px 32px rgba(0,0,0,0.15);
+}
+body{
+  font-family:'Nunito',sans-serif;
+  background:linear-gradient(135deg,#FFF5F0 0%,#FFF9E6 50%,#F0FFF4 100%);
+  min-height:100vh;color:var(--text);
+}
+h1,h2,h3,.big{font-family:'Fredoka One',cursive}
+
+/* ─── TOP BAR ─── */
+.topbar{
+  background:white;border-bottom:2px solid var(--gray-border);
+  padding:12px 20px;display:flex;align-items:center;gap:12px;
+  box-shadow:var(--shadow);position:sticky;top:0;z-index:100;
+}
+.topbar h1{font-size:22px;color:var(--coral-dark)}
+.topbar .streak-count{
+  margin-left:auto;background:#FFF3E0;
+  border:2px solid #FB923C;border-radius:20px;
+  padding:4px 14px;font-size:15px;font-weight:800;color:#C2410C;
+}
+.topbar .star-count{
+  background:var(--yellow-light);
+  border:2px solid var(--yellow);border-radius:20px;
+  padding:4px 14px;font-size:15px;font-weight:800;color:#B45309;
+}
+
+/* ─── LAYOUT ─── */
+.container{max-width:720px;margin:0 auto;padding:20px 16px 60px}
+
+/* ─── WELCOME BANNER ─── */
+.welcome{
+  background:white;border-radius:var(--radius);border:2px solid var(--coral-light);
+  padding:20px 24px;margin-bottom:20px;box-shadow:var(--shadow);
+  display:flex;align-items:center;gap:16px;
+}
+.welcome .avatar{
+  width:60px;height:60px;border-radius:50%;
+  background:linear-gradient(135deg,var(--coral),var(--yellow));
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;flex-shrink:0;
+}
+.welcome p{font-size:15px;line-height:1.5;color:var(--text-soft)}
+.welcome strong{color:var(--coral-dark)}
+
+/* ─── SUBJECT SELECTOR ─── */
+.section-title{
+  font-family:'Fredoka One',cursive;font-size:17px;
+  color:var(--text-soft);margin-bottom:10px;letter-spacing:0.5px;
+}
+.subjects-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;
+  margin-bottom:20px;
+}
+.subject-card{
+  background:white;border:2px solid var(--gray-border);border-radius:var(--radius);
+  padding:16px 12px;text-align:center;cursor:pointer;transition:all .2s;
+  box-shadow:var(--shadow);
+}
+.subject-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.subject-card.active{border-color:var(--coral);background:var(--coral-light)}
+.subject-card .s-icon{font-size:32px;margin-bottom:6px}
+.subject-card .s-name{font-family:'Fredoka One',cursive;font-size:14px;line-height:1.3;color:var(--text)}
+.subject-card .s-count{font-size:12px;color:var(--text-soft);margin-top:4px}
+
+/* ─── MODE SELECTOR ─── */
+.mode-bar{
+  display:flex;gap:10px;margin-bottom:24px;
+  background:white;border-radius:var(--radius);padding:6px;
+  border:2px solid var(--gray-border);box-shadow:var(--shadow);
+}
+.mode-btn{
+  flex:1;padding:10px;border:none;border-radius:calc(var(--radius) - 4px);
+  font-family:'Fredoka One',cursive;font-size:16px;cursor:pointer;
+  transition:all .2s;color:var(--text-soft);background:transparent;
+}
+.mode-btn.active{background:var(--coral);color:white;box-shadow:0 2px 8px rgba(255,107,107,.4)}
+.mode-btn:hover:not(.active){background:var(--coral-light)}
+
+/* ─── FLASHCARDS ─── */
+#cards-view{}
+.progress-bar-wrap{
+  background:var(--gray-border);border-radius:8px;height:8px;
+  margin-bottom:14px;overflow:hidden;
+}
+.progress-bar{
+  height:100%;border-radius:8px;
+  background:linear-gradient(90deg,var(--coral),var(--yellow));
+  transition:width .4s ease;
+}
+.card-counter{
+  text-align:center;font-size:14px;color:var(--text-soft);
+  margin-bottom:14px;font-weight:700;
+}
+
+.flip-scene{
+  perspective:1000px;height:220px;margin-bottom:20px;cursor:pointer;
+}
+.flip-card{
+  width:100%;height:100%;position:relative;
+  transform-style:preserve-3d;transition:transform .5s ease;
+}
+.flip-card.flipped{transform:rotateY(180deg)}
+.flip-face{
+  position:absolute;inset:0;backface-visibility:hidden;
+  border-radius:var(--radius);border:2.5px solid;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:24px;text-align:center;box-shadow:var(--shadow-lg);
+}
+.flip-front{
+  background:white;border-color:var(--coral);
+}
+.flip-back{
+  background:var(--mint-light);border-color:var(--mint);
+  transform:rotateY(180deg);
+}
+.flip-face .card-emoji{font-size:36px;margin-bottom:10px}
+.flip-face .card-label{
+  font-size:11px;font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--text-soft);margin-bottom:8px;
+}
+.flip-face .card-text{
+  font-family:'Nunito',sans-serif;font-size:17px;font-weight:700;
+  line-height:1.5;color:var(--text);
+}
+.flip-face.flip-back .card-text{font-size:15px;font-weight:600;color:#1A5C22}
+.flip-hint{
+  font-size:12px;color:var(--text-soft);text-align:center;
+  margin-bottom:14px;
+}
+
+.card-nav{display:flex;gap:10px;align-items:center;justify-content:center}
+.nav-btn{
+  border:2px solid;border-radius:var(--radius-sm);padding:10px 22px;
+  font-family:'Fredoka One',cursive;font-size:16px;cursor:pointer;
+  transition:all .18s;
+}
+.nav-btn.prev{border-color:var(--coral);color:var(--coral);background:white}
+.nav-btn.prev:hover{background:var(--coral-light)}
+.nav-btn.next{border-color:var(--coral);background:var(--coral);color:white}
+.nav-btn.next:hover{background:var(--coral-dark)}
+.nav-btn:disabled{opacity:.3;cursor:default}
+
+.rhyme-box{
+  background:var(--yellow-light);border:2px solid var(--yellow);
+  border-radius:var(--radius);padding:14px 18px;margin-top:20px;
+  font-size:14px;font-weight:700;color:#7C5100;text-align:center;
+  line-height:1.6;
+}
+.rhyme-box::before{content:"🎵 ";font-size:16px}
+
+/* ─── QUIZ ─── */
+#quiz-view{}
+.quiz-progress{
+  display:flex;align-items:center;gap:10px;margin-bottom:16px;
+}
+.quiz-progress .qp-bar-wrap{flex:1;background:var(--gray-border);border-radius:8px;height:10px;overflow:hidden}
+.quiz-progress .qp-bar{height:100%;border-radius:8px;background:linear-gradient(90deg,var(--purple),var(--blue));transition:width .4s}
+.quiz-progress .qp-label{font-size:13px;font-weight:800;color:var(--text-soft);white-space:nowrap}
+
+.question-card{
+  background:white;border:2.5px solid var(--purple-light);
+  border-radius:var(--radius);padding:24px;
+  box-shadow:var(--shadow-lg);margin-bottom:16px;
+}
+.question-card .q-num{
+  font-size:12px;font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--purple);margin-bottom:8px;
+}
+.question-card .q-text{
+  font-family:'Fredoka One',cursive;font-size:18px;line-height:1.4;color:var(--text);
+}
+
+.options-grid{display:flex;flex-direction:column;gap:10px;margin-bottom:4px}
+.option-btn{
+  border:2.5px solid var(--gray-border);border-radius:var(--radius-sm);
+  padding:12px 16px;text-align:left;background:white;cursor:pointer;
+  font-family:'Nunito',sans-serif;font-size:15px;font-weight:600;
+  transition:all .18s;display:flex;align-items:center;gap:10px;color:var(--text);
+}
+.option-btn .opt-letter{
+  width:28px;height:28px;border-radius:8px;
+  background:var(--gray-light);border:1.5px solid var(--gray-border);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fredoka One',cursive;font-size:14px;flex-shrink:0;
+  transition:all .18s;
+}
+.option-btn:hover:not(:disabled){border-color:var(--purple);background:var(--purple-light)}
+.option-btn:hover:not(:disabled) .opt-letter{background:var(--purple);color:white;border-color:var(--purple)}
+.option-btn.correct{border-color:var(--mint);background:var(--mint-light)}
+.option-btn.correct .opt-letter{background:var(--mint);color:white;border-color:var(--mint-dark)}
+.option-btn.wrong{border-color:var(--coral);background:var(--coral-light)}
+.option-btn.wrong .opt-letter{background:var(--coral);color:white;border-color:var(--coral-dark)}
+.option-btn:disabled{cursor:default}
+
+.feedback-box{
+  border-radius:var(--radius-sm);padding:14px 16px;margin-top:12px;
+  font-size:14px;font-weight:700;line-height:1.5;display:none;
+}
+.feedback-box.show{display:block}
+.feedback-box.ok{background:var(--mint-light);border:2px solid var(--mint);color:var(--mint-dark)}
+.feedback-box.nope{background:var(--coral-light);border:2px solid var(--coral);color:var(--coral-dark)}
+
+.btn-next-q{
+  display:none;margin-top:14px;width:100%;
+  border:none;border-radius:var(--radius-sm);
+  padding:14px;font-family:'Fredoka One',cursive;font-size:17px;
+  background:var(--purple);color:white;cursor:pointer;transition:all .18s;
+  box-shadow:0 3px 12px rgba(168,85,247,.3);
+}
+.btn-next-q.show{display:block}
+.btn-next-q:hover{background:#9333EA;transform:translateY(-1px)}
+
+/* ─── SCORE ─── */
+#score-view{display:none;text-align:center}
+.score-card{
+  background:white;border-radius:var(--radius);border:3px solid var(--yellow);
+  padding:36px 24px;box-shadow:var(--shadow-lg);margin-bottom:20px;
+}
+.score-card .big-emoji{font-size:64px;margin-bottom:12px}
+.score-card h2{font-family:'Fredoka One',cursive;font-size:28px;color:var(--text);margin-bottom:8px}
+.score-card .score-num{
+  font-family:'Fredoka One',cursive;font-size:52px;color:var(--coral);
+  line-height:1;margin:12px 0;
+}
+.score-card .score-msg{font-size:16px;font-weight:700;color:var(--text-soft);line-height:1.5}
+.stars-row{display:flex;justify-content:center;gap:8px;margin:16px 0;font-size:36px}
+.btn-retry{
+  border:none;border-radius:var(--radius-sm);
+  padding:14px 36px;font-family:'Fredoka One',cursive;font-size:18px;
+  background:var(--coral);color:white;cursor:pointer;
+  box-shadow:0 4px 14px rgba(255,107,107,.35);transition:all .2s;
+  margin:6px;
+}
+.btn-retry:hover{background:var(--coral-dark);transform:translateY(-2px)}
+.btn-retry.secondary{background:white;color:var(--coral);border:2.5px solid var(--coral)}
+
+/* ─── EMPTY STATE ─── */
+.empty{
+  text-align:center;padding:48px 24px;
+  background:white;border-radius:var(--radius);
+  border:2px dashed var(--gray-border);color:var(--text-soft);
+}
+.empty .e-icon{font-size:48px;margin-bottom:12px}
+
+/* ─── ANIMATIONS ─── */
+@keyframes pop{0%{transform:scale(.85);opacity:0}70%{transform:scale(1.04)}100%{transform:scale(1);opacity:1}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.pop{animation:pop .3s ease forwards}
+.shake{animation:shake .3s ease}
+
+/* ─── AUDIO PLAYER ─── */
+.audio-box{
+  background:white;border-radius:var(--radius);
+  border:2px solid #FFD93D;
+  padding:18px 20px;margin-bottom:20px;box-shadow:var(--shadow);
+}
+.audio-box-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.audio-box-icon{
+  width:48px;height:48px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--yellow),var(--coral));
+  display:flex;align-items:center;justify-content:center;font-size:22px;
+}
+.audio-box-title{font-family:'Fredoka One',cursive;font-size:17px;color:var(--text);line-height:1.2}
+.audio-box-sub{font-size:13px;color:var(--text-soft);font-weight:600;margin-top:2px}
+.audio-box audio{width:100%;border-radius:var(--radius-sm);outline:none;display:block}
+
+/* ─── SCORE META (racha + mejor puntaje) ─── */
+.score-meta{
+  display:flex;gap:10px;justify-content:center;flex-wrap:wrap;
+  margin-bottom:16px;
+}
+.score-meta-item{
+  background:white;border:2px solid var(--gray-border);
+  border-radius:var(--radius-sm);padding:10px 18px;
+  font-size:14px;font-weight:700;color:var(--text-soft);
+  display:flex;align-items:center;gap:6px;
+}
+.score-meta-item strong{color:var(--text)}
+.new-record{
+  background:var(--yellow);color:#7C5100;
+  border-radius:20px;padding:2px 10px;font-size:12px;font-weight:800;
+}
+
+/* ─── FOOTER ─── */
+.app-footer{text-align:center;font-size:12px;color:var(--text-soft);margin-top:32px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div style="font-size:26px">📚</div>
+  <h1>Dasha Estudia</h1>
+  <div class="streak-count" id="streak-display">🔥 ¡Empezá hoy!</div>
+  <div class="star-count" id="total-stars">⭐ 0 puntos</div>
+</div>
+
+<div class="container">
+
+  <!-- WELCOME -->
+  <div class="welcome">
+    <div class="avatar">🦋</div>
+    <div>
+      <p><strong>¡Hola, Dasha!</strong> 👋 Acá encontrás tus tarjetas y cuestionarios.<br>
+      Elegí una materia y empezá cuando quieras. <strong>¡Vos podés!</strong> 💪</p>
+    </div>
+  </div>
+
+  <!-- SUBJECT SELECTOR -->
+  <div class="section-title">📖 Elegí una materia</div>
+  <div class="subjects-grid" id="subjects-grid"></div>
+
+  <!-- MODE SELECTOR -->
+  <div class="mode-bar" id="mode-bar" style="display:none">
+    <button class="mode-btn active" onclick="setMode('cards')" id="btn-mode-cards">🃏 Tarjetas</button>
+    <button class="mode-btn" onclick="setMode('quiz')" id="btn-mode-quiz">❓ Cuestionario</button>
+  </div>
+
+  <!-- SUBJECT AUDIO (aparece solo si la materia tiene audio) -->
+  <div id="subject-audio" class="audio-box" style="display:none">
+    <div class="audio-box-header">
+      <div class="audio-box-icon">🎧</div>
+      <div>
+        <div class="audio-box-title" id="audio-title"></div>
+        <div class="audio-box-sub" id="audio-sub">Debate NotebookLM · Escuchá antes de estudiar</div>
+      </div>
+    </div>
+    <audio id="audio-player" controls style="width:100%;border-radius:10px;display:block">
+      <source id="audio-source" src="" type="audio/mp4">
+    </audio>
+  </div>
+
+  <!-- FLASHCARDS -->
+  <div id="cards-view" style="display:none">
+    <div class="progress-bar-wrap"><div class="progress-bar" id="card-progress"></div></div>
+    <div class="card-counter" id="card-counter"></div>
+
+    <div class="flip-scene" onclick="flipCard()">
+      <div class="flip-card" id="flip-card">
+        <div class="flip-face flip-front">
+          <div class="card-emoji" id="card-emoji-front">❓</div>
+          <div class="card-label">Pregunta</div>
+          <div class="card-text" id="card-text-front"></div>
+        </div>
+        <div class="flip-face flip-back">
+          <div class="card-emoji" id="card-emoji-back">💡</div>
+          <div class="card-label">Respuesta</div>
+          <div class="card-text" id="card-text-back"></div>
+        </div>
+      </div>
+    </div>
+    <div class="flip-hint">👆 Tocá la tarjeta para ver la respuesta</div>
+
+    <div class="card-nav">
+      <button class="nav-btn prev" id="btn-prev" onclick="changeCard(-1)">← Anterior</button>
+      <button class="nav-btn next" id="btn-next" onclick="changeCard(1)">Siguiente →</button>
+    </div>
+
+    <div class="rhyme-box" id="card-rhyme" style="display:none"></div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz-view" style="display:none">
+    <div class="quiz-progress">
+      <div class="qp-bar-wrap"><div class="qp-bar" id="qp-bar"></div></div>
+      <div class="qp-label" id="qp-label"></div>
+    </div>
+
+    <div class="question-card" id="question-card">
+      <div class="q-num" id="q-num"></div>
+      <div class="q-text" id="q-text"></div>
+    </div>
+
+    <div class="options-grid" id="options-grid"></div>
+    <div class="feedback-box" id="feedback-box"></div>
+    <button class="btn-next-q" id="btn-next-q" onclick="nextQuestion()">Siguiente pregunta →</button>
+  </div>
+
+  <!-- SCORE -->
+  <div id="score-view">
+    <div class="score-card">
+      <div class="big-emoji" id="score-emoji"></div>
+      <h2 id="score-title"></h2>
+      <div class="score-num" id="score-num"></div>
+      <div class="stars-row" id="score-stars"></div>
+      <div class="score-msg" id="score-msg"></div>
+    </div>
+    <div class="score-meta" id="score-meta"></div>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn-retry" onclick="retryQuiz()">🔄 Intentar de nuevo</button>
+      <button class="btn-retry secondary" onclick="goToCards()">🃏 Ver tarjetas</button>
+    </div>
+  </div>
+
+  <div class="app-footer">
+    Creado con ❤️ para Dasha · Podés agregar más materias editando el archivo
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════
+   ★  CONFIG  —  AGREGÁ MATERIAS ACÁ ABAJO  ★
+   ══════════════════════════════════════════════ */
+
+const SUBJECTS = [
+
+  /* ── CIUDADANÍA: CAP 1 ── */
+  {
+    id: 'ciudadania-cap1',
+    name: 'Ciudadanía',
+    subtitle: 'La Libertad',
+    icon: '🦋',
+    color: '#FF6B6B',
+    audio: 'Por_qu%C3%A9_no_somos_como_las_hormigas.m4a',
+    audioTitle: '¿Por qué no somos como las hormigas?',
+    flashcards: [
+      {
+        front: '¿Qué es la etología?',
+        back: 'La ciencia que estudia el comportamiento de los animales en su hábitat natural. 🐜',
+        emoji: '🔬'
+      },
+      {
+        front: '¿Los animales actúan libremente?',
+        back: 'No. Siguen sus instintos — sus genes les "dicen" qué hacer. ¡No tienen otra opción! 🧬',
+        emoji: '🐝'
+      },
+      {
+        front: '¿Qué es la "conducta"?',
+        back: 'El conjunto de acciones con que un ser vivo responde a una situación. Por ejemplo: huir, atacar, ayudar... 🦎',
+        emoji: '💡'
+      },
+      {
+        front: '¿Por qué los humanos SÍ somos libres?',
+        back: 'Porque podemos elegir entre distintas opciones. No estamos obligados solo por nuestros genes. ¡Somos conscientes! 🧠',
+        emoji: '🧠'
+      },
+      {
+        front: '¿Qué son los "condicionamientos"?',
+        back: 'Factores que influyen en cómo actuamos:\n🌍 El lugar donde vivimos\n🧬 Nuestro cuerpo\n👥 Las otras personas\n💻 La tecnología',
+        emoji: '🌍'
+      },
+      {
+        front: '¿Ser libre significa hacer todo lo que queremos?',
+        back: 'No. Ser libre es poder responder de distintas maneras a lo que nos pasa — aunque no siempre elijamos lo que nos pasa. 🦋',
+        emoji: '🤔'
+      },
+      {
+        front: '¿Qué es la responsabilidad?',
+        back: 'Es hacerse cargo de las consecuencias de lo que elegimos hacer. Si fui libre, soy responsable. ⚖️',
+        emoji: '⚖️'
+      },
+      {
+        front: '¿Qué es la coacción?',
+        back: 'Una fuerza externa que nos obliga a actuar contra nuestra voluntad. Cuando hay coacción fuerte, no somos responsables. 🚫',
+        emoji: '🚫'
+      },
+      {
+        front: '¿Cuál es la diferencia entre moral y ética?',
+        back: '🔵 MORAL = las normas que seguimos\n🟣 ÉTICA = reflexionar y preguntarse POR QUÉ existen esas normas 💭',
+        emoji: '💭'
+      },
+      {
+        front: '¿Cuáles son los 4 aspectos de una acción libre?',
+        back: '🎯 1. MOTIVO — ¿por qué actué?\n🏁 2. FIN — ¿para qué?\n🛠️ 3. MEDIOS — ¿cómo?\n📊 4. RESULTADOS — ¿qué pasó?',
+        emoji: '🎯'
+      }
+    ],
+    quiz: [
+      {
+        q: '¿Por qué las hormigas guerreras NO pueden ser consideradas "valientes"?',
+        opts: ['Porque son muy pequeñas','Porque actúan por instinto, sin poder elegir','Porque no tienen corazón','Porque viven bajo tierra'],
+        correct: 1,
+        explanation: '¡Exacto! La valentía necesita una decisión libre. Las hormigas no eligen — sus genes las programan para defender el hormiguero. 🐜'
+      },
+      {
+        q: 'Un chico elige estudiar aunque tiene ganas de jugar. Esto muestra que...',
+        opts: ['Está siendo castigado','No tiene libertad','Es libre: elige lo que quiere de verdad, no solo lo que le apetece','Sus padres lo obligan a hacerlo'],
+        correct: 2,
+        explanation: '¡Correcto! Ser libre es hacer lo que verdaderamente queremos, no solo lo que sentimos en el momento. 💪'
+      },
+      {
+        q: '¿Cuál de estos es un condicionamiento de la acción humana?',
+        opts: ['El color del cielo','El lugar geográfico donde vivimos','La cantidad de planetas del sistema solar','El color de los ojos de los dinosaurios'],
+        correct: 1,
+        explanation: '¡Muy bien! Vivir en un lugar frío o caliente, por ejemplo, condiciona cómo nos vestimos y qué actividades hacemos. 🌍'
+      },
+      {
+        q: 'El escorpión pica a la rana aunque prometió no hacerlo. ¿Por qué no se lo puede considerar responsable?',
+        opts: ['Porque dijo "lo siento" después','Porque no puede evitarlo — es su naturaleza, no una elección','Porque es un animal pequeño','Porque la rana lo provocó primero'],
+        correct: 1,
+        explanation: '¡Correcto! El escorpión actúa por instinto. Para ser responsable, primero hay que ser libre. ⚖️'
+      },
+      {
+        q: '¿Cuándo la ignorancia nos quita responsabilidad?',
+        opts: ['Cuando no estudiamos para el examen','Cuando no sabíamos algo que era imposible que supiéramos','Siempre que digamos "no sabía"','Cuando somos chicos automáticamente'],
+        correct: 1,
+        explanation: '¡Exacto! Solo la ignorancia que no podíamos evitar nos quita responsabilidad. Si podías saber y elegiste no enterarte, igual sos responsable. 🧐'
+      },
+      {
+        q: '¿Qué diferencia hay entre moral y ética?',
+        opts: ['Son exactamente lo mismo, ninguna diferencia','La moral son las normas; la ética es reflexionar sobre esas normas','La ética es para filósofos, la moral para religiosos','La moral es más importante que la ética'],
+        correct: 1,
+        explanation: '¡Muy bien! La moral nos dice "no mentir". La ética se pregunta: ¿por qué está mal mentir? 💭'
+      },
+      {
+        q: '¿Cuál de estos es el "fin" de una acción?',
+        opts: ['El momento en que algo termina','Los materiales que usamos para hacer algo','La intención u objetivo que tenemos al actuar','Lo que siente otra persona cuando actuamos'],
+        correct: 2,
+        explanation: '¡Correcto! El "fin" es el para qué, la meta que tenemos en mente cuando actuamos. 🏁'
+      },
+      {
+        q: 'Libertad y responsabilidad van...',
+        opts: ['En caminos separados — no tienen relación','De la mano: si sos libre, también sos responsable','En contra una de la otra','Solo en los adultos mayores de 18 años'],
+        correct: 1,
+        explanation: '¡Exacto! Si sos libre para actuar, también sos responsable por lo que hiciste. ¡Una no va sin la otra! 🌟'
+      }
+    ],
+    rhymes: [
+      'El animal sigue su instinto sin parar,\nel humano puede elegir cómo actuar. 🐜',
+      'Ser libre no es hacer lo que me gusta ya,\nes elegir con la cabeza lo que más me va. 🦋',
+      'Libertad y responsabilidad van de la mano,\nsi elegí actuar, hago cargo de lo que causé, hermano. ⚖️',
+      'La moral son las normas que seguimos todos,\nla ética pregunta: ¿por qué de esos modos? 💭'
+    ]
+  },
+
+  /* ══════════════════════════════════════
+   ★  PARA AGREGAR UNA MATERIA NUEVA:     ★
+   Copiá el bloque de arriba               ★
+   y editá id, name, subtitle, icon,       ★
+   color, flashcards y quiz.               ★
+   ══════════════════════════════════════ */
+
+  /* ── EJEMPLO: MATERIA PLACEHOLDER ── */
+  {
+    id: 'proximamente',
+    name: 'Próximamente',
+    subtitle: '¡Más materias ya vienen!',
+    icon: '🚀',
+    color: '#A855F7',
+    flashcards: [
+      {front: '¿Qué materia viene pronto?', back: '¡La que vos más necesitás! Pedile a papá que agregue el contenido acá. 😊', emoji: '🚀'}
+    ],
+    quiz: [
+      {q: '¿Dasha es buena estudiante?', opts: ['Sí, mucho!','¡Sí, muchísimo!','¡Claro que sí!','¡La mejor!'], correct: 0, explanation: '¡Todas son correctas, Dasha! ⭐'}
+    ],
+    rhymes: ['¡Pronto habrá más materias para explorar,\nDasha siempre lista para aprender más! 🚀']
+  }
+
+]; /* ← FIN DE SUBJECTS */
+
+/* ═══════════ STREAK & SCORES ═══════════ */
+function loadStreak(){
+  return parseInt(localStorage.getItem('dasha_streak')||'0');
+}
+function updateStreakDisplay(){
+  const s = loadStreak();
+  document.getElementById('streak-display').textContent =
+    s > 0 ? `🔥 ${s} día${s!==1?'s':''}` : '🔥 ¡Empezá hoy!';
+}
+function markActivityToday(){
+  const today = new Date().toDateString();
+  const last  = localStorage.getItem('dasha_last_active');
+  if(last === today) return loadStreak();
+  const yest = new Date(); yest.setDate(yest.getDate()-1);
+  let s = (last === yest.toDateString()) ? loadStreak()+1 : 1;
+  localStorage.setItem('dasha_streak', s);
+  localStorage.setItem('dasha_last_active', today);
+  const best = parseInt(localStorage.getItem('dasha_best_streak')||'0');
+  if(s > best) localStorage.setItem('dasha_best_streak', s);
+  updateStreakDisplay();
+  return s;
+}
+function getBestPct(subjectId){
+  return parseInt(localStorage.getItem('dasha_best_'+subjectId)||'-1');
+}
+function saveBestPct(subjectId, pct){
+  const prev = getBestPct(subjectId);
+  if(pct > prev){ localStorage.setItem('dasha_best_'+subjectId, pct); return true; }
+  return false;
+}
+
+/* ═══════════ STATE ═══════════ */
+let currentSubject = null;
+let currentMode = 'cards';
+let currentCardIdx = 0;
+let cardOrder = [];
+let quizOrder = [];
+let currentQIdx = 0;
+let score = 0;
+let answered = false;
+let totalStars = parseInt(localStorage.getItem('dasha_stars')||'0');
+
+/* ═══════════ INIT ═══════════ */
+function init(){
+  renderSubjects();
+  updateStarDisplay();
+  updateStreakDisplay();
+}
+
+function updateStarDisplay(){
+  document.getElementById('total-stars').textContent = '⭐ ' + totalStars + ' puntos';
+}
+
+function renderSubjects(){
+  const grid = document.getElementById('subjects-grid');
+  grid.innerHTML = '';
+  SUBJECTS.forEach(s => {
+    const d = document.createElement('div');
+    d.className = 'subject-card';
+    d.innerHTML = `<div class="s-icon">${s.icon}</div>
+      <div class="s-name">${s.name}<br><span style="font-family:Nunito;font-size:12px;font-weight:600;color:#6B7280">${s.subtitle}</span></div>
+      <div class="s-count">📖 ${s.flashcards.length} tarjetas · ❓ ${s.quiz.length} preguntas</div>`;
+    d.onclick = () => selectSubject(s.id);
+    grid.appendChild(d);
+  });
+}
+
+/* ═══════════ SUBJECT ═══════════ */
+function selectSubject(id){
+  currentSubject = SUBJECTS.find(s=>s.id===id);
+  document.querySelectorAll('.subject-card').forEach((el,i)=>{
+    el.classList.toggle('active', SUBJECTS[i].id===id);
+  });
+  document.getElementById('mode-bar').style.display = 'flex';
+  // audio del subject
+  const audioBox = document.getElementById('subject-audio');
+  if(currentSubject.audio){
+    document.getElementById('audio-title').textContent = currentSubject.audioTitle || currentSubject.name;
+    document.getElementById('audio-source').src = currentSubject.audio;
+    document.getElementById('audio-player').load();
+    audioBox.style.display = 'block';
+  } else {
+    audioBox.style.display = 'none';
+  }
+  setMode('cards');
+}
+
+/* ═══════════ MODE ═══════════ */
+function setMode(m){
+  currentMode = m;
+  document.getElementById('btn-mode-cards').classList.toggle('active',m==='cards');
+  document.getElementById('btn-mode-quiz').classList.toggle('active',m==='quiz');
+  document.getElementById('cards-view').style.display = m==='cards'?'block':'none';
+  document.getElementById('quiz-view').style.display = m==='quiz'?'block':'none';
+  document.getElementById('score-view').style.display = 'none';
+  if(m==='cards') startCards();
+  if(m==='quiz') startQuiz();
+}
+
+/* ═══════════ FISHER-YATES SHUFFLE ═══════════ */
+function shuffle(arr){
+  const a=[...arr.keys()];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+/* ═══════════ FLASHCARDS ═══════════ */
+function startCards(){
+  if(!currentSubject) return;
+  cardOrder = shuffle(currentSubject.flashcards);
+  currentCardIdx = 0;
+  document.getElementById('flip-card').classList.remove('flipped');
+  renderCard();
+}
+
+function renderCard(){
+  const total = currentSubject.flashcards.length;
+  const card = currentSubject.flashcards[cardOrder[currentCardIdx]];
+  const pct = ((currentCardIdx+1)/total*100).toFixed(0);
+  document.getElementById('card-progress').style.width = pct+'%';
+  document.getElementById('card-counter').textContent = `Tarjeta ${currentCardIdx+1} de ${total}`;
+  document.getElementById('card-emoji-front').textContent = card.emoji||'❓';
+  document.getElementById('card-text-front').textContent = card.front;
+  document.getElementById('card-text-back').textContent = card.back;
+  document.getElementById('flip-card').classList.remove('flipped');
+  document.getElementById('btn-prev').disabled = currentCardIdx===0;
+  document.getElementById('btn-next').disabled = currentCardIdx===total-1;
+
+  // rhyme
+  const rhymeBox = document.getElementById('card-rhyme');
+  if(currentSubject.rhymes && currentSubject.rhymes.length){
+    const r = currentSubject.rhymes[currentCardIdx % currentSubject.rhymes.length];
+    rhymeBox.textContent = r;
+    rhymeBox.style.display = 'block';
+  } else {
+    rhymeBox.style.display = 'none';
+  }
+
+  document.querySelector('.flip-scene').classList.add('pop');
+  setTimeout(()=>document.querySelector('.flip-scene').classList.remove('pop'),350);
+}
+
+function flipCard(){
+  document.getElementById('flip-card').classList.toggle('flipped');
+}
+
+function changeCard(dir){
+  const total = currentSubject.flashcards.length;
+  currentCardIdx = Math.max(0,Math.min(total-1,currentCardIdx+dir));
+  renderCard();
+}
+
+/* ═══════════ QUIZ ═══════════ */
+function startQuiz(){
+  if(!currentSubject) return;
+  quizOrder = shuffle(currentSubject.quiz);
+  currentQIdx = 0;
+  score = 0;
+  answered = false;
+  document.getElementById('score-view').style.display='none';
+  document.getElementById('quiz-view').style.display='block';
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const total = currentSubject.quiz.length;
+  const q = currentSubject.quiz[quizOrder[currentQIdx]];
+  const pct = (currentQIdx/total*100).toFixed(0);
+  document.getElementById('qp-bar').style.width = pct+'%';
+  document.getElementById('qp-label').textContent = `${currentQIdx+1} / ${total}`;
+  document.getElementById('q-num').textContent = `Pregunta ${currentQIdx+1}`;
+  document.getElementById('q-text').textContent = q.q;
+
+  // shuffle options for this question
+  const optOrder = shuffle(q.opts);
+  // find where correct answer ended up
+  const correctText = q.opts[q.correct];
+  const newCorrectIdx = optOrder.findIndex(i=>i===q.opts.indexOf(correctText)||
+    q.opts[i]===correctText );
+
+  const grid = document.getElementById('options-grid');
+  grid.innerHTML = '';
+  const letters = ['A','B','C','D'];
+  optOrder.forEach((optIdx, pos)=>{
+    const optText = typeof optIdx==='number' ? q.opts[optIdx] : optIdx;
+    const isCorrect = (typeof optIdx==='number') ? optIdx===q.correct : optIdx===q.opts[q.correct];
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.innerHTML = `<span class="opt-letter">${letters[pos]}</span>${optText}`;
+    btn.onclick = ()=>selectOption(btn, isCorrect, q.explanation);
+    grid.appendChild(btn);
+  });
+
+  document.getElementById('feedback-box').className = 'feedback-box';
+  document.getElementById('feedback-box').textContent = '';
+  document.getElementById('btn-next-q').className = 'btn-next-q';
+  answered = false;
+
+  document.getElementById('question-card').classList.add('pop');
+  setTimeout(()=>document.getElementById('question-card').classList.remove('pop'),350);
+}
+
+// Proper shuffle for options preserving correct-answer tracking
+function renderQuestion2(){
+  // overrides above — smarter version
+}
+
+function selectOption(btn, isCorrect, explanation){
+  if(answered) return;
+  answered = true;
+  const allBtns = document.querySelectorAll('.option-btn');
+  allBtns.forEach(b=>b.disabled=true);
+
+  const fb = document.getElementById('feedback-box');
+
+  if(isCorrect){
+    btn.classList.add('correct');
+    score++;
+    totalStars += 10;
+    localStorage.setItem('dasha_stars', totalStars);
+    updateStarDisplay();
+    fb.className = 'feedback-box ok show';
+    fb.textContent = '✅ ¡Muy bien, Dasha! ' + explanation;
+  } else {
+    btn.classList.add('wrong');
+    btn.closest('.options-grid').querySelectorAll('.option-btn').forEach(b=>{
+      // find correct and highlight it
+    });
+    // highlight correct answer
+    allBtns.forEach(b=>{
+      if(!b.classList.contains('wrong')){
+        // check text matches correct
+        const txt = b.querySelector('.option-btn') ? b.textContent.trim() : b.textContent.replace(/^[ABCD]/,'').trim();
+      }
+    });
+    btn.closest('#options-grid').querySelectorAll('.option-btn').forEach(b=>{
+      if(!b.classList.contains('wrong')){
+        b.classList.add('correct');
+      }
+    });
+    fb.className = 'feedback-box nope show';
+    fb.textContent = '💪 Casi, Dasha! ' + explanation;
+    btn.classList.remove('correct');
+    btn.classList.add('wrong');
+    // shake
+    document.getElementById('question-card').classList.add('shake');
+    setTimeout(()=>document.getElementById('question-card').classList.remove('shake'),350);
+  }
+
+  document.getElementById('btn-next-q').classList.add('show');
+  const isLast = currentQIdx >= currentSubject.quiz.length - 1;
+  document.getElementById('btn-next-q').textContent = isLast ? '🌟 Ver mi resultado' : 'Siguiente pregunta →';
+}
+
+function nextQuestion(){
+  currentQIdx++;
+  if(currentQIdx >= currentSubject.quiz.length){
+    showScore();
+  } else {
+    renderQuestion();
+  }
+}
+
+function showScore(){
+  document.getElementById('quiz-view').style.display='none';
+  const sv = document.getElementById('score-view');
+  sv.style.display='block';
+  sv.classList.add('pop');
+
+  const total = currentSubject.quiz.length;
+  const pct = Math.round(score/total*100);
+  let emoji,title,msg,stars;
+
+  if(pct===100){
+    emoji='🏆';title='¡Perfecta, Dasha!';stars='⭐⭐⭐';
+    msg=`¡Respondiste todo bien! Tu cerebro es una máquina, Dasha.\n¡Sos increíble! +${score*10} puntos ganados.`;
+  } else if(pct>=75){
+    emoji='🌟';title='¡Muy bien, Dasha!';stars='⭐⭐';
+    msg=`¡La mayoría bien! Repasá las que fallaste y vas a llegar al 100. ¡Ya casi! +${score*10} puntos.`;
+  } else if(pct>=50){
+    emoji='💪';title='¡Vas por buen camino!';stars='⭐';
+    msg=`Más de la mitad correctas — eso es avanzar, Dasha.\n¡Intentalo de nuevo y vas a mejorar! +${score*10} puntos.`;
+  } else {
+    emoji='🌱';title='¡Seguí intentándolo!';stars='';
+    msg=`Todavía estás aprendiendo y eso está perfecto, Dasha.\nRepasá las tarjetas y después volvé al quiz. ¡Vos podés! +${score*10} puntos.`;
+  }
+
+  document.getElementById('score-emoji').textContent = emoji;
+  document.getElementById('score-title').textContent = title;
+  document.getElementById('score-num').textContent = `${score} / ${total}`;
+  document.getElementById('score-stars').textContent = stars;
+  document.getElementById('score-msg').textContent = msg;
+
+  // racha y mejor puntaje
+  const streak = markActivityToday();
+  const isNew  = saveBestPct(currentSubject.id, pct);
+  const bestPct = getBestPct(currentSubject.id);
+  const streakDays = `🔥 Racha: <strong>${streak} día${streak!==1?'s':''}</strong>`;
+  const bestLabel  = isNew
+    ? `🏅 Mejor: <strong>${bestPct}%</strong> <span class="new-record">¡Nuevo récord!</span>`
+    : `🏅 Mejor: <strong>${bestPct}%</strong>`;
+  document.getElementById('score-meta').innerHTML =
+    `<div class="score-meta-item">${streakDays}</div><div class="score-meta-item">${bestLabel}</div>`;
+}
+
+function retryQuiz(){
+  document.getElementById('score-view').style.display='none';
+  document.getElementById('quiz-view').style.display='block';
+  startQuiz();
+}
+
+function goToCards(){
+  document.getElementById('score-view').style.display='none';
+  setMode('cards');
+}
+
+init();
+</script>
+</body>
+</html>

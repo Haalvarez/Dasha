@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin · Dasha Estudia</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --coral:#FF6B6B;--coral-light:#FFE5E5;--coral-dark:#CC4444;
+  --yellow:#FFD93D;--yellow-light:#FFFBE6;
+  --mint:#6BCB77;--mint-light:#E6F9E8;--mint-dark:#3A8A44;
+  --purple:#A855F7;--purple-light:#F5F0FF;
+  --gray:#6B7280;--gray-light:#F9FAFB;--gray-border:#E5E7EB;
+  --text:#1F2937;--text-soft:#6B7280;
+  --radius:16px;--radius-sm:10px;
+  --shadow:0 4px 20px rgba(0,0,0,.10);
+}
+body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FFF5F0 0%,#FFF9E6 50%,#F0FFF4 100%);min-height:100vh;color:var(--text)}
+h1,h2,h3{font-family:'Fredoka One',cursive}
+
+/* ── HEADER ── */
+.admin-header{background:white;border-bottom:2px solid var(--gray-border);padding:12px 20px;display:flex;align-items:center;gap:10px;box-shadow:var(--shadow);position:sticky;top:0;z-index:100}
+.admin-header h1{font-size:19px;color:var(--coral-dark);flex:1}
+.btn-export{background:var(--mint);color:white;border:none;border-radius:var(--radius-sm);padding:8px 14px;font-family:'Fredoka One',cursive;font-size:14px;cursor:pointer}
+.btn-export:hover{background:var(--mint-dark)}
+.btn-app{background:white;color:var(--coral);border:2px solid var(--coral);border-radius:var(--radius-sm);padding:6px 12px;font-family:'Fredoka One',cursive;font-size:14px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.btn-app:hover{background:var(--coral-light)}
+
+/* ── LAYOUT ── */
+.admin-wrap{max-width:720px;margin:0 auto;padding:20px 16px 60px}
+
+/* ── SUBJECT LIST ── */
+.subject-row{background:white;border:2px solid var(--gray-border);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow);transition:all .18s}
+.subject-row:hover{border-color:var(--coral);transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.12)}
+.s-icon{font-size:26px;flex-shrink:0}
+.s-info{flex:1;min-width:0}
+.s-name{font-family:'Fredoka One',cursive;font-size:15px}
+.s-sub{font-size:12px;color:var(--text-soft)}
+.s-counts{font-size:11px;color:var(--text-soft);margin-top:2px}
+.row-actions{display:flex;gap:6px;flex-shrink:0}
+
+/* ── BUTTONS ── */
+.btn{border:none;border-radius:var(--radius-sm);padding:8px 16px;font-family:'Fredoka One',cursive;font-size:15px;cursor:pointer;transition:all .18s}
+.btn-primary{background:var(--coral);color:white}
+.btn-primary:hover{background:var(--coral-dark)}
+.btn-sm{padding:6px 12px;font-size:13px}
+.btn-outline{background:white;color:var(--coral);border:2px solid var(--coral)}
+.btn-outline:hover{background:var(--coral-light)}
+.btn-danger{background:white;color:#DC2626;border:2px solid #DC2626}
+.btn-danger:hover{background:#FEE2E2}
+.btn-success{background:var(--mint);color:white}
+.btn-success:hover{background:var(--mint-dark)}
+.btn-ghost{background:transparent;color:var(--text-soft);border:2px solid var(--gray-border)}
+.btn-ghost:hover{border-color:var(--coral);color:var(--coral)}
+.btn-dashed{width:100%;background:white;border:2px dashed var(--coral);border-radius:var(--radius);padding:12px;font-family:'Fredoka One',cursive;font-size:15px;color:var(--coral);cursor:pointer;margin-top:8px;transition:all .18s}
+.btn-dashed:hover{background:var(--coral-light)}
+
+/* ── EDITOR ── */
+.btn-back{background:none;border:none;color:var(--coral);font-family:'Fredoka One',cursive;font-size:16px;cursor:pointer;padding:0;margin-bottom:10px;display:flex;align-items:center;gap:4px}
+.editor-heading{font-size:22px;color:var(--text);margin-bottom:14px}
+
+.tabs{display:flex;gap:6px;margin-bottom:18px;background:white;padding:5px;border-radius:var(--radius);border:2px solid var(--gray-border);box-shadow:var(--shadow)}
+.tab{flex:1;padding:8px 4px;border:none;border-radius:calc(var(--radius) - 4px);font-family:'Fredoka One',cursive;font-size:14px;cursor:pointer;color:var(--text-soft);background:transparent;transition:all .2s}
+.tab.active{background:var(--coral);color:white}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* ── FORMS ── */
+.card-form{background:white;border:2px solid var(--gray-border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);margin-bottom:16px}
+.form-group{margin-bottom:12px}
+.form-group label{display:block;font-size:12px;font-weight:800;color:var(--text-soft);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.form-group input,.form-group textarea,.form-group select{width:100%;border:2px solid var(--gray-border);border-radius:var(--radius-sm);padding:9px 12px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--text);transition:border-color .18s;background:white}
+.form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--coral)}
+.form-group textarea{min-height:70px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-row-3{display:grid;grid-template-columns:80px 1fr 80px;gap:10px}
+.btn-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+
+/* ── ITEM CARDS (flashcards/quiz list) ── */
+.item-card{background:white;border:2px solid var(--gray-border);border-radius:var(--radius-sm);margin-bottom:8px;overflow:hidden}
+.item-header{display:flex;align-items:center;gap:10px;padding:11px 14px}
+.item-icon{font-size:18px;flex-shrink:0;width:28px;text-align:center}
+.item-main{flex:1;min-width:0}
+.item-title{font-size:14px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item-sub{font-size:11px;color:var(--text-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+.item-btns{display:flex;gap:5px;flex-shrink:0}
+.item-edit-form{padding:14px;border-top:2px solid var(--gray-border);background:#FAFAFA;display:none}
+.item-edit-form.open{display:block}
+
+/* ── QUIZ OPTIONS ── */
+.opts-grid{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.opt-row{display:flex;align-items:center;gap:8px}
+.opt-row input[type=text]{flex:1;border:2px solid var(--gray-border);border-radius:8px;padding:7px 10px;font-family:'Nunito',sans-serif;font-size:13px}
+.opt-row input[type=text]:focus{outline:none;border-color:var(--coral)}
+.opt-row input[type=radio]{width:16px;height:16px;cursor:pointer;accent-color:var(--mint);flex-shrink:0}
+.opt-row .opt-label{font-family:'Fredoka One',cursive;font-size:13px;color:var(--text-soft);width:18px;flex-shrink:0;text-align:center}
+.opt-hint{font-size:11px;color:var(--text-soft);margin-top:4px}
+
+/* ── RHYMES ── */
+.rhyme-card{background:var(--yellow-light);border:2px solid var(--yellow);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:8px;display:flex;gap:10px;align-items:flex-start}
+.rhyme-card textarea{flex:1;border:none;background:transparent;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;color:#7C5100;resize:vertical;min-height:44px}
+.rhyme-card textarea:focus{outline:none}
+
+/* ── SECTION HEADER ── */
+.sec-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.sec-title{font-family:'Fredoka One',cursive;font-size:17px;color:var(--text)}
+.sec-count{font-size:12px;color:var(--text-soft);font-weight:700;background:var(--gray-light);border:1.5px solid var(--gray-border);border-radius:20px;padding:2px 10px}
+
+/* ── IMPORT ── */
+.import-bar{background:white;border:2px solid var(--gray-border);border-radius:var(--radius);padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px;box-shadow:var(--shadow)}
+.import-bar label{font-size:13px;font-weight:700;color:var(--text-soft);cursor:pointer;display:flex;align-items:center;gap:6px}
+.import-bar input[type=file]{display:none}
+.unsaved{background:var(--yellow-light);border:2px solid var(--yellow);border-radius:var(--radius-sm);padding:8px 14px;font-size:13px;font-weight:700;color:#92400E;display:none}
+.unsaved.show{display:block}
+</style>
+</head>
+<body>
+
+<div class="admin-header">
+  <h1>🛠️ Admin · Dasha</h1>
+  <span class="unsaved" id="unsaved-badge">● Cambios sin exportar</span>
+  <a href="index.html" class="btn-app">Ver app →</a>
+  <button class="btn-export" onclick="exportJSON()">⬇️ Exportar JSON</button>
+</div>
+
+<div class="admin-wrap">
+
+  <!-- VIEW: LISTA DE MATERIAS -->
+  <div id="view-list">
+    <div class="import-bar">
+      <span style="font-size:18px">📂</span>
+      <label>
+        <input type="file" id="import-file" accept=".json" onchange="importJSON(event)">
+        <span style="color:var(--coral);font-weight:800;cursor:pointer">Importar materias.json</span>
+      </label>
+      <span style="font-size:12px;color:var(--text-soft)">o cargá desde el repo</span>
+    </div>
+
+    <div class="sec-header">
+      <span class="sec-title">📖 Materias</span>
+      <span class="sec-count" id="subject-count">0 materias</span>
+    </div>
+    <div id="subject-list"></div>
+    <button class="btn-dashed" onclick="newSubject()">+ Nueva materia</button>
+  </div>
+
+  <!-- VIEW: EDITOR DE MATERIA -->
+  <div id="view-editor" style="display:none">
+    <button class="btn-back" onclick="showList()">← Volver a materias</button>
+    <h2 class="editor-heading" id="editor-heading"></h2>
+
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('info')">⚙️ Info</button>
+      <button class="tab" onclick="showTab('cards')">🃏 Tarjetas</button>
+      <button class="tab" onclick="showTab('quiz')">❓ Quiz</button>
+      <button class="tab" onclick="showTab('rhymes')">🎵 Coplas</button>
+    </div>
+
+    <!-- TAB: INFO -->
+    <div id="tab-info" class="tab-panel active">
+      <div class="card-form">
+        <div class="form-row-3">
+          <div class="form-group">
+            <label>Ícono</label>
+            <input type="text" id="f-icon" placeholder="🦋" maxlength="4">
+          </div>
+          <div class="form-group">
+            <label>Nombre de la materia</label>
+            <input type="text" id="f-name" placeholder="Ciudadanía">
+          </div>
+          <div class="form-group">
+            <label>Color</label>
+            <input type="color" id="f-color" style="padding:4px;height:44px">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Subtítulo / Capítulo</label>
+          <input type="text" id="f-subtitle" placeholder="La Libertad">
+        </div>
+        <div class="form-group">
+          <label>ID (sin espacios, minúsculas)</label>
+          <input type="text" id="f-id" placeholder="ciudadania-cap1">
+        </div>
+        <div class="form-group">
+          <label>Audio — nombre del archivo (opcional)</label>
+          <input type="text" id="f-audio" placeholder="Por_qu%C3%A9_no_somos_como_las_hormigas.m4a">
+        </div>
+        <div class="form-group">
+          <label>Audio — título visible</label>
+          <input type="text" id="f-audio-title" placeholder="¿Por qué no somos como las hormigas?">
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="saveInfo()">Guardar info</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteSubject()">🗑️ Eliminar materia</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: TARJETAS -->
+    <div id="tab-cards" class="tab-panel">
+      <div class="sec-header">
+        <span class="sec-title">Tarjetas</span>
+        <span class="sec-count" id="cards-count">0</span>
+      </div>
+      <div id="cards-list"></div>
+      <button class="btn-dashed" onclick="addCard()">+ Agregar tarjeta</button>
+    </div>
+
+    <!-- TAB: QUIZ -->
+    <div id="tab-quiz" class="tab-panel">
+      <div class="sec-header">
+        <span class="sec-title">Preguntas</span>
+        <span class="sec-count" id="quiz-count">0</span>
+      </div>
+      <div id="quiz-list"></div>
+      <button class="btn-dashed" onclick="addQuestion()">+ Agregar pregunta</button>
+    </div>
+
+    <!-- TAB: COPLAS -->
+    <div id="tab-rhymes" class="tab-panel">
+      <div class="sec-header">
+        <span class="sec-title">Coplas / Rimas</span>
+        <span class="sec-count" id="rhymes-count">0</span>
+      </div>
+      <div id="rhymes-list"></div>
+      <button class="btn-dashed" onclick="addRhyme()">+ Agregar copla</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ══════ STATE ══════ */
+let data = { subjects: [] };
+let currentIdx = null;
+let currentTab = 'info';
+let dirty = false;
+
+function subject(){ return data.subjects[currentIdx]; }
+
+function markDirty(){
+  dirty = true;
+  document.getElementById('unsaved-badge').classList.add('show');
+}
+
+/* ══════ LOAD ══════ */
+async function loadData(){
+  try {
+    const res = await fetch('materias.json');
+    if(!res.ok) throw new Error();
+    data = await res.json();
+  } catch(e){
+    // start with empty data — user can import or create
+  }
+  renderList();
+}
+
+function importJSON(e){
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      data = JSON.parse(ev.target.result);
+      renderList();
+      markDirty();
+    } catch(err){ alert('JSON inválido'); }
+  };
+  reader.readAsText(file);
+}
+
+/* ══════ EXPORT ══════ */
+function exportJSON(){
+  // sync rhymes before export (they use live textareas)
+  if(currentIdx !== null) syncRhymes();
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = 'materias.json'; a.click();
+  URL.revokeObjectURL(url);
+  dirty = false;
+  document.getElementById('unsaved-badge').classList.remove('show');
+}
+
+/* ══════ VIEWS ══════ */
+function showList(){
+  if(currentIdx !== null) syncRhymes();
+  document.getElementById('view-list').style.display   = 'block';
+  document.getElementById('view-editor').style.display = 'none';
+  renderList();
+}
+
+function renderList(){
+  const list = document.getElementById('subject-list');
+  list.innerHTML = '';
+  document.getElementById('subject-count').textContent = data.subjects.length + ' materia' + (data.subjects.length !== 1 ? 's' : '');
+  data.subjects.forEach((s, i) => {
+    const d = document.createElement('div');
+    d.className = 'subject-row';
+    d.innerHTML = `
+      <div class="s-icon">${s.icon||'📚'}</div>
+      <div class="s-info">
+        <div class="s-name">${s.name||'Sin nombre'}</div>
+        <div class="s-sub">${s.subtitle||''}</div>
+        <div class="s-counts">📖 ${s.flashcards.length} tarjetas · ❓ ${s.quiz.length} preguntas · 🎵 ${(s.rhymes||[]).length} coplas</div>
+      </div>
+      <div class="row-actions">
+        <button class="btn btn-outline btn-sm" onclick="editSubject(${i})">✏️ Editar</button>
+        <button class="btn btn-danger btn-sm" onclick="removeSubject(${i})">🗑️</button>
+      </div>`;
+    list.appendChild(d);
+  });
+}
+
+function editSubject(i){
+  currentIdx = i;
+  const s = subject();
+  document.getElementById('view-list').style.display   = 'none';
+  document.getElementById('view-editor').style.display = 'block';
+  document.getElementById('editor-heading').textContent = (s.icon||'') + ' ' + (s.name||'Nueva materia');
+  // fill info form
+  document.getElementById('f-icon').value        = s.icon||'';
+  document.getElementById('f-name').value        = s.name||'';
+  document.getElementById('f-subtitle').value    = s.subtitle||'';
+  document.getElementById('f-id').value          = s.id||'';
+  document.getElementById('f-color').value       = s.color||'#FF6B6B';
+  document.getElementById('f-audio').value       = s.audio||'';
+  document.getElementById('f-audio-title').value = s.audioTitle||'';
+  showTab(currentTab);
+}
+
+function showTab(tab){
+  currentTab = tab;
+  document.querySelectorAll('.tab').forEach((t,i) => {
+    const tabs = ['info','cards','quiz','rhymes'];
+    t.classList.toggle('active', tabs[i] === tab);
+  });
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + (tab === 'cards' ? 'cards' : tab === 'quiz' ? 'quiz' : tab === 'rhymes' ? 'rhymes' : 'info')).classList.add('active');
+  if(tab === 'cards')  renderCards();
+  if(tab === 'quiz')   renderQuiz();
+  if(tab === 'rhymes') renderRhymes();
+}
+
+/* ══════ SUBJECT CRUD ══════ */
+function newSubject(){
+  data.subjects.push({
+    id: 'nueva-materia-' + Date.now(),
+    name: 'Nueva materia', subtitle: '', icon: '📚', color: '#FF6B6B',
+    audio: '', audioTitle: '', flashcards: [], quiz: [], rhymes: []
+  });
+  markDirty();
+  editSubject(data.subjects.length - 1);
+}
+
+function saveInfo(){
+  const s = subject();
+  s.icon       = document.getElementById('f-icon').value.trim();
+  s.name       = document.getElementById('f-name').value.trim();
+  s.subtitle   = document.getElementById('f-subtitle').value.trim();
+  s.id         = document.getElementById('f-id').value.trim().toLowerCase().replace(/\s+/g,'-');
+  s.color      = document.getElementById('f-color').value;
+  s.audio      = document.getElementById('f-audio').value.trim();
+  s.audioTitle = document.getElementById('f-audio-title').value.trim();
+  document.getElementById('editor-heading').textContent = (s.icon||'') + ' ' + (s.name||'');
+  markDirty();
+  alert('✅ Info guardada. Recordá exportar el JSON cuando termines.');
+}
+
+function deleteSubject(){
+  if(!confirm('¿Eliminar esta materia y todo su contenido?')) return;
+  data.subjects.splice(currentIdx, 1);
+  markDirty();
+  showList();
+}
+
+function removeSubject(i){
+  if(!confirm('¿Eliminar "' + data.subjects[i].name + '"?')) return;
+  data.subjects.splice(i, 1);
+  markDirty();
+  renderList();
+}
+
+/* ══════ FLASHCARDS ══════ */
+function renderCards(){
+  const s = subject();
+  const list = document.getElementById('cards-list');
+  document.getElementById('cards-count').textContent = s.flashcards.length;
+  list.innerHTML = '';
+  s.flashcards.forEach((c, i) => {
+    const d = document.createElement('div');
+    d.className = 'item-card';
+    d.id = 'card-item-' + i;
+    d.innerHTML = `
+      <div class="item-header">
+        <div class="item-icon">${c.emoji||'❓'}</div>
+        <div class="item-main">
+          <div class="item-title">${esc(c.front)}</div>
+          <div class="item-sub">${esc(c.back)}</div>
+        </div>
+        <div class="item-btns">
+          <button class="btn btn-outline btn-sm" onclick="toggleCardForm(${i})">✏️</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteCard(${i})">🗑️</button>
+        </div>
+      </div>
+      <div class="item-edit-form" id="card-form-${i}">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Emoji</label>
+            <input type="text" id="cf-emoji-${i}" value="${esc(c.emoji||'')}" maxlength="4" placeholder="🔬">
+          </div>
+          <div class="form-group"></div>
+        </div>
+        <div class="form-group">
+          <label>Pregunta (frente)</label>
+          <textarea id="cf-front-${i}">${esc(c.front)}</textarea>
+        </div>
+        <div class="form-group">
+          <label>Respuesta (dorso)</label>
+          <textarea id="cf-back-${i}">${esc(c.back)}</textarea>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-success btn-sm" onclick="saveCard(${i})">Guardar</button>
+          <button class="btn btn-ghost btn-sm" onclick="toggleCardForm(${i})">Cancelar</button>
+        </div>
+      </div>`;
+    list.appendChild(d);
+  });
+}
+
+function toggleCardForm(i){
+  const f = document.getElementById('card-form-' + i);
+  f.classList.toggle('open');
+}
+
+function saveCard(i){
+  const s = subject();
+  s.flashcards[i] = {
+    emoji: document.getElementById('cf-emoji-' + i).value.trim(),
+    front: document.getElementById('cf-front-' + i).value.trim(),
+    back:  document.getElementById('cf-back-' + i).value.trim()
+  };
+  markDirty();
+  renderCards();
+}
+
+function deleteCard(i){
+  if(!confirm('¿Eliminar esta tarjeta?')) return;
+  subject().flashcards.splice(i, 1);
+  markDirty();
+  renderCards();
+}
+
+function addCard(){
+  subject().flashcards.push({ emoji: '❓', front: 'Nueva pregunta', back: 'Nueva respuesta' });
+  markDirty();
+  renderCards();
+  const idx = subject().flashcards.length - 1;
+  setTimeout(() => toggleCardForm(idx), 50);
+}
+
+/* ══════ QUIZ ══════ */
+function renderQuiz(){
+  const s = subject();
+  const list = document.getElementById('quiz-list');
+  document.getElementById('quiz-count').textContent = s.quiz.length;
+  list.innerHTML = '';
+  s.quiz.forEach((q, i) => {
+    const d = document.createElement('div');
+    d.className = 'item-card';
+    const correctText = q.opts[q.correct] || '';
+    d.innerHTML = `
+      <div class="item-header">
+        <div class="item-icon">❓</div>
+        <div class="item-main">
+          <div class="item-title">${esc(q.q)}</div>
+          <div class="item-sub">✅ ${esc(correctText)}</div>
+        </div>
+        <div class="item-btns">
+          <button class="btn btn-outline btn-sm" onclick="toggleQuizForm(${i})">✏️</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteQuestion(${i})">🗑️</button>
+        </div>
+      </div>
+      <div class="item-edit-form" id="quiz-form-${i}">
+        <div class="form-group">
+          <label>Pregunta</label>
+          <textarea id="qf-q-${i}">${esc(q.q)}</textarea>
+        </div>
+        <div class="form-group">
+          <label>Opciones — marcá con ● cuál es la correcta</label>
+          <div class="opts-grid">
+            ${['A','B','C','D'].map((l,j) => `
+              <div class="opt-row">
+                <span class="opt-label">${l}</span>
+                <input type="text" id="qf-opt-${i}-${j}" value="${esc(q.opts[j]||'')}">
+                <input type="radio" name="qf-correct-${i}" id="qf-r-${i}-${j}" value="${j}" ${q.correct===j?'checked':''}>
+              </div>`).join('')}
+          </div>
+          <div class="opt-hint">El ● selecciona la respuesta correcta</div>
+        </div>
+        <div class="form-group">
+          <label>Explicación (aparece después de responder)</label>
+          <textarea id="qf-exp-${i}">${esc(q.explanation||'')}</textarea>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-success btn-sm" onclick="saveQuestion(${i})">Guardar</button>
+          <button class="btn btn-ghost btn-sm" onclick="toggleQuizForm(${i})">Cancelar</button>
+        </div>
+      </div>`;
+    list.appendChild(d);
+  });
+}
+
+function toggleQuizForm(i){
+  document.getElementById('quiz-form-' + i).classList.toggle('open');
+}
+
+function saveQuestion(i){
+  const s = subject();
+  const opts = [0,1,2,3].map(j => document.getElementById('qf-opt-' + i + '-' + j).value.trim());
+  const correctEl = document.querySelector('input[name="qf-correct-' + i + '"]:checked');
+  const correct = correctEl ? parseInt(correctEl.value) : 0;
+  s.quiz[i] = {
+    q: document.getElementById('qf-q-' + i).value.trim(),
+    opts,
+    correct,
+    explanation: document.getElementById('qf-exp-' + i).value.trim()
+  };
+  markDirty();
+  renderQuiz();
+}
+
+function deleteQuestion(i){
+  if(!confirm('¿Eliminar esta pregunta?')) return;
+  subject().quiz.splice(i, 1);
+  markDirty();
+  renderQuiz();
+}
+
+function addQuestion(){
+  subject().quiz.push({ q: 'Nueva pregunta', opts: ['Opción A','Opción B','Opción C','Opción D'], correct: 0, explanation: '' });
+  markDirty();
+  renderQuiz();
+  const idx = subject().quiz.length - 1;
+  setTimeout(() => toggleQuizForm(idx), 50);
+}
+
+/* ══════ RHYMES ══════ */
+function syncRhymes(){
+  if(currentIdx === null) return;
+  const s = subject();
+  document.querySelectorAll('.rhyme-textarea').forEach((ta, i) => {
+    if(i < s.rhymes.length) s.rhymes[i] = ta.value;
+  });
+}
+
+function renderRhymes(){
+  const s = subject();
+  s.rhymes = s.rhymes || [];
+  const list = document.getElementById('rhymes-list');
+  document.getElementById('rhymes-count').textContent = s.rhymes.length;
+  list.innerHTML = '';
+  s.rhymes.forEach((r, i) => {
+    const d = document.createElement('div');
+    d.className = 'rhyme-card';
+    d.innerHTML = `
+      <span style="font-size:18px">🎵</span>
+      <textarea class="rhyme-textarea" rows="2">${esc(r)}</textarea>
+      <button class="btn btn-danger btn-sm" onclick="deleteRhyme(${i})">🗑️</button>`;
+    list.appendChild(d);
+  });
+}
+
+function deleteRhyme(i){
+  syncRhymes();
+  subject().rhymes.splice(i, 1);
+  markDirty();
+  renderRhymes();
+}
+
+function addRhyme(){
+  syncRhymes();
+  subject().rhymes.push('Nueva copla...');
+  markDirty();
+  renderRhymes();
+}
+
+/* ══════ UTILS ══════ */
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+/* ══════ START ══════ */
+loadData();
+</script>
+</body>
+</html>

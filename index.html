@@ -417,155 +417,7 @@ h1,h2,h3,.big{font-family:'Fredoka One',cursive}
 </div>
 
 <script>
-/* ══════════════════════════════════════════════
-   ★  CONFIG  —  AGREGÁ MATERIAS ACÁ ABAJO  ★
-   ══════════════════════════════════════════════ */
-
-const SUBJECTS = [
-
-  /* ── CIUDADANÍA: CAP 1 ── */
-  {
-    id: 'ciudadania-cap1',
-    name: 'Ciudadanía',
-    subtitle: 'La Libertad',
-    icon: '🦋',
-    color: '#FF6B6B',
-    audio: 'Por_qu%C3%A9_no_somos_como_las_hormigas.m4a',
-    audioTitle: '¿Por qué no somos como las hormigas?',
-    flashcards: [
-      {
-        front: '¿Qué es la etología?',
-        back: 'La ciencia que estudia el comportamiento de los animales en su hábitat natural. 🐜',
-        emoji: '🔬'
-      },
-      {
-        front: '¿Los animales actúan libremente?',
-        back: 'No. Siguen sus instintos — sus genes les "dicen" qué hacer. ¡No tienen otra opción! 🧬',
-        emoji: '🐝'
-      },
-      {
-        front: '¿Qué es la "conducta"?',
-        back: 'El conjunto de acciones con que un ser vivo responde a una situación. Por ejemplo: huir, atacar, ayudar... 🦎',
-        emoji: '💡'
-      },
-      {
-        front: '¿Por qué los humanos SÍ somos libres?',
-        back: 'Porque podemos elegir entre distintas opciones. No estamos obligados solo por nuestros genes. ¡Somos conscientes! 🧠',
-        emoji: '🧠'
-      },
-      {
-        front: '¿Qué son los "condicionamientos"?',
-        back: 'Factores que influyen en cómo actuamos:\n🌍 El lugar donde vivimos\n🧬 Nuestro cuerpo\n👥 Las otras personas\n💻 La tecnología',
-        emoji: '🌍'
-      },
-      {
-        front: '¿Ser libre significa hacer todo lo que queremos?',
-        back: 'No. Ser libre es poder responder de distintas maneras a lo que nos pasa — aunque no siempre elijamos lo que nos pasa. 🦋',
-        emoji: '🤔'
-      },
-      {
-        front: '¿Qué es la responsabilidad?',
-        back: 'Es hacerse cargo de las consecuencias de lo que elegimos hacer. Si fui libre, soy responsable. ⚖️',
-        emoji: '⚖️'
-      },
-      {
-        front: '¿Qué es la coacción?',
-        back: 'Una fuerza externa que nos obliga a actuar contra nuestra voluntad. Cuando hay coacción fuerte, no somos responsables. 🚫',
-        emoji: '🚫'
-      },
-      {
-        front: '¿Cuál es la diferencia entre moral y ética?',
-        back: '🔵 MORAL = las normas que seguimos\n🟣 ÉTICA = reflexionar y preguntarse POR QUÉ existen esas normas 💭',
-        emoji: '💭'
-      },
-      {
-        front: '¿Cuáles son los 4 aspectos de una acción libre?',
-        back: '🎯 1. MOTIVO — ¿por qué actué?\n🏁 2. FIN — ¿para qué?\n🛠️ 3. MEDIOS — ¿cómo?\n📊 4. RESULTADOS — ¿qué pasó?',
-        emoji: '🎯'
-      }
-    ],
-    quiz: [
-      {
-        q: '¿Por qué las hormigas guerreras NO pueden ser consideradas "valientes"?',
-        opts: ['Porque son muy pequeñas','Porque actúan por instinto, sin poder elegir','Porque no tienen corazón','Porque viven bajo tierra'],
-        correct: 1,
-        explanation: '¡Exacto! La valentía necesita una decisión libre. Las hormigas no eligen — sus genes las programan para defender el hormiguero. 🐜'
-      },
-      {
-        q: 'Un chico elige estudiar aunque tiene ganas de jugar. Esto muestra que...',
-        opts: ['Está siendo castigado','No tiene libertad','Es libre: elige lo que quiere de verdad, no solo lo que le apetece','Sus padres lo obligan a hacerlo'],
-        correct: 2,
-        explanation: '¡Correcto! Ser libre es hacer lo que verdaderamente queremos, no solo lo que sentimos en el momento. 💪'
-      },
-      {
-        q: '¿Cuál de estos es un condicionamiento de la acción humana?',
-        opts: ['El color del cielo','El lugar geográfico donde vivimos','La cantidad de planetas del sistema solar','El color de los ojos de los dinosaurios'],
-        correct: 1,
-        explanation: '¡Muy bien! Vivir en un lugar frío o caliente, por ejemplo, condiciona cómo nos vestimos y qué actividades hacemos. 🌍'
-      },
-      {
-        q: 'El escorpión pica a la rana aunque prometió no hacerlo. ¿Por qué no se lo puede considerar responsable?',
-        opts: ['Porque dijo "lo siento" después','Porque no puede evitarlo — es su naturaleza, no una elección','Porque es un animal pequeño','Porque la rana lo provocó primero'],
-        correct: 1,
-        explanation: '¡Correcto! El escorpión actúa por instinto. Para ser responsable, primero hay que ser libre. ⚖️'
-      },
-      {
-        q: '¿Cuándo la ignorancia nos quita responsabilidad?',
-        opts: ['Cuando no estudiamos para el examen','Cuando no sabíamos algo que era imposible que supiéramos','Siempre que digamos "no sabía"','Cuando somos chicos automáticamente'],
-        correct: 1,
-        explanation: '¡Exacto! Solo la ignorancia que no podíamos evitar nos quita responsabilidad. Si podías saber y elegiste no enterarte, igual sos responsable. 🧐'
-      },
-      {
-        q: '¿Qué diferencia hay entre moral y ética?',
-        opts: ['Son exactamente lo mismo, ninguna diferencia','La moral son las normas; la ética es reflexionar sobre esas normas','La ética es para filósofos, la moral para religiosos','La moral es más importante que la ética'],
-        correct: 1,
-        explanation: '¡Muy bien! La moral nos dice "no mentir". La ética se pregunta: ¿por qué está mal mentir? 💭'
-      },
-      {
-        q: '¿Cuál de estos es el "fin" de una acción?',
-        opts: ['El momento en que algo termina','Los materiales que usamos para hacer algo','La intención u objetivo que tenemos al actuar','Lo que siente otra persona cuando actuamos'],
-        correct: 2,
-        explanation: '¡Correcto! El "fin" es el para qué, la meta que tenemos en mente cuando actuamos. 🏁'
-      },
-      {
-        q: 'Libertad y responsabilidad van...',
-        opts: ['En caminos separados — no tienen relación','De la mano: si sos libre, también sos responsable','En contra una de la otra','Solo en los adultos mayores de 18 años'],
-        correct: 1,
-        explanation: '¡Exacto! Si sos libre para actuar, también sos responsable por lo que hiciste. ¡Una no va sin la otra! 🌟'
-      }
-    ],
-    rhymes: [
-      'El animal sigue su instinto sin parar,\nel humano puede elegir cómo actuar. 🐜',
-      'Ser libre no es hacer lo que me gusta ya,\nes elegir con la cabeza lo que más me va. 🦋',
-      'Libertad y responsabilidad van de la mano,\nsi elegí actuar, hago cargo de lo que causé, hermano. ⚖️',
-      'La moral son las normas que seguimos todos,\nla ética pregunta: ¿por qué de esos modos? 💭'
-    ]
-  },
-
-  /* ══════════════════════════════════════
-   ★  PARA AGREGAR UNA MATERIA NUEVA:     ★
-   Copiá el bloque de arriba               ★
-   y editá id, name, subtitle, icon,       ★
-   color, flashcards y quiz.               ★
-   ══════════════════════════════════════ */
-
-  /* ── EJEMPLO: MATERIA PLACEHOLDER ── */
-  {
-    id: 'proximamente',
-    name: 'Próximamente',
-    subtitle: '¡Más materias ya vienen!',
-    icon: '🚀',
-    color: '#A855F7',
-    flashcards: [
-      {front: '¿Qué materia viene pronto?', back: '¡La que vos más necesitás! Pedile a papá que agregue el contenido acá. 😊', emoji: '🚀'}
-    ],
-    quiz: [
-      {q: '¿Dasha es buena estudiante?', opts: ['Sí, mucho!','¡Sí, muchísimo!','¡Claro que sí!','¡La mejor!'], correct: 0, explanation: '¡Todas son correctas, Dasha! ⭐'}
-    ],
-    rhymes: ['¡Pronto habrá más materias para explorar,\nDasha siempre lista para aprender más! 🚀']
-  }
-
-]; /* ← FIN DE SUBJECTS */
+let SUBJECTS = [];
 
 /* ═══════════ STREAK & SCORES ═══════════ */
 function loadStreak(){
@@ -886,7 +738,20 @@ function goToCards(){
   setMode('cards');
 }
 
-init();
+async function loadData(){
+  const grid = document.getElementById('subjects-grid');
+  grid.innerHTML = '<div style="padding:24px;color:var(--text-soft);font-weight:700;text-align:center">⏳ Cargando materias...</div>';
+  try {
+    const res = await fetch('materias.json');
+    if(!res.ok) throw new Error('fetch failed');
+    const json = await res.json();
+    SUBJECTS = json.subjects;
+    init();
+  } catch(e) {
+    grid.innerHTML = '<div style="padding:24px;color:var(--coral);font-weight:700;text-align:center">⚠️ No se pudo cargar materias.json.<br><small>Servir desde un servidor HTTP (no file://).</small></div>';
+  }
+}
+loadData();
 </script>
 </body>
 </html>

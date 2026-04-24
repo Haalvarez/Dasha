@@ -1,0 +1,182 @@
+{
+  "subjects": [
+    {
+      "id": "ciudadania-cap1",
+      "name": "Ciudadanía",
+      "subtitle": "La Libertad",
+      "icon": "🦋",
+      "color": "#FF6B6B",
+      "audio": "Por_qu%C3%A9_no_somos_como_las_hormigas.m4a",
+      "audioTitle": "¿Por qué no somos como las hormigas?",
+      "flashcards": [
+        { "front": "¿Qué es la etología?", "back": "La ciencia que estudia el comportamiento de los animales en su hábitat natural. 🐜", "emoji": "🔬" },
+        { "front": "¿Los animales actúan libremente?", "back": "No. Siguen sus instintos — sus genes les \"dicen\" qué hacer. ¡No tienen otra opción! 🧬", "emoji": "🐝" },
+        { "front": "¿Qué es la \"conducta\"?", "back": "El conjunto de acciones con que un ser vivo responde a una situación. Por ejemplo: huir, atacar, ayudar... 🦎", "emoji": "💡" },
+        { "front": "¿Por qué los humanos SÍ somos libres?", "back": "Porque podemos elegir entre distintas opciones. No estamos obligados solo por nuestros genes. ¡Somos conscientes! 🧠", "emoji": "🧠" },
+        { "front": "¿Qué son los \"condicionamientos\"?", "back": "Factores que influyen en cómo actuamos:\n🌍 El lugar donde vivimos\n🧬 Nuestro cuerpo\n👥 Las otras personas\n💻 La tecnología", "emoji": "🌍" },
+        { "front": "¿Ser libre significa hacer todo lo que queremos?", "back": "No. Ser libre es poder responder de distintas maneras a lo que nos pasa — aunque no siempre elijamos lo que nos pasa. 🦋", "emoji": "🤔" },
+        { "front": "¿Qué es la responsabilidad?", "back": "Es hacerse cargo de las consecuencias de lo que elegimos hacer. Si fui libre, soy responsable. ⚖️", "emoji": "⚖️" },
+        { "front": "¿Qué es la coacción?", "back": "Una fuerza externa que nos obliga a actuar contra nuestra voluntad. Cuando hay coacción fuerte, no somos responsables. 🚫", "emoji": "🚫" },
+        { "front": "¿Cuál es la diferencia entre moral y ética?", "back": "🔵 MORAL = las normas que seguimos\n🟣 ÉTICA = reflexionar y preguntarse POR QUÉ existen esas normas 💭", "emoji": "💭" },
+        { "front": "¿Cuáles son los 4 aspectos de una acción libre?", "back": "🎯 1. MOTIVO — ¿por qué actué?\n🏁 2. FIN — ¿para qué?\n🛠️ 3. MEDIOS — ¿cómo?\n📊 4. RESULTADOS — ¿qué pasó?", "emoji": "🎯" }
+      ],
+      "quiz": [
+        { "q": "¿Por qué las hormigas guerreras NO pueden ser consideradas \"valientes\"?", "opts": ["Porque son muy pequeñas", "Porque actúan por instinto, sin poder elegir", "Porque no tienen corazón", "Porque viven bajo tierra"], "correct": 1, "explanation": "¡Exacto! La valentía necesita una decisión libre. Las hormigas no eligen — sus genes las programan para defender el hormiguero. 🐜" },
+        { "q": "Un chico elige estudiar aunque tiene ganas de jugar. Esto muestra que...", "opts": ["Está siendo castigado", "No tiene libertad", "Es libre: elige lo que quiere de verdad, no solo lo que le apetece", "Sus padres lo obligan a hacerlo"], "correct": 2, "explanation": "¡Correcto! Ser libre es hacer lo que verdaderamente queremos, no solo lo que sentimos en el momento. 💪" },
+        { "q": "¿Cuál de estos es un condicionamiento de la acción humana?", "opts": ["El color del cielo", "El lugar geográfico donde vivimos", "La cantidad de planetas del sistema solar", "El color de los ojos de los dinosaurios"], "correct": 1, "explanation": "¡Muy bien! Vivir en un lugar frío o caliente, por ejemplo, condiciona cómo nos vestimos y qué actividades hacemos. 🌍" },
+        { "q": "El escorpión pica a la rana aunque prometió no hacerlo. ¿Por qué no se lo puede considerar responsable?", "opts": ["Porque dijo \"lo siento\" después", "Porque no puede evitarlo — es su naturaleza, no una elección", "Porque es un animal pequeño", "Porque la rana lo provocó primero"], "correct": 1, "explanation": "¡Correcto! El escorpión actúa por instinto. Para ser responsable, primero hay que ser libre. ⚖️" },
+        { "q": "¿Cuándo la ignorancia nos quita responsabilidad?", "opts": ["Cuando no estudiamos para el examen", "Cuando no sabíamos algo que era imposible que supiéramos", "Siempre que digamos \"no sabía\"", "Cuando somos chicos automáticamente"], "correct": 1, "explanation": "¡Exacto! Solo la ignorancia que no podíamos evitar nos quita responsabilidad. 🧐" },
+        { "q": "¿Qué diferencia hay entre moral y ética?", "opts": ["Son exactamente lo mismo, ninguna diferencia", "La moral son las normas; la ética es reflexionar sobre esas normas", "La ética es para filósofos, la moral para religiosos", "La moral es más importante que la ética"], "correct": 1, "explanation": "¡Muy bien! La moral nos dice \"no mentir\". La ética se pregunta: ¿por qué está mal mentir? 💭" },
+        { "q": "¿Cuál de estos es el \"fin\" de una acción?", "opts": ["El momento en que algo termina", "Los materiales que usamos para hacer algo", "La intención u objetivo que tenemos al actuar", "Lo que siente otra persona cuando actuamos"], "correct": 2, "explanation": "¡Correcto! El \"fin\" es el para qué, la meta que tenemos en mente cuando actuamos. 🏁" },
+        { "q": "Libertad y responsabilidad van...", "opts": ["En caminos separados — no tienen relación", "De la mano: si sos libre, también sos responsable", "En contra una de la otra", "Solo en los adultos mayores de 18 años"], "correct": 1, "explanation": "¡Exacto! Si sos libre para actuar, también sos responsable por lo que hiciste. ¡Una no va sin la otra! 🌟" }
+      ],
+      "rhymes": [
+        "El animal sigue su instinto sin parar,\nel humano puede elegir cómo actuar. 🐜",
+        "Ser libre no es hacer lo que me gusta ya,\nes elegir con la cabeza lo que más me va. 🦋",
+        "Libertad y responsabilidad van de la mano,\nsi elegí actuar, hago cargo de lo que causé, hermano. ⚖️",
+        "La moral son las normas que seguimos todos,\nla ética pregunta: ¿por qué de esos modos? 💭"
+      ]
+    },
+    {
+      "id": "sociales-u1",
+      "name": "Cs. Sociales",
+      "subtitle": "Unidad 1 · Método Científico",
+      "icon": "🔭",
+      "color": "#4ECDC4",
+      "flashcards": [
+        {
+          "emoji": "🔬",
+          "front": "¿Qué es la ciencia?",
+          "back": "Conjunto sistemático de conocimientos sobre la realidad, obtenidos mediante el método científico. 📚"
+        },
+        {
+          "emoji": "🌿",
+          "front": "¿Cuáles son las dos grandes ramas de las ciencias?",
+          "back": "🔵 Ciencias FORMALES — estudian formas abstractas (no la realidad concreta)\n🟢 Ciencias FÁCTICAS — estudian hechos reales"
+        },
+        {
+          "emoji": "➕",
+          "front": "¿Qué son las ciencias formales? ¿Cuáles son?",
+          "back": "Estudian relaciones abstractas, sin experimentos.\nEjemplos: Matemática y Lógica. 🔢"
+        },
+        {
+          "emoji": "🌍",
+          "front": "¿Cómo se dividen las ciencias fácticas?",
+          "back": "🧪 Naturales → Biología, Física, Química\n🌎 Sociales → Historia, Geografía, Sociología"
+        },
+        {
+          "emoji": "🧪",
+          "front": "¿Cuáles son los pasos del método científico?",
+          "back": "1️⃣ Observación\n2️⃣ Formulación del problema\n3️⃣ Hipótesis\n4️⃣ Experimentación\n5️⃣ Análisis de resultados\n6️⃣ Conclusión"
+        },
+        {
+          "emoji": "💡",
+          "front": "¿Qué es una hipótesis?",
+          "back": "Una suposición provisional que se hace ANTES de investigar. Hay que comprobarla o refutarla con datos. 💡"
+        },
+        {
+          "emoji": "📝",
+          "front": "¿Qué significan IP, C e IS?",
+          "back": "📌 IP = Idea Principal (la más importante)\n🔗 C = Conector (une las ideas)\n📎 IS = Idea Secundaria (complementa la IP)"
+        },
+        {
+          "emoji": "🔗",
+          "front": "¿Qué son los conectores? Dá ejemplos.",
+          "back": "Palabras que unen o relacionan ideas.\nEjemplos: «pero», «sin embargo», «además», «por lo tanto», «aunque», «porque». 🔗"
+        },
+        {
+          "emoji": "📜",
+          "front": "¿Qué es una fuente primaria?",
+          "back": "Documento o testimonio ORIGINAL y DIRECTO de la época estudiada.\nEjemplos: diario íntimo, carta, fotografía de la época. 📜"
+        },
+        {
+          "emoji": "📚",
+          "front": "¿Qué es una fuente secundaria?",
+          "back": "Análisis o interpretación hecha DESPUÉS sobre una fuente primaria.\nEjemplos: libro de texto, documental, enciclopedia. 📚"
+        },
+        {
+          "emoji": "📅",
+          "front": "¿Qué es la periodización?",
+          "back": "La división del tiempo histórico en períodos o etapas para organizar y estudiar mejor la historia. Se representa en una línea de tiempo. 📅"
+        },
+        {
+          "emoji": "📋",
+          "front": "¿Qué partes tiene un texto de investigación?",
+          "back": "🔴 Problema — qué se investiga\n🎯 Objetivo — para qué\n💡 Hipótesis — suposición inicial\n🛠️ Metodología — cómo se investiga\n✅ Conclusión — qué se encontró"
+        }
+      ],
+      "quiz": [
+        {
+          "q": "La Matemática es una ciencia...",
+          "opts": ["Fáctica natural", "Fáctica social", "Formal", "Experimental"],
+          "correct": 2,
+          "explanation": "¡Correcto! La Matemática es una ciencia formal porque estudia formas y relaciones abstractas, no hechos de la realidad. ➕"
+        },
+        {
+          "q": "¿Cuál es el tercer paso del método científico?",
+          "opts": ["Observación", "Conclusión", "Hipótesis", "Análisis de resultados"],
+          "correct": 2,
+          "explanation": "¡Exacto! Después de observar el problema y formularlo, el tercer paso es plantear una hipótesis — una suposición que vamos a tratar de probar. 💡"
+        },
+        {
+          "q": "En IP + C + IS, ¿qué significa la «C»?",
+          "opts": ["Ciencia", "Conclusión", "Conector", "Clasificación"],
+          "correct": 2,
+          "explanation": "¡Muy bien! El Conector es la palabra que une la Idea Principal con la Idea Secundaria. Ej: «pero», «además», «sin embargo». 🔗"
+        },
+        {
+          "q": "Un diario íntimo escrito durante la Revolución de Mayo es una fuente...",
+          "opts": ["Secundaria", "Primaria", "Formal", "Metodológica"],
+          "correct": 1,
+          "explanation": "¡Correcto! Es una fuente primaria porque es un documento original y directo de la época. 📜"
+        },
+        {
+          "q": "¿Qué describe la METODOLOGÍA en un texto de investigación?",
+          "opts": ["El problema que se estudia", "La suposición inicial del investigador", "Cómo se va a realizar la investigación", "El resultado final obtenido"],
+          "correct": 2,
+          "explanation": "¡Exacto! La metodología explica los pasos, técnicas y herramientas que se usarán para investigar. 🛠️"
+        },
+        {
+          "q": "Historia y Geografía son ciencias...",
+          "opts": ["Formales", "Fácticas naturales", "Fácticas sociales", "Exactas"],
+          "correct": 2,
+          "explanation": "¡Muy bien! Estudian hechos de la realidad humana y social, por eso son ciencias fácticas sociales. 🌎"
+        },
+        {
+          "q": "La periodización sirve para...",
+          "opts": ["Formular hipótesis", "Dividir y organizar el tiempo histórico en etapas", "Clasificar las fuentes históricas", "Describir el método científico"],
+          "correct": 1,
+          "explanation": "¡Correcto! La periodización divide la historia en períodos y se representa en una línea de tiempo. 📅"
+        },
+        {
+          "q": "Una enciclopedia que explica la Revolución Francesa es una fuente...",
+          "opts": ["Primaria, porque habla de historia", "Secundaria, porque interpreta hechos del pasado", "Formal, porque tiene mucha información", "Primaria, porque está escrita en papel"],
+          "correct": 1,
+          "explanation": "¡Exacto! La enciclopedia fue escrita después de los hechos y los interpreta — eso la hace fuente secundaria. 📚"
+        }
+      ],
+      "rhymes": [
+        "Observo el problema, hipotetizo con razón,\nexperimento y saco mi conclusión. 🔬",
+        "IP es la idea que manda y guía,\nC la conecta, IS la amplía. 📝",
+        "Fuente primaria: el original de verdad,\nsecundaria: alguien la analizó ya. 📜",
+        "Formal es la Mate, abstracta y pura,\nfáctica estudia la realidad y su estructura. 🌍"
+      ]
+    },
+    {
+      "id": "proximamente",
+      "name": "Próximamente",
+      "subtitle": "¡Más materias ya vienen!",
+      "icon": "🚀",
+      "color": "#A855F7",
+      "flashcards": [
+        { "front": "¿Qué materia viene pronto?", "back": "¡La que vos más necesitás! Pedile a papá que la agregue desde el Admin. 😊", "emoji": "🚀" }
+      ],
+      "quiz": [
+        { "q": "¿Dasha es buena estudiante?", "opts": ["¡Sí, mucho!", "¡Sí, muchísimo!", "¡Claro que sí!", "¡La mejor!"], "correct": 0, "explanation": "¡Todas son correctas, Dasha! ⭐" }
+      ],
+      "rhymes": [
+        "¡Pronto habrá más materias para explorar,\nDasha siempre lista para aprender más! 🚀"
+      ]
+    }
+  ]
+}

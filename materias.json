@@ -41,123 +41,129 @@
       "id": "sociales-u1",
       "name": "Cs. Sociales",
       "subtitle": "Unidad 1 · Método Científico",
-      "icon": "🔭",
-      "color": "#4ECDC4",
+      "icon": "🔬",
+      "color": "#1976D2",
       "flashcards": [
         {
-          "emoji": "🔬",
-          "front": "¿Qué es la ciencia?",
-          "back": "Conjunto sistemático de conocimientos sobre la realidad, obtenidos mediante el método científico. 📚"
+          "emoji": "❓",
+          "front": "¿Qué es un problema científico?",
+          "back": "Una PREGUNTA que no tiene respuesta automática y que se puede investigar.\nNo es una afirmación ni una definición — ¡tiene que ser una pregunta! ❓"
         },
         {
-          "emoji": "🌿",
-          "front": "¿Cuáles son las dos grandes ramas de las ciencias?",
-          "back": "🔵 Ciencias FORMALES — estudian formas abstractas (no la realidad concreta)\n🟢 Ciencias FÁCTICAS — estudian hechos reales"
+          "emoji": "🔢",
+          "front": "¿Cuáles son los 10 pasos del método científico EN ORDEN?",
+          "back": "1️⃣ Tema\n2️⃣ Problema\n3️⃣ Objetivo\n4️⃣ Hipótesis\n5️⃣ Metodología\n6️⃣ Método\n7️⃣ Datos\n8️⃣ Discusión\n9️⃣ Verificación\n🔟 Conclusión"
         },
         {
-          "emoji": "➕",
-          "front": "¿Qué son las ciencias formales? ¿Cuáles son?",
-          "back": "Estudian relaciones abstractas, sin experimentos.\nEjemplos: Matemática y Lógica. 🔢"
-        },
-        {
-          "emoji": "🌍",
-          "front": "¿Cómo se dividen las ciencias fácticas?",
-          "back": "🧪 Naturales → Biología, Física, Química\n🌎 Sociales → Historia, Geografía, Sociología"
-        },
-        {
-          "emoji": "🧪",
-          "front": "¿Cuáles son los pasos del método científico?",
-          "back": "1️⃣ Observación\n2️⃣ Formulación del problema\n3️⃣ Hipótesis\n4️⃣ Experimentación\n5️⃣ Análisis de resultados\n6️⃣ Conclusión"
-        },
-        {
-          "emoji": "💡",
-          "front": "¿Qué es una hipótesis?",
-          "back": "Una suposición provisional que se hace ANTES de investigar. Hay que comprobarla o refutarla con datos. 💡"
-        },
-        {
-          "emoji": "📝",
-          "front": "¿Qué significan IP, C e IS?",
-          "back": "📌 IP = Idea Principal (la más importante)\n🔗 C = Conector (une las ideas)\n📎 IS = Idea Secundaria (complementa la IP)"
+          "emoji": "🤔",
+          "front": "¿En qué se diferencia el PROBLEMA de la HIPÓTESIS?",
+          "back": "❓ PROBLEMA = es una PREGUNTA a investigar\n(Ej: «¿Cómo afecta la ansiedad al rendimiento?»)\n\n💡 HIPÓTESIS = es una AFIRMACIÓN provisional\n(Ej: «Los alumnos que estudian más rinden mejor»)"
         },
         {
           "emoji": "🔗",
-          "front": "¿Qué son los conectores? Dá ejemplos.",
-          "back": "Palabras que unen o relacionan ideas.\nEjemplos: «pero», «sin embargo», «además», «por lo tanto», «aunque», «porque». 🔗"
+          "front": "¿Para qué sirve la estructura IP + C + IS?",
+          "back": "Es la fórmula para armar una HIPÓTESIS:\n🔵 IP = Idea Principal → la afirmación central\n🟠 C = Conector → une IP con IS\n🟢 IS = Idea Secundaria → la causa o consecuencia"
         },
         {
-          "emoji": "📜",
-          "front": "¿Qué es una fuente primaria?",
-          "back": "Documento o testimonio ORIGINAL y DIRECTO de la época estudiada.\nEjemplos: diario íntimo, carta, fotografía de la época. 📜"
+          "emoji": "📌",
+          "front": "¿Qué va en la Idea Principal (IP)?",
+          "back": "La afirmación central sobre el tema-problema.\nEs lo que creemos que va a pasar o que es verdad.\nEj: «Los alumnos que estudian más tienen mejor rendimiento». 📌"
         },
         {
-          "emoji": "📚",
-          "front": "¿Qué es una fuente secundaria?",
-          "back": "Análisis o interpretación hecha DESPUÉS sobre una fuente primaria.\nEjemplos: libro de texto, documental, enciclopedia. 📚"
+          "emoji": "🟠",
+          "front": "¿Qué va en el Conector (C)? Dá ejemplos.",
+          "back": "Palabras que UNEN la IP con la IS.\nEjemplos: «es por ello que», «debido a que», «porque», «ya que», «sin embargo». 🔗"
         },
         {
-          "emoji": "📅",
-          "front": "¿Qué es la periodización?",
-          "back": "La división del tiempo histórico en períodos o etapas para organizar y estudiar mejor la historia. Se representa en una línea de tiempo. 📅"
+          "emoji": "📎",
+          "front": "¿Qué va en la Idea Secundaria (IS)?",
+          "back": "La consecuencia, causa o argumento que apoya la Idea Principal.\nEs el «por qué» de la hipótesis.\nEj: «...porque el cerebro retiene mejor con práctica repetida». 📎"
         },
         {
-          "emoji": "📋",
-          "front": "¿Qué partes tiene un texto de investigación?",
-          "back": "🔴 Problema — qué se investiga\n🎯 Objetivo — para qué\n💡 Hipótesis — suposición inicial\n🛠️ Metodología — cómo se investiga\n✅ Conclusión — qué se encontró"
+          "emoji": "🔑",
+          "front": "Preguntas clave: ¿qué investigan ¿Por qué? y ¿Para qué?",
+          "back": "❓ ¿Por qué? → Causas y razones\n🎯 ¿Para qué? → Objetivos y finalidad"
+        },
+        {
+          "emoji": "👤",
+          "front": "Preguntas clave: ¿qué investigan ¿Qué? y ¿Quién?",
+          "back": "🔍 ¿Qué? → Características, ideas centrales, datos principales\n👤 ¿Quién? → Actores sociales, personajes, entidades culturales"
+        },
+        {
+          "emoji": "🗺️",
+          "front": "Preguntas clave: ¿qué investigan ¿Cómo?, ¿Dónde? y ¿Cuándo?",
+          "back": "🛠️ ¿Cómo? → Procedimientos, pasos, método utilizado\n📍 ¿Dónde? → Lugar, espacio, ubicación\n📅 ¿Cuándo? → Tiempo, época, fecha, período"
+        },
+        {
+          "emoji": "🎯",
+          "front": "¿Qué es el OBJETIVO en una investigación?",
+          "back": "Lo que queremos lograr con la investigación.\nResponde a la pregunta ¿PARA QUÉ investigamos?\nEj: «Determinar la relación entre horas de estudio y rendimiento». 🎯"
+        },
+        {
+          "emoji": "🛠️",
+          "front": "¿Qué es la METODOLOGÍA?",
+          "back": "La parte que explica CÓMO se va a investigar:\nqué técnicas, herramientas y pasos se usarán.\nResponde al ¿CÓMO? de la investigación. 🛠️"
+        },
+        {
+          "emoji": "✅",
+          "front": "¿Qué es la CONCLUSIÓN?",
+          "back": "El resultado FINAL de la investigación.\nConfirma o refuta la hipótesis después de analizar todos los datos.\nEs el último paso del método científico. ✅"
         }
       ],
       "quiz": [
         {
-          "q": "La Matemática es una ciencia...",
-          "opts": ["Fáctica natural", "Fáctica social", "Formal", "Experimental"],
+          "q": "¿Cuál de estas frases ES un problema científico?",
+          "opts": ["El agua se evapora con el calor.", "La lluvia es un tipo de precipitación.", "¿Por qué a veces llueve de diferente forma?", "Si llueve, antes tuvo que evaporarse el agua."],
           "correct": 2,
-          "explanation": "¡Correcto! La Matemática es una ciencia formal porque estudia formas y relaciones abstractas, no hechos de la realidad. ➕"
+          "explanation": "¡Correcto! Un problema científico es una PREGUNTA que se puede investigar. Las otras opciones son afirmaciones o definiciones, no preguntas. ❓"
         },
         {
-          "q": "¿Cuál es el tercer paso del método científico?",
-          "opts": ["Observación", "Conclusión", "Hipótesis", "Análisis de resultados"],
+          "q": "«Los alumnos que estudian 2 horas diarias tienen mayor rendimiento.» ¿Qué parte del método es?",
+          "opts": ["Problema", "Objetivo", "Hipótesis", "Conclusión"],
           "correct": 2,
-          "explanation": "¡Exacto! Después de observar el problema y formularlo, el tercer paso es plantear una hipótesis — una suposición que vamos a tratar de probar. 💡"
+          "explanation": "¡Exacto! Es una HIPÓTESIS: una afirmación provisional que todavía no fue comprobada. No es una pregunta, es una suposición. 💡"
         },
         {
-          "q": "En IP + C + IS, ¿qué significa la «C»?",
-          "opts": ["Ciencia", "Conclusión", "Conector", "Clasificación"],
-          "correct": 2,
-          "explanation": "¡Muy bien! El Conector es la palabra que une la Idea Principal con la Idea Secundaria. Ej: «pero», «además», «sin embargo». 🔗"
+          "q": "«¿Cómo la ansiedad influye en el bajo rendimiento escolar?» ¿Qué parte del método es?",
+          "opts": ["Hipótesis", "Conclusión", "Objetivo", "Problema"],
+          "correct": 3,
+          "explanation": "¡Muy bien! Es el PROBLEMA porque es una pregunta a investigar, no una afirmación. ❓"
         },
         {
-          "q": "Un diario íntimo escrito durante la Revolución de Mayo es una fuente...",
-          "opts": ["Secundaria", "Primaria", "Formal", "Metodológica"],
+          "q": "¿Cuál es el 4° paso del método científico?",
+          "opts": ["Objetivo", "Metodología", "Hipótesis", "Datos"],
+          "correct": 2,
+          "explanation": "¡Correcto! El orden es: Tema → Problema → Objetivo → HIPÓTESIS → Metodología... El 4° paso es siempre la hipótesis. 🔢"
+        },
+        {
+          "q": "¿Cuál es el 10° y último paso del método científico?",
+          "opts": ["Verificación", "Discusión", "Datos", "Conclusión"],
+          "correct": 3,
+          "explanation": "¡Muy bien! La CONCLUSIÓN es el paso final: confirma o refuta la hipótesis con los datos obtenidos. ✅"
+        },
+        {
+          "q": "En IP + C + IS, el CONECTOR sirve para...",
+          "opts": ["Hacer la afirmación central", "Unir la Idea Principal con la Idea Secundaria", "Explicar la consecuencia del problema", "Describir los pasos de la investigación"],
           "correct": 1,
-          "explanation": "¡Correcto! Es una fuente primaria porque es un documento original y directo de la época. 📜"
+          "explanation": "¡Exacto! El Conector une la IP con la IS. Ejemplos: «es por ello que», «debido a que», «porque». 🟠"
         },
         {
-          "q": "¿Qué describe la METODOLOGÍA en un texto de investigación?",
-          "opts": ["El problema que se estudia", "La suposición inicial del investigador", "Cómo se va a realizar la investigación", "El resultado final obtenido"],
+          "q": "La pregunta ¿QUIÉN? en las preguntas clave investiga...",
+          "opts": ["Procedimientos y pasos a seguir", "Tiempo, época y período", "Actores sociales y personajes", "Lugar y espacio"],
           "correct": 2,
-          "explanation": "¡Exacto! La metodología explica los pasos, técnicas y herramientas que se usarán para investigar. 🛠️"
+          "explanation": "¡Correcto! ¿Quién? investiga actores sociales, personajes y entidades culturales. 👤"
         },
         {
-          "q": "Historia y Geografía son ciencias...",
-          "opts": ["Formales", "Fácticas naturales", "Fácticas sociales", "Exactas"],
-          "correct": 2,
-          "explanation": "¡Muy bien! Estudian hechos de la realidad humana y social, por eso son ciencias fácticas sociales. 🌎"
-        },
-        {
-          "q": "La periodización sirve para...",
-          "opts": ["Formular hipótesis", "Dividir y organizar el tiempo histórico en etapas", "Clasificar las fuentes históricas", "Describir el método científico"],
-          "correct": 1,
-          "explanation": "¡Correcto! La periodización divide la historia en períodos y se representa en una línea de tiempo. 📅"
-        },
-        {
-          "q": "Una enciclopedia que explica la Revolución Francesa es una fuente...",
-          "opts": ["Primaria, porque habla de historia", "Secundaria, porque interpreta hechos del pasado", "Formal, porque tiene mucha información", "Primaria, porque está escrita en papel"],
-          "correct": 1,
-          "explanation": "¡Exacto! La enciclopedia fue escrita después de los hechos y los interpreta — eso la hace fuente secundaria. 📚"
+          "q": "La pregunta ¿CÓMO? en las preguntas clave investiga...",
+          "opts": ["Causas y razones", "Actores sociales", "Tiempo y época", "Procedimientos y método utilizado"],
+          "correct": 3,
+          "explanation": "¡Muy bien! ¿Cómo? investiga los procedimientos, pasos a seguir y método utilizado — igual que la Metodología en el método científico. 🛠️"
         }
       ],
       "rhymes": [
-        "Observo el problema, hipotetizo con razón,\nexperimento y saco mi conclusión. 🔬",
-        "IP es la idea que manda y guía,\nC la conecta, IS la amplía. 📝",
+        "Tema, problema, objetivo e hipótesis van,\nmetodología, método y datos vienen atrás,\ndiscusión, verificación y conclusión al final:\n¡diez pasos del método científico ya! 🔬",
+        "IP afirma, C conecta con razón,\nIS explica: ¡esa es tu hipótesis en acción! 💡",
+        "¿Por qué? busca causas, ¿para qué? el fin,\n¿quién? busca personas, ¿cuándo? el origen. 🔑",
         "Fuente primaria: el original de verdad,\nsecundaria: alguien la analizó ya. 📜",
         "Formal es la Mate, abstracta y pura,\nfáctica estudia la realidad y su estructura. 🌍"
       ]

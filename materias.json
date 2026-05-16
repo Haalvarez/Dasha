@@ -1,54 +1,64 @@
 {
-  "subjects": [
+  "materias": [
     {
-      "id": "ciudadania-cap1",
-      "file": "ciudadania-cap1.json",
-      "name": "Ciudadanía",
-      "subtitle": "La Libertad",
-      "icon": "🦋",
-      "color": "#FF6B6B",
-      "audio": "Por_qué_no_somos_como_las_hormigas.m4a",
-      "audioTitle": "¿Por qué no somos como las hormigas?"
-    },
-    {
-      "id": "ciencias-la-materia",
-      "file": "ciencias-la-materia.json",
-      "name": "Cs. Naturales",
-      "subtitle": "La Materia",
-      "icon": "⚗️",
-      "color": "#0EA5E9",
-      "audio": null,
-      "audioTitle": null
-    },
-    {
-      "id": "sociales-u1",
-      "file": "sociales-u1.json",
-      "name": "Cs. Sociales",
-      "subtitle": "Método Científico",
-      "icon": "🔬",
-      "color": "#1976D2",
-      "audio": "Pasos_y_formulas_del_metodo_cientifico.m4a",
-      "audioTitle": "Hablemos de Hipótesis"
-    },
-    {
-      "id": "lengua-mitos",
-      "file": "lengua-mitos.json",
-      "name": "Lengua",
-      "subtitle": "Los Mitos",
+      "id": "practicas-del-lenguaje",
+      "name": "Prácticas del Lenguaje",
       "icon": "📜",
       "color": "#7C3AED",
-      "audio": null,
-      "audioTitle": null
+      "temas": [
+        {
+          "id": "lengua-mitos",
+          "file": "lengua-mitos.json",
+          "subtitle": "Los Mitos",
+          "audio": null,
+          "audioTitle": null
+        }
+      ]
     },
     {
-      "id": "proximamente",
-      "file": null,
-      "name": "Próximamente",
-      "subtitle": "¡Más materias ya vienen!",
-      "icon": "🚀",
-      "color": "#A855F7",
-      "audio": null,
-      "audioTitle": null
+      "id": "ciudadania",
+      "name": "Ciudadanía",
+      "icon": "🦋",
+      "color": "#FF6B6B",
+      "temas": [
+        {
+          "id": "ciudadania-cap1",
+          "file": "ciudadania-cap1.json",
+          "subtitle": "La Libertad",
+          "audio": null,
+          "audioTitle": null
+        }
+      ]
+    },
+    {
+      "id": "ciencias-naturales",
+      "name": "Cs. Naturales",
+      "icon": "⚗️",
+      "color": "#0EA5E9",
+      "temas": [
+        {
+          "id": "ciencias-la-materia",
+          "file": "ciencias-la-materia.json",
+          "subtitle": "La Materia",
+          "audio": null,
+          "audioTitle": null
+        }
+      ]
+    },
+    {
+      "id": "ciencias-sociales",
+      "name": "Cs. Sociales",
+      "icon": "🔬",
+      "color": "#1976D2",
+      "temas": [
+        {
+          "id": "sociales-u1",
+          "file": "sociales-u1.json",
+          "subtitle": "Método Científico",
+          "audio": "Pasos_y_formulas_del_metodo_cientifico.m4a",
+          "audioTitle": "Hablemos de Hipótesis"
+        }
+      ]
     }
   ]
 }

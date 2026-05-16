@@ -6,27 +6,444 @@
       "title": "¿Qué es un mito?",
       "audio": null,
       "audioTitle": null,
-      "rhymes": [],
-      "flashcards": [],
-      "quiz": []
+      "rhymes": [
+        "Si un pueblo lo quiso contar, un mito te puede explicar. 📜",
+        "No es noticia ni dato escrito: tiene dioses, símbolos y mito. ⚡"
+      ],
+      "flashcards": [
+        {
+          "emoji": "🌩️",
+          "front": "Cuando un pueblo antiguo veía un rayo y no sabía explicarlo, ¿qué hacía?",
+          "back": "Lo explicaba con un relato sagrado. Ahí aparece el mito: una historia que da sentido a lo que parecía inexplicable."
+        },
+        {
+          "emoji": "📖",
+          "front": "¿Qué es un mito?",
+          "back": "Es un relato tradicional que intenta explicar el origen de algo importante: el mundo, los dioses, los seres humanos o ciertos fenómenos."
+        },
+        {
+          "emoji": "🕊️",
+          "front": "¿Por qué el mito no es solo una historia inventada?",
+          "back": "Porque para la comunidad que lo cuenta tiene valor verdadero y sagrado: organiza creencias, normas y explicaciones."
+        },
+        {
+          "emoji": "👥",
+          "front": "¿Quién crea un mito?",
+          "back": "No lo inventa una sola persona. Nace en una comunidad y se transmite de generación en generación."
+        },
+        {
+          "emoji": "🗣️",
+          "front": "¿Cómo circulaban los mitos antes de escribirse?",
+          "back": "Por tradición oral: alguien los contaba, otra persona los recordaba y así seguían vivos."
+        },
+        {
+          "emoji": "🔍",
+          "front": "¿Qué suele explicar un mito?",
+          "back": "El origen del mundo, de los dioses, de los seres humanos, de ciertas costumbres o de fenómenos naturales."
+        }
+      ],
+      "quiz": [
+        {
+          "q": "¿Cuál de estas opciones define mejor un mito?",
+          "opts": [
+            "Un relato tradicional y sagrado que explica orígenes o fenómenos",
+            "Una noticia antigua escrita por periodistas",
+            "Un cuento humorístico sin valor cultural",
+            "Una biografía exacta de un héroe real"
+          ],
+          "correct": 0,
+          "explanation": "Correcto. El mito es un relato tradicional y sagrado que intenta explicar lo que una comunidad considera importante o misterioso."
+        },
+        {
+          "q": "¿Qué rasgo es propio del mito?",
+          "opts": [
+            "Se crea siempre en una escuela",
+            "Se transmite en comunidad y muchas veces de forma oral",
+            "Solo habla de hechos comprobados por la ciencia",
+            "No tiene relación con creencias"
+          ],
+          "correct": 1,
+          "explanation": "Sí. El mito pertenece a una comunidad y suele circular primero por tradición oral."
+        },
+        {
+          "q": "Si un relato explica por qué existe el trueno usando dioses, probablemente sea...",
+          "opts": [
+            "una receta",
+            "una crónica policial",
+            "un mito",
+            "un instructivo"
+          ],
+          "correct": 2,
+          "explanation": "Exacto. El mito recurre a dioses, fuerzas sagradas o seres extraordinarios para explicar fenómenos."
+        },
+        {
+          "q": "¿Por qué un mito no depende de un autor individual?",
+          "opts": [
+            "Porque lo construye y transmite una comunidad",
+            "Porque siempre es anónimo por ley",
+            "Porque nadie lo recuerda completo",
+            "Porque solo existe en películas"
+          ],
+          "correct": 0,
+          "explanation": "Bien. El mito es colectivo: se forma en una comunidad y cambia con el tiempo mientras se sigue contando."
+        }
+      ]
     },
     {
       "id": "tipos",
       "title": "Tipos de mitos",
       "audio": null,
       "audioTitle": null,
-      "rhymes": [],
-      "flashcards": [],
-      "quiz": []
+      "rhymes": [
+        "Cosmo, teo, antropo también; etiológico y escatológico después. 🌍",
+        "Si preguntás por el origen o el final, cada mito tiene un tipo especial. 🔥"
+      ],
+      "flashcards": [
+        {
+          "emoji": "🌌",
+          "front": "Si un mito cuenta cómo nació el mundo, ¿qué tipo es?",
+          "back": "Cosmogónico. "
+        },
+        {
+          "emoji": "🌍",
+          "front": "¿Qué es un mito cosmogónico?",
+          "back": "Es el que explica el origen del mundo o del universo."
+        },
+        {
+          "emoji": "⚡",
+          "front": "Si un mito cuenta de dónde salieron los dioses, ¿qué tipo es?",
+          "back": "Teogónico. Trata sobre el origen de los dioses."
+        },
+        {
+          "emoji": "🧍",
+          "front": "¿Qué explica un mito antropogónico?",
+          "back": "El origen del ser humano."
+        },
+        {
+          "emoji": "🌋",
+          "front": "¿Qué explica un mito etiológico?",
+          "back": "El origen de cosas concretas: una costumbre, un animal, una planta, un río o una montaña."
+        },
+        {
+          "emoji": "🔥",
+          "front": "¿Qué explica un mito escatológico?",
+          "back": "El fin del mundo, el destino final de la humanidad o la destrucción de una era."
+        }
+      ],
+      "quiz": [
+        {
+          "q": "Un mito que explica cómo nació el universo es...",
+          "opts": [
+            "teogónico",
+            "cosmogónico",
+            "etiológico",
+            "antropogónico"
+          ],
+          "correct": 1,
+          "explanation": "Correcto. Cosmogónico viene de cosmos: se relaciona con el origen del mundo o del universo."
+        },
+        {
+          "q": "¿Qué tipo de mito explica el origen de los dioses?",
+          "opts": [
+            "Escatológico",
+            "Antropogónico",
+            "Teogónico",
+            "Etiológico"
+          ],
+          "correct": 2,
+          "explanation": "Exacto. El mito teogónico se ocupa del origen y genealogía de los dioses."
+        },
+        {
+          "q": "Si un relato cuenta por qué existe una planta o una montaña, es más probable que sea...",
+          "opts": [
+            "etiológico",
+            "cosmogónico",
+            "teogónico",
+            "escatológico"
+          ],
+          "correct": 0,
+          "explanation": "Bien. El mito etiológico explica el origen de cosas concretas del mundo."
+        },
+        {
+          "q": "¿Cuál se relaciona con el fin del mundo?",
+          "opts": [
+            "Antropogónico",
+            "Escatológico",
+            "Cosmogónico",
+            "Teogónico"
+          ],
+          "correct": 1,
+          "explanation": "Sí. El mito escatológico trata el final de una era, del mundo o del destino final."
+        },
+        {
+          "q": "¿Qué tipo de mito explica el origen del hombre?",
+          "opts": [
+            "Antropogónico",
+            "Teogónico",
+            "Etiológico",
+            "Escatológico"
+          ],
+          "correct": 0,
+          "explanation": "Correcto. Antropogónico se refiere al origen del ser humano."
+        }
+      ]
     },
     {
       "id": "caracteristicas",
       "title": "Características",
       "audio": null,
       "audioTitle": null,
-      "rhymes": [],
-      "flashcards": [],
+      "rhymes": [
+        "Colectivo y oral, simbólico y sagrado: así viaja el mito de lado a lado. 🗣️",
+        "Si explica lo difícil de nombrar, el mito te lo intenta mostrar. ✨"
+      ],
+      "flashcards": [
+        {
+          "emoji": "👥",
+          "front": "¿Qué significa que el mito es colectivo?",
+          "back": "Que pertenece a una comunidad, no a un autor individual. Se construye y se conserva entre muchas personas."
+        },
+        {
+          "emoji": "🔣",
+          "front": "¿Qué significa que el mito es simbólico?",
+          "back": "Que usa imágenes, personajes y acciones que representan ideas más profundas: miedo, poder, origen, destino o libertad."
+        },
+        {
+          "emoji": "⛩️",
+          "front": "¿Qué significa que el mito es sagrado?",
+          "back": "Que está ligado a creencias religiosas o espirituales y a veces explica normas o rituales."
+        },
+        {
+          "emoji": "🗣️",
+          "front": "¿Qué significa que el mito es oral?",
+          "back": "Que primero circula hablado: se cuenta, se recuerda y se transmite antes de escribirse."
+        },
+        {
+          "emoji": "❓",
+          "front": "¿Qué quiere decir que el mito explica lo inexplicable?",
+          "back": "Que intenta responder preguntas que una comunidad no podía resolver con observación o ciencia."
+        }
+      ],
       "quiz": []
+    },
+    {
+      "id": "leyenda",
+      "title": "La Leyenda",
+      "audio": null,
+      "audioTitle": null,
+      "rhymes": [
+        "La leyenda puede sonar real, pero el mito es más sagrado y total. 🏞️",
+        "Si hay lugar, fecha y tradición, quizá leyenda sea la opción. 📍"
+      ],
+      "flashcards": [
+        {
+          "emoji": "🏞️",
+          "front": "Si te cuentan una historia unida a un lugar real y a personajes del pueblo, ¿qué género puede ser?",
+          "back": "Una leyenda. Suele vincularse con lugares, tiempos o personajes reconocibles para una comunidad."
+        },
+        {
+          "emoji": "📚",
+          "front": "¿Qué es una leyenda?",
+          "back": "Es un relato que mezcla hechos reales o posibles con elementos ficticios."
+        },
+        {
+          "emoji": "📍",
+          "front": "¿Qué diferencia básica tiene la leyenda frente al mito?",
+          "back": "La leyenda tiene un marco real o plausible: un lugar, un tiempo y personajes que podrían haber existido."
+        },
+        {
+          "emoji": "🦸",
+          "front": "¿Qué personajes suelen aparecer en una leyenda?",
+          "back": "Personajes identificables: héroes, vecinos, jefes, viajeros o figuras ligadas a un lugar concreto."
+        },
+        {
+          "emoji": "🗣️",
+          "front": "¿Cómo se transmiten muchas leyendas?",
+          "back": "De forma oral. Se cuentan de generación en generación y pueden cambiar según la región."
+        },
+        {
+          "emoji": "⚖️",
+          "front": "¿Cuál es la diferencia clave entre mito y leyenda?",
+          "back": "El mito explica orígenes del mundo, dioses o fuerzas sagradas; la leyenda parte de un hecho real o posible y lo mezcla con ficción."
+        }
+      ],
+      "quiz": [
+        {
+          "q": "¿Qué define mejor a una leyenda?",
+          "opts": [
+            "Un relato que mezcla hechos reales o posibles con elementos ficticios",
+            "Un relato completamente sagrado sobre el origen del universo",
+            "Un texto científico sobre hechos comprobables",
+            "Un cuento sin relación con ningún lugar ni personaje"
+          ],
+          "correct": 0,
+          "explanation": "Correcto. La leyenda combina algo real o posible con elementos inventados o extraordinarios."
+        },
+        {
+          "q": "¿Qué rasgo suele tener una leyenda?",
+          "opts": [
+            "Solo dioses y origen de la naturaleza",
+            "Un lugar o un hecho que parece posible",
+            "Lenguaje técnico y experimental",
+            "Prohibición de cambios al contarla"
+          ],
+          "correct": 1,
+          "explanation": "Sí. La leyenda suele apoyarse en un marco histórico o geográfico reconocible."
+        },
+        {
+          "q": "¿Cómo circulan muchas leyendas en una comunidad?",
+          "opts": [
+            "Solo por documentos judiciales",
+            "Solo por manuales escolares",
+            "Por transmisión oral",
+            "Por fórmulas científicas"
+          ],
+          "correct": 2,
+          "explanation": "Exacto. La oralidad es una característica central de la leyenda."
+        },
+        {
+          "q": "¿Qué puede pasar con una leyenda según la región?",
+          "opts": [
+            "Debe quedar igual para siempre",
+            "Puede variar en detalles",
+            "Pierde todo elemento ficticio",
+            "Deja de ser tradición"
+          ],
+          "correct": 1,
+          "explanation": "Bien. Como se transmite oralmente, una leyenda puede cambiar de una región a otra."
+        },
+        {
+          "q": "¿Qué opción marca mejor la diferencia entre mito y leyenda?",
+          "opts": [
+            "El mito explica orígenes sagrados; la leyenda mezcla historia posible con ficción",
+            "La leyenda solo habla de dioses y el mito de vecinos",
+            "El mito siempre ocurre en un pueblo real y la leyenda en el cielo",
+            "No hay diferencia entre los dos"
+          ],
+          "correct": 0,
+          "explanation": "Exacto. El mito se relaciona con lo sagrado y los grandes orígenes; la leyenda parte de algo real o plausible y lo combina con ficción."
+        }
+      ]
+    },
+    {
+      "id": "birmajer",
+      "title": "Mitos y Recuerdos — Birmajer",
+      "audio": null,
+      "audioTitle": null,
+      "rhymes": [
+        "Grecia y memoria en un mismo andar: Birmajer las vuelve a mezclar. 🇬🇷",
+        "Aquiles, sirenas y Polifemo: mito antiguo con recuerdo moderno. 📘"
+      ],
+      "flashcards": [
+        {
+          "emoji": "📘",
+          "front": "¿Cómo está armada cada historia de “Mitos y Recuerdos”?",
+          "back": "Tiene dos partes: un mito griego y un recuerdo personal de la infancia."
+        },
+        {
+          "emoji": "🏛️",
+          "front": "¿De qué obras clásicas salen muchos de estos relatos?",
+          "back": "De La Ilíada y La Odisea, atribuidas a Homero hace unos 2500 años."
+        },
+        {
+          "emoji": "⚔️",
+          "front": "¿De qué trata La Ilíada?",
+          "back": "De la guerra entre griegos y troyanos a partir del conflicto por Helena."
+        },
+        {
+          "emoji": "⛵",
+          "front": "¿De qué trata La Odisea?",
+          "back": "Del largo viaje de Ulises para volver a Ítaca, un regreso que dura diez años."
+        },
+        {
+          "emoji": "🦶",
+          "front": "¿Cómo resignifica Birmajer el talón de Aquiles?",
+          "back": "Dice que los humanos somos al revés: todo el cuerpo puede ser vulnerable, salvo un talón invencible que es la voluntad."
+        },
+        {
+          "emoji": "👁️",
+          "front": "¿Qué enseña el episodio de Polifemo?",
+          "back": "Que la inteligencia y la astucia pueden vencer a la fuerza bruta."
+        },
+        {
+          "emoji": "🎶",
+          "front": "¿Qué idea dejan las sirenas?",
+          "back": "Que se puede resistir una tentación sin borrarla de la memoria. No hace falta olvidar para seguir adelante."
+        },
+        {
+          "emoji": "🕊️",
+          "front": "¿Qué pregunta deja la tregua en la guerra?",
+          "back": "Si pudieron hablar para acordar una tregua, también podrían haber hablado para terminar la guerra."
+        }
+      ],
+      "quiz": [
+        {
+          "q": "¿Cómo está armada cada historia de “Mitos y Recuerdos”?",
+          "opts": [
+            "Un mito griego y un recuerdo personal de la infancia",
+            "Una noticia y una entrevista",
+            "Dos mitos romanos seguidos",
+            "Una biografía y una receta"
+          ],
+          "correct": 0,
+          "explanation": "Correcto. Esa estructura doble es una de las marcas más claras del libro."
+        },
+        {
+          "q": "¿Qué obras de Homero están en la base de varios relatos del libro?",
+          "opts": [
+            "Edipo Rey y Antígona",
+            "La Ilíada y La Odisea",
+            "La Eneida y La Metamorfosis",
+            "Don Quijote y el Cid"
+          ],
+          "correct": 1,
+          "explanation": "Exacto. Birmajer toma materiales de La Ilíada y La Odisea, dos obras centrales de la tradición griega."
+        },
+        {
+          "q": "¿De qué trata La Odisea?",
+          "opts": [
+            "De la creación del mundo",
+            "De una tregua entre dioses",
+            "Del regreso de Ulises a Ítaca durante diez años",
+            "De la infancia de Aquiles"
+          ],
+          "correct": 2,
+          "explanation": "Bien. La Odisea narra el viaje de Ulises para volver a su casa, Ítaca."
+        },
+        {
+          "q": "¿Qué lección deja Polifemo?",
+          "opts": [
+            "La fuerza bruta siempre resuelve todo",
+            "La astucia puede más que la fuerza",
+            "La guerra es inevitable",
+            "La memoria no sirve"
+          ],
+          "correct": 1,
+          "explanation": "Exacto. En ese episodio, la inteligencia de Ulises vence donde la fuerza sola no alcanza."
+        },
+        {
+          "q": "¿Qué idea dejan las sirenas en la lectura de Birmajer?",
+          "opts": [
+            "Que hay que olvidar toda tentación para vivir",
+            "Que la tentación no existe",
+            "Que se puede resistir sin olvidar",
+            "Que el peligro siempre está en la fuerza física"
+          ],
+          "correct": 2,
+          "explanation": "Sí. La idea es que podés seguir adelante sin negar que la tentación existió."
+        },
+        {
+          "q": "¿Qué pregunta deja la tregua en medio de la guerra?",
+          "opts": [
+            "Si pudieron hablar para una tregua, ¿por qué no hablar para terminar la guerra?",
+            "Si pelean más fuerte, ¿ganan más rápido?",
+            "Si un héroe gana, ¿desaparecen los conflictos?",
+            "Si hay dioses, ¿ya no hace falta decidir nada?"
+          ],
+          "correct": 0,
+          "explanation": "Correcto. Esa escena empuja una idea fuerte: si hay diálogo para frenar un poco la violencia, también podría haberlo para terminarla."
+        }
+      ]
     }
   ]
 }

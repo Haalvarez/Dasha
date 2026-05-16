@@ -1,0 +1,144 @@
+{
+  "id": "ciencias-la-materia",
+  "sections": [
+    {
+      "id": "la-materia",
+      "title": "La Materia",
+      "audio": null,
+      "audioTitle": null,
+      "rhymes": [
+        "Sólido, líquido, gaseoso también,\ncada uno ocupa su lugar muy bien. 🧊💧💨",
+        "La masa pesa, el volumen es el lugar,\njuntos te dicen qué hay que calcular. ⚖️📏",
+        "Átomo pequeñito, invisible y veloz,\nforma toda la materia con su voz. ⚛️",
+        "Físico: cambia forma, materia igual,\nquímico: otra sustancia — ¡total! 🔥"
+      ],
+      "flashcards": [
+        {
+          "emoji": "🌍",
+          "front": "¿Qué es la materia?",
+          "back": "Todo lo que tiene MASA y ocupa un lugar en el espacio. Tu mochila, el agua, el aire — ¡todo es materia! 🌍"
+        },
+        {
+          "emoji": "🧊",
+          "front": "¿Cuáles son los 3 estados de la materia?",
+          "back": "🧊 SÓLIDO → forma y volumen fijos\n💧 LÍQUIDO → volumen fijo, forma variable\n💨 GASEOSO → sin forma ni volumen fijos"
+        },
+        {
+          "emoji": "⚖️",
+          "front": "¿Qué es la MASA?",
+          "back": "La cantidad de materia que tiene un objeto. Se mide con balanza en gramos (g) o kilogramos (kg). ⚖️"
+        },
+        {
+          "emoji": "📏",
+          "front": "¿Qué es el VOLUMEN?",
+          "back": "El espacio que ocupa un material. Se mide en dm³ o cm³. ¡Es el 'tamaño' que ocupa la materia! 📏"
+        },
+        {
+          "emoji": "🔍",
+          "front": "¿Qué diferencia una propiedad GENERAL de una ESPECÍFICA?",
+          "back": "⚖️ GENERAL: la tienen TODOS los materiales (masa, volumen)\n🔬 ESPECÍFICA: identifica UN material en particular (densidad, punto de fusión)"
+        },
+        {
+          "emoji": "🌡️",
+          "front": "¿Qué es el punto de fusión?",
+          "back": "La temperatura a la que un sólido se vuelve líquido.\nEjemplo: el hielo se derrite a 0°C. ¡Siempre a la misma temperatura! 🌡️"
+        },
+        {
+          "emoji": "☁️",
+          "front": "¿Qué es el punto de ebullición?",
+          "back": "La temperatura a la que un líquido se vuelve gas.\nEjemplo: el agua hierve a 100°C — ¡tanto un vaso como una pileta! ☁️"
+        },
+        {
+          "emoji": "⚡",
+          "front": "¿Qué es la DENSIDAD?",
+          "back": "Relaciona la masa con el volumen: Densidad = Masa ÷ Volumen.\nEjemplo: el hielo flota porque su densidad es MENOR que la del agua líquida. 🧊"
+        },
+        {
+          "emoji": "⚛️",
+          "front": "¿Qué son los ÁTOMOS?",
+          "back": "Partículas muy muy pequeñas e invisibles que forman toda la materia.\nDemócrito los imaginó como granos de arena — ¡hace 2500 años! ⚛️"
+        },
+        {
+          "emoji": "🧩",
+          "front": "¿Qué son las MOLÉCULAS?",
+          "back": "Grupos de átomos unidos entre sí.\nÁtomos distintos se juntan → forman moléculas → forman toda la materia del universo. 🧩"
+        },
+        {
+          "emoji": "🏛️",
+          "front": "¿Qué dijo Dalton sobre los átomos? (Teoría 1803)",
+          "back": "1. Los átomos son sólidos e indivisibles\n2. Son indestructibles\n3. Cada elemento tiene su propio tipo de átomo\n4. Cada átomo tiene su propia masa 🏛️"
+        },
+        {
+          "emoji": "🪐",
+          "front": "¿Cómo es el modelo atómico de Bohr?",
+          "back": "Un núcleo en el centro con protones (+) y neutrones.\nLos electrones (−) giran alrededor en órbitas, ¡como planetas alrededor del sol! 🪐"
+        },
+        {
+          "emoji": "🔄",
+          "front": "¿Qué es un cambio FÍSICO?",
+          "back": "El material CAMBIA de forma o tamaño pero sigue siendo el mismo.\nEjemplo: romper un chocolate, derretir manteca — ¡sigue siendo manteca! 🔄"
+        },
+        {
+          "emoji": "🔥",
+          "front": "¿Qué es un cambio QUÍMICO?",
+          "back": "El material se transforma en UNA SUSTANCIA DIFERENTE. No hay vuelta atrás.\nEjemplo: quemar papel → cenizas. El papel ya no existe. 🔥"
+        },
+        {
+          "emoji": "🕵️",
+          "front": "¿Cuáles son las señales de que ocurrió un cambio QUÍMICO?",
+          "back": "🫧 Aparecen burbujas (gas nuevo)\n🌈 Cambio de color\n☁️ Aparece humo\n🧱 Se forma un precipitado (sólido nuevo)"
+        }
+      ],
+      "quiz": [
+        {
+          "q": "¿Cuál de estos NO es materia?",
+          "opts": ["El aire", "El agua", "La luz del sol", "Una roca"],
+          "correct": 2,
+          "explanation": "¡Exacto! La luz NO tiene masa ni ocupa espacio — no es materia. El aire, el agua y las rocas sí tienen masa y ocupan un lugar. 🌍"
+        },
+        {
+          "q": "Una botella de agua mantiene el agua en su forma. ¿En qué estado está el agua dentro?",
+          "opts": ["Sólido", "Líquido", "Gaseoso", "Plasma"],
+          "correct": 1,
+          "explanation": "¡Correcto! El agua es LÍQUIDA: tiene volumen fijo pero toma la forma del recipiente que la contiene. 💧"
+        },
+        {
+          "q": "¿A qué temperatura hierve el agua — tanto un vaso como una olla llena?",
+          "opts": ["Depende de la cantidad de agua", "50°C si hay poco, 100°C si hay mucho", "100°C siempre", "80°C"],
+          "correct": 2,
+          "explanation": "¡Exacto! El punto de ebullición es una propiedad ESPECÍFICA — no cambia según la cantidad. Siempre 100°C. ☁️"
+        },
+        {
+          "q": "¿Por qué el hielo flota en el agua?",
+          "opts": ["Porque es más liviano en general", "Porque su densidad es menor que la del agua líquida", "Porque el agua lo empuja hacia arriba con fuerza", "Porque el frío lo hace flotar"],
+          "correct": 1,
+          "explanation": "¡Muy bien! La densidad del hielo es menor que la del agua líquida. Por eso flota. ¡Es una propiedad específica del agua! 🧊"
+        },
+        {
+          "q": "Demócrito propuso que la materia está formada por átomos. ¿Cuándo fue aceptada su idea?",
+          "opts": ["Al instante, todos lo creyeron", "100 años después", "Recién 23 siglos (2300 años) más tarde", "Nunca fue aceptada"],
+          "correct": 2,
+          "explanation": "¡Correcto! Demócrito tuvo razón pero no había tecnología para demostrarlo. ¡Esperó 2300 años para ser reconocido! ⏳"
+        },
+        {
+          "q": "Rompés una hoja de papel en pedacitos muy chiquitos. ¿Qué tipo de cambio es?",
+          "opts": ["Químico, porque cambió", "Físico, porque el papel sigue siendo papel", "Químico, porque es irreversible", "No es ningún cambio"],
+          "correct": 1,
+          "explanation": "¡Exacto! Cambio FÍSICO: la forma cambió, pero el material sigue siendo papel. No se creó ninguna sustancia nueva. 🔄"
+        },
+        {
+          "q": "Quemás una hoja de papel y quedan cenizas. ¿Qué tipo de cambio es?",
+          "opts": ["Físico, porque igual cambió de forma", "Físico, porque todavía es papel pero negro", "Químico, porque el papel se transformó en otra sustancia", "Ninguno de los dos"],
+          "correct": 2,
+          "explanation": "¡Muy bien! Cambio QUÍMICO: el papel ya no existe — se transformó en cenizas, CO₂ y vapor. No hay vuelta atrás. 🔥"
+        },
+        {
+          "q": "Cuando tirás un antiácido en agua y aparecen burbujas, ¿qué indica eso?",
+          "opts": ["Que el agua estaba muy fría", "Que es un cambio físico", "Que ocurrió una reacción química y se formó un gas nuevo", "Que el antiácido se disolvió nomás"],
+          "correct": 2,
+          "explanation": "¡Exacto! Las burbujas son una señal de reacción química — se formó un gas nuevo que antes no existía. 🫧"
+        }
+      ]
+    }
+  ]
+}

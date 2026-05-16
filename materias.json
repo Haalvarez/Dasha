@@ -2,189 +2,53 @@
   "subjects": [
     {
       "id": "ciudadania-cap1",
+      "file": "ciudadania-cap1.json",
       "name": "Ciudadanía",
       "subtitle": "La Libertad",
       "icon": "🦋",
       "color": "#FF6B6B",
-      "audio": "Por_qu%C3%A9_no_somos_como_las_hormigas.m4a",
-      "audioTitle": "¿Por qué no somos como las hormigas?",
-      "flashcards": [
-        { "front": "¿Qué es la etología?", "back": "La ciencia que estudia el comportamiento de los animales en su hábitat natural. 🐜", "emoji": "🔬" },
-        { "front": "¿Los animales actúan libremente?", "back": "No. Siguen sus instintos — sus genes les \"dicen\" qué hacer. ¡No tienen otra opción! 🧬", "emoji": "🐝" },
-        { "front": "¿Qué es la \"conducta\"?", "back": "El conjunto de acciones con que un ser vivo responde a una situación. Por ejemplo: huir, atacar, ayudar... 🦎", "emoji": "💡" },
-        { "front": "¿Por qué los humanos SÍ somos libres?", "back": "Porque podemos elegir entre distintas opciones. No estamos obligados solo por nuestros genes. ¡Somos conscientes! 🧠", "emoji": "🧠" },
-        { "front": "¿Qué son los \"condicionamientos\"?", "back": "Factores que influyen en cómo actuamos:\n🌍 El lugar donde vivimos\n🧬 Nuestro cuerpo\n👥 Las otras personas\n💻 La tecnología", "emoji": "🌍" },
-        { "front": "¿Ser libre significa hacer todo lo que queremos?", "back": "No. Ser libre es poder responder de distintas maneras a lo que nos pasa — aunque no siempre elijamos lo que nos pasa. 🦋", "emoji": "🤔" },
-        { "front": "¿Qué es la responsabilidad?", "back": "Es hacerse cargo de las consecuencias de lo que elegimos hacer. Si fui libre, soy responsable. ⚖️", "emoji": "⚖️" },
-        { "front": "¿Qué es la coacción?", "back": "Una fuerza externa que nos obliga a actuar contra nuestra voluntad. Cuando hay coacción fuerte, no somos responsables. 🚫", "emoji": "🚫" },
-        { "front": "¿Cuál es la diferencia entre moral y ética?", "back": "🔵 MORAL = las normas que seguimos\n🟣 ÉTICA = reflexionar y preguntarse POR QUÉ existen esas normas 💭", "emoji": "💭" },
-        { "front": "¿Cuáles son los 4 aspectos de una acción libre?", "back": "🎯 1. MOTIVO — ¿por qué actué?\n🏁 2. FIN — ¿para qué?\n🛠️ 3. MEDIOS — ¿cómo?\n📊 4. RESULTADOS — ¿qué pasó?", "emoji": "🎯" }
-      ],
-      "quiz": [
-        { "q": "¿Por qué las hormigas guerreras NO pueden ser consideradas \"valientes\"?", "opts": ["Porque son muy pequeñas", "Porque actúan por instinto, sin poder elegir", "Porque no tienen corazón", "Porque viven bajo tierra"], "correct": 1, "explanation": "¡Exacto! La valentía necesita una decisión libre. Las hormigas no eligen — sus genes las programan para defender el hormiguero. 🐜" },
-        { "q": "Un chico elige estudiar aunque tiene ganas de jugar. Esto muestra que...", "opts": ["Está siendo castigado", "No tiene libertad", "Es libre: elige lo que quiere de verdad, no solo lo que le apetece", "Sus padres lo obligan a hacerlo"], "correct": 2, "explanation": "¡Correcto! Ser libre es hacer lo que verdaderamente queremos, no solo lo que sentimos en el momento. 💪" },
-        { "q": "¿Cuál de estos es un condicionamiento de la acción humana?", "opts": ["El color del cielo", "El lugar geográfico donde vivimos", "La cantidad de planetas del sistema solar", "El color de los ojos de los dinosaurios"], "correct": 1, "explanation": "¡Muy bien! Vivir en un lugar frío o caliente, por ejemplo, condiciona cómo nos vestimos y qué actividades hacemos. 🌍" },
-        { "q": "El escorpión pica a la rana aunque prometió no hacerlo. ¿Por qué no se lo puede considerar responsable?", "opts": ["Porque dijo \"lo siento\" después", "Porque no puede evitarlo — es su naturaleza, no una elección", "Porque es un animal pequeño", "Porque la rana lo provocó primero"], "correct": 1, "explanation": "¡Correcto! El escorpión actúa por instinto. Para ser responsable, primero hay que ser libre. ⚖️" },
-        { "q": "¿Cuándo la ignorancia nos quita responsabilidad?", "opts": ["Cuando no estudiamos para el examen", "Cuando no sabíamos algo que era imposible que supiéramos", "Siempre que digamos \"no sabía\"", "Cuando somos chicos automáticamente"], "correct": 1, "explanation": "¡Exacto! Solo la ignorancia que no podíamos evitar nos quita responsabilidad. 🧐" },
-        { "q": "¿Qué diferencia hay entre moral y ética?", "opts": ["Son exactamente lo mismo, ninguna diferencia", "La moral son las normas; la ética es reflexionar sobre esas normas", "La ética es para filósofos, la moral para religiosos", "La moral es más importante que la ética"], "correct": 1, "explanation": "¡Muy bien! La moral nos dice \"no mentir\". La ética se pregunta: ¿por qué está mal mentir? 💭" },
-        { "q": "¿Cuál de estos es el \"fin\" de una acción?", "opts": ["El momento en que algo termina", "Los materiales que usamos para hacer algo", "La intención u objetivo que tenemos al actuar", "Lo que siente otra persona cuando actuamos"], "correct": 2, "explanation": "¡Correcto! El \"fin\" es el para qué, la meta que tenemos en mente cuando actuamos. 🏁" },
-        { "q": "Libertad y responsabilidad van...", "opts": ["En caminos separados — no tienen relación", "De la mano: si sos libre, también sos responsable", "En contra una de la otra", "Solo en los adultos mayores de 18 años"], "correct": 1, "explanation": "¡Exacto! Si sos libre para actuar, también sos responsable por lo que hiciste. ¡Una no va sin la otra! 🌟" }
-      ],
-      "rhymes": [
-        "El animal sigue su instinto sin parar,\nel humano puede elegir cómo actuar. 🐜",
-        "Ser libre no es hacer lo que me gusta ya,\nes elegir con la cabeza lo que más me va. 🦋",
-        "Libertad y responsabilidad van de la mano,\nsi elegí actuar, hago cargo de lo que causé, hermano. ⚖️",
-        "La moral son las normas que seguimos todos,\nla ética pregunta: ¿por qué de esos modos? 💭"
-      ]
+      "audio": "Por_qué_no_somos_como_las_hormigas.m4a",
+      "audioTitle": "¿Por qué no somos como las hormigas?"
+    },
+    {
+      "id": "ciencias-la-materia",
+      "file": "ciencias-la-materia.json",
+      "name": "Cs. Naturales",
+      "subtitle": "La Materia",
+      "icon": "⚗️",
+      "color": "#0EA5E9",
+      "audio": null,
+      "audioTitle": null
     },
     {
       "id": "sociales-u1",
+      "file": "sociales-u1.json",
       "name": "Cs. Sociales",
-      "subtitle": "Unidad 1 · Método Científico",
+      "subtitle": "Método Científico",
       "icon": "🔬",
       "color": "#1976D2",
-      "flashcards": [
-        {
-          "emoji": "❓",
-          "front": "¿Qué es un problema científico?",
-          "back": "Una PREGUNTA que no tiene respuesta automática y que se puede investigar.\nNo es una afirmación ni una definición — ¡tiene que ser una pregunta! ❓"
-        },
-        {
-          "emoji": "🔢",
-          "front": "¿Cuáles son los 10 pasos del método científico EN ORDEN?",
-          "back": "1️⃣ Tema\n2️⃣ Problema\n3️⃣ Objetivo\n4️⃣ Hipótesis\n5️⃣ Metodología\n6️⃣ Método\n7️⃣ Datos\n8️⃣ Discusión\n9️⃣ Verificación\n🔟 Conclusión"
-        },
-        {
-          "emoji": "🤔",
-          "front": "¿En qué se diferencia el PROBLEMA de la HIPÓTESIS?",
-          "back": "❓ PROBLEMA = es una PREGUNTA a investigar\n(Ej: «¿Cómo afecta la ansiedad al rendimiento?»)\n\n💡 HIPÓTESIS = es una AFIRMACIÓN provisional\n(Ej: «Los alumnos que estudian más rinden mejor»)"
-        },
-        {
-          "emoji": "🔗",
-          "front": "¿Para qué sirve la estructura IP + C + IS?",
-          "back": "Es la fórmula para armar una HIPÓTESIS:\n🔵 IP = Idea Principal → la afirmación central\n🟠 C = Conector → une IP con IS\n🟢 IS = Idea Secundaria → la causa o consecuencia"
-        },
-        {
-          "emoji": "📌",
-          "front": "¿Qué va en la Idea Principal (IP)?",
-          "back": "La afirmación central sobre el tema-problema.\nEs lo que creemos que va a pasar o que es verdad.\nEj: «Los alumnos que estudian más tienen mejor rendimiento». 📌"
-        },
-        {
-          "emoji": "🟠",
-          "front": "¿Qué va en el Conector (C)? Dá ejemplos.",
-          "back": "Palabras que UNEN la IP con la IS.\nEjemplos: «es por ello que», «debido a que», «porque», «ya que», «sin embargo». 🔗"
-        },
-        {
-          "emoji": "📎",
-          "front": "¿Qué va en la Idea Secundaria (IS)?",
-          "back": "La consecuencia, causa o argumento que apoya la Idea Principal.\nEs el «por qué» de la hipótesis.\nEj: «...porque el cerebro retiene mejor con práctica repetida». 📎"
-        },
-        {
-          "emoji": "🔑",
-          "front": "Preguntas clave: ¿qué investigan ¿Por qué? y ¿Para qué?",
-          "back": "❓ ¿Por qué? → Causas y razones\n🎯 ¿Para qué? → Objetivos y finalidad"
-        },
-        {
-          "emoji": "👤",
-          "front": "Preguntas clave: ¿qué investigan ¿Qué? y ¿Quién?",
-          "back": "🔍 ¿Qué? → Características, ideas centrales, datos principales\n👤 ¿Quién? → Actores sociales, personajes, entidades culturales"
-        },
-        {
-          "emoji": "🗺️",
-          "front": "Preguntas clave: ¿qué investigan ¿Cómo?, ¿Dónde? y ¿Cuándo?",
-          "back": "🛠️ ¿Cómo? → Procedimientos, pasos, método utilizado\n📍 ¿Dónde? → Lugar, espacio, ubicación\n📅 ¿Cuándo? → Tiempo, época, fecha, período"
-        },
-        {
-          "emoji": "🎯",
-          "front": "¿Qué es el OBJETIVO en una investigación?",
-          "back": "Lo que queremos lograr con la investigación.\nResponde a la pregunta ¿PARA QUÉ investigamos?\nEj: «Determinar la relación entre horas de estudio y rendimiento». 🎯"
-        },
-        {
-          "emoji": "🛠️",
-          "front": "¿Qué es la METODOLOGÍA?",
-          "back": "La parte que explica CÓMO se va a investigar:\nqué técnicas, herramientas y pasos se usarán.\nResponde al ¿CÓMO? de la investigación. 🛠️"
-        },
-        {
-          "emoji": "✅",
-          "front": "¿Qué es la CONCLUSIÓN?",
-          "back": "El resultado FINAL de la investigación.\nConfirma o refuta la hipótesis después de analizar todos los datos.\nEs el último paso del método científico. ✅"
-        }
-      ],
-      "quiz": [
-        {
-          "q": "¿Cuál de estas frases ES un problema científico?",
-          "opts": ["El agua se evapora con el calor.", "La lluvia es un tipo de precipitación.", "¿Por qué a veces llueve de diferente forma?", "Si llueve, antes tuvo que evaporarse el agua."],
-          "correct": 2,
-          "explanation": "¡Correcto! Un problema científico es una PREGUNTA que se puede investigar. Las otras opciones son afirmaciones o definiciones, no preguntas. ❓"
-        },
-        {
-          "q": "«Los alumnos que estudian 2 horas diarias tienen mayor rendimiento.» ¿Qué parte del método es?",
-          "opts": ["Problema", "Objetivo", "Hipótesis", "Conclusión"],
-          "correct": 2,
-          "explanation": "¡Exacto! Es una HIPÓTESIS: una afirmación provisional que todavía no fue comprobada. No es una pregunta, es una suposición. 💡"
-        },
-        {
-          "q": "«¿Cómo la ansiedad influye en el bajo rendimiento escolar?» ¿Qué parte del método es?",
-          "opts": ["Hipótesis", "Conclusión", "Objetivo", "Problema"],
-          "correct": 3,
-          "explanation": "¡Muy bien! Es el PROBLEMA porque es una pregunta a investigar, no una afirmación. ❓"
-        },
-        {
-          "q": "¿Cuál es el 4° paso del método científico?",
-          "opts": ["Objetivo", "Metodología", "Hipótesis", "Datos"],
-          "correct": 2,
-          "explanation": "¡Correcto! El orden es: Tema → Problema → Objetivo → HIPÓTESIS → Metodología... El 4° paso es siempre la hipótesis. 🔢"
-        },
-        {
-          "q": "¿Cuál es el 10° y último paso del método científico?",
-          "opts": ["Verificación", "Discusión", "Datos", "Conclusión"],
-          "correct": 3,
-          "explanation": "¡Muy bien! La CONCLUSIÓN es el paso final: confirma o refuta la hipótesis con los datos obtenidos. ✅"
-        },
-        {
-          "q": "En IP + C + IS, el CONECTOR sirve para...",
-          "opts": ["Hacer la afirmación central", "Unir la Idea Principal con la Idea Secundaria", "Explicar la consecuencia del problema", "Describir los pasos de la investigación"],
-          "correct": 1,
-          "explanation": "¡Exacto! El Conector une la IP con la IS. Ejemplos: «es por ello que», «debido a que», «porque». 🟠"
-        },
-        {
-          "q": "La pregunta ¿QUIÉN? en las preguntas clave investiga...",
-          "opts": ["Procedimientos y pasos a seguir", "Tiempo, época y período", "Actores sociales y personajes", "Lugar y espacio"],
-          "correct": 2,
-          "explanation": "¡Correcto! ¿Quién? investiga actores sociales, personajes y entidades culturales. 👤"
-        },
-        {
-          "q": "La pregunta ¿CÓMO? en las preguntas clave investiga...",
-          "opts": ["Causas y razones", "Actores sociales", "Tiempo y época", "Procedimientos y método utilizado"],
-          "correct": 3,
-          "explanation": "¡Muy bien! ¿Cómo? investiga los procedimientos, pasos a seguir y método utilizado — igual que la Metodología en el método científico. 🛠️"
-        }
-      ],
-      "rhymes": [
-        "Tema, problema, objetivo e hipótesis van,\nmetodología, método y datos vienen atrás,\ndiscusión, verificación y conclusión al final:\n¡diez pasos del método científico ya! 🔬",
-        "IP afirma, C conecta con razón,\nIS explica: ¡esa es tu hipótesis en acción! 💡",
-        "¿Por qué? busca causas, ¿para qué? el fin,\n¿quién? busca personas, ¿cuándo? el origen. 🔑",
-        "Fuente primaria: el original de verdad,\nsecundaria: alguien la analizó ya. 📜",
-        "Formal es la Mate, abstracta y pura,\nfáctica estudia la realidad y su estructura. 🌍"
-      ],
       "audio": "Pasos_y_formulas_del_metodo_cientifico.m4a",
       "audioTitle": "Hablemos de Hipótesis"
     },
     {
+      "id": "lengua-mitos",
+      "file": "lengua-mitos.json",
+      "name": "Lengua",
+      "subtitle": "Los Mitos",
+      "icon": "📜",
+      "color": "#7C3AED",
+      "audio": null,
+      "audioTitle": null
+    },
+    {
       "id": "proximamente",
+      "file": null,
       "name": "Próximamente",
       "subtitle": "¡Más materias ya vienen!",
       "icon": "🚀",
       "color": "#A855F7",
-      "flashcards": [
-        { "front": "¿Qué materia viene pronto?", "back": "¡La que vos más necesitás! Pedile a papá que la agregue desde el Admin. 😊", "emoji": "🚀" }
-      ],
-      "quiz": [
-        { "q": "¿Dasha es buena estudiante?", "opts": ["¡Sí, mucho!", "¡Sí, muchísimo!", "¡Claro que sí!", "¡La mejor!"], "correct": 0, "explanation": "¡Todas son correctas, Dasha! ⭐" }
-      ],
-      "rhymes": [
-        "¡Pronto habrá más materias para explorar,\nDasha siempre lista para aprender más! 🚀"
-      ]
+      "audio": null,
+      "audioTitle": null
     }
   ]
 }

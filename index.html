@@ -417,7 +417,9 @@ h1,h2,h3,.big{font-family:'Fredoka One',cursive}
 </div>
 
 <script>
+// @ts-nocheck
 let SUBJECTS = [];
+const subjectCache = new Map();
 
 /* ═══════════ STREAK & SCORES ═══════════ */
 function loadStreak(){
@@ -451,7 +453,10 @@ function saveBestPct(subjectId, pct){
 }
 
 /* ═══════════ STATE ═══════════ */
+let currentSubjectMeta = null;
 let currentSubject = null;
+let currentSection = null;
+let currentSectionIdx = 0;
 let currentMode = 'cards';
 let currentCardIdx = 0;
 let cardOrder = [];
@@ -463,6 +468,7 @@ let totalStars = parseInt(localStorage.getItem('dasha_stars')||'0');
 
 /* ═══════════ INIT ═══════════ */
 function init(){
+  ensureSectionBar();
   renderSubjects();
   updateStarDisplay();
   updateStreakDisplay();
@@ -472,38 +478,251 @@ function updateStarDisplay(){
   document.getElementById('total-stars').textContent = '⭐ ' + totalStars + ' puntos';
 }
 
+function ensureSectionBar(){
+  if(document.getElementById('section-bar')) return;
+  const modeBar = document.getElementById('mode-bar');
+  const bar = document.createElement('div');
+  bar.id = 'section-bar';
+  bar.className = 'mode-bar';
+  bar.style.display = 'none';
+  modeBar.parentNode.insertBefore(bar, modeBar);
+}
+
+function getCardsElements(){
+  return {
+    progress: document.querySelector('.progress-bar-wrap'),
+    counter: document.getElementById('card-counter'),
+    scene: document.querySelector('.flip-scene'),
+    hint: document.querySelector('.flip-hint'),
+    nav: document.querySelector('.card-nav'),
+    rhyme: document.getElementById('card-rhyme')
+  };
+}
+
+function getQuizElements(){
+  return {
+    progress: document.querySelector('.quiz-progress'),
+    card: document.getElementById('question-card'),
+    options: document.getElementById('options-grid'),
+    feedback: document.getElementById('feedback-box'),
+    next: document.getElementById('btn-next-q')
+  };
+}
+
+function ensureEmptyBox(viewId, boxId){
+  let box = document.getElementById(boxId);
+  if(box) return box;
+  box = document.createElement('div');
+  box.id = boxId;
+  box.className = 'empty';
+  box.style.display = 'none';
+  document.getElementById(viewId).appendChild(box);
+  return box;
+}
+
+function showCardsEmpty(title, text, emoji='📚'){
+  const els = getCardsElements();
+  const box = ensureEmptyBox('cards-view','cards-empty');
+  els.progress.style.display = 'none';
+  els.counter.style.display = 'none';
+  els.scene.style.display = 'none';
+  els.hint.style.display = 'none';
+  els.nav.style.display = 'none';
+  els.rhyme.style.display = 'none';
+  box.innerHTML = `<div class="e-icon">${emoji}</div><h3 style="margin-bottom:10px">${title}</h3><p>${text}</p>`;
+  box.style.display = 'block';
+}
+
+function showCardsContent(){
+  const els = getCardsElements();
+  const box = ensureEmptyBox('cards-view','cards-empty');
+  els.progress.style.display = 'block';
+  els.counter.style.display = 'block';
+  els.scene.style.display = 'block';
+  els.hint.style.display = 'block';
+  els.nav.style.display = 'flex';
+  box.style.display = 'none';
+}
+
+function showQuizEmpty(title, text, emoji='❓'){
+  const els = getQuizElements();
+  const box = ensureEmptyBox('quiz-view','quiz-empty');
+  els.progress.style.display = 'none';
+  els.card.style.display = 'none';
+  els.options.style.display = 'none';
+  els.feedback.style.display = 'none';
+  els.next.style.display = 'none';
+  box.innerHTML = `<div class="e-icon">${emoji}</div><h3 style="margin-bottom:10px">${title}</h3><p>${text}</p>`;
+  box.style.display = 'block';
+}
+
+function showQuizContent(){
+  const els = getQuizElements();
+  const box = ensureEmptyBox('quiz-view','quiz-empty');
+  els.progress.style.display = 'flex';
+  els.card.style.display = 'block';
+  els.options.style.display = 'flex';
+  els.feedback.style.display = '';
+  els.next.style.display = '';
+  box.style.display = 'none';
+}
+
+function getSubjectStats(subjectMeta){
+  if(subjectMeta.file === null) return '🚀 Próximamente';
+  const cached = subjectMeta.file ? subjectCache.get(subjectMeta.file) : null;
+  if(!cached) return '✨ Tocá para estudiar';
+  const flashcards = cached.sections.reduce((sum, section) => sum + section.flashcards.length, 0);
+  const quiz = cached.sections.reduce((sum, section) => sum + section.quiz.length, 0);
+  if(cached.sections.length > 1){
+    return `🗂️ ${cached.sections.length} secciones · 📖 ${flashcards} tarjetas · ❓ ${quiz} preguntas`;
+  }
+  return `📖 ${flashcards} tarjetas · ❓ ${quiz} preguntas`;
+}
+
 function renderSubjects(){
   const grid = document.getElementById('subjects-grid');
   grid.innerHTML = '';
   SUBJECTS.forEach(s => {
     const d = document.createElement('div');
     d.className = 'subject-card';
+    if(currentSubjectMeta && currentSubjectMeta.id === s.id) d.classList.add('active');
     d.innerHTML = `<div class="s-icon">${s.icon}</div>
       <div class="s-name">${s.name}<br><span style="font-family:Nunito;font-size:12px;font-weight:600;color:#6B7280">${s.subtitle}</span></div>
-      <div class="s-count">📖 ${s.flashcards.length} tarjetas · ❓ ${s.quiz.length} preguntas</div>`;
+      <div class="s-count">${getSubjectStats(s)}</div>`;
     d.onclick = () => selectSubject(s.id);
     grid.appendChild(d);
   });
 }
 
-/* ═══════════ SUBJECT ═══════════ */
-function selectSubject(id){
-  currentSubject = SUBJECTS.find(s=>s.id===id);
-  document.querySelectorAll('.subject-card').forEach((el,i)=>{
-    el.classList.toggle('active', SUBJECTS[i].id===id);
+function normalizeCard(card){
+  return {
+    emoji: card && card.emoji ? card.emoji : '❓',
+    front: card && card.front ? card.front : '',
+    back: card && card.back ? card.back : ''
+  };
+}
+
+function normalizeQuestion(question){
+  const opts = Array.isArray(question && question.opts) ? question.opts.slice(0,4) : [];
+  while(opts.length < 4) opts.push('');
+  return {
+    q: question && question.q ? question.q : '',
+    opts,
+    correct: Number.isInteger(question && question.correct) ? question.correct : 0,
+    explanation: question && question.explanation ? question.explanation : ''
+  };
+}
+
+function normalizeSection(section, fallbackTitle, index){
+  return {
+    id: section && section.id ? section.id : `section-${index+1}`,
+    title: section && section.title ? section.title : fallbackTitle,
+    audio: section && section.audio ? section.audio : null,
+    audioTitle: section && section.audioTitle ? section.audioTitle : null,
+    rhymes: Array.isArray(section && section.rhymes) ? section.rhymes.filter(Boolean) : [],
+    flashcards: Array.isArray(section && section.flashcards) ? section.flashcards.map(normalizeCard) : [],
+    quiz: Array.isArray(section && section.quiz) ? section.quiz.map(normalizeQuestion) : []
+  };
+}
+
+function normalizeSubjectData(meta, raw){
+  const source = raw || {};
+  const sections = Array.isArray(source.sections) && source.sections.length
+    ? source.sections.map((section, index) => normalizeSection(section, section && section.title ? section.title : meta.subtitle || meta.name, index))
+    : [normalizeSection({}, meta.subtitle || meta.name, 0)];
+  return {
+    id: source.id || meta.id,
+    sections
+  };
+}
+
+async function loadSubjectFile(subjectMeta){
+  if(subjectCache.has(subjectMeta.file)) return subjectCache.get(subjectMeta.file);
+  const res = await fetch(subjectMeta.file);
+  if(!res.ok) throw new Error('fetch failed');
+  const json = await res.json();
+  const normalized = normalizeSubjectData(subjectMeta, json);
+  subjectCache.set(subjectMeta.file, normalized);
+  return normalized;
+}
+
+function renderSectionTabs(){
+  const bar = document.getElementById('section-bar');
+  bar.innerHTML = '';
+  if(!currentSubject || currentSubject.sections.length <= 1){
+    bar.style.display = 'none';
+    return;
+  }
+  currentSubject.sections.forEach((section, index) => {
+    const btn = document.createElement('button');
+    btn.className = 'mode-btn' + (index === currentSectionIdx ? ' active' : '');
+    btn.textContent = section.title;
+    btn.onclick = () => selectSection(index);
+    bar.appendChild(btn);
   });
-  document.getElementById('mode-bar').style.display = 'flex';
-  // audio del subject
+  bar.style.display = 'flex';
+}
+
+function updateSectionAudio(){
   const audioBox = document.getElementById('subject-audio');
-  if(currentSubject.audio){
-    document.getElementById('audio-title').textContent = currentSubject.audioTitle || currentSubject.name;
-    document.getElementById('audio-source').src = currentSubject.audio;
+  if(currentSection && currentSection.audio){
+    document.getElementById('audio-title').textContent = currentSection.audioTitle || currentSection.title;
+    document.getElementById('audio-source').src = 'audios/' + currentSection.audio;
     document.getElementById('audio-player').load();
     audioBox.style.display = 'block';
   } else {
+    document.getElementById('audio-source').src = '';
     audioBox.style.display = 'none';
   }
-  setMode('cards');
+}
+
+/* ═══════════ SUBJECT ═══════════ */
+async function selectSubject(id){
+  currentSubjectMeta = SUBJECTS.find(s => s.id === id) || null;
+  currentSubject = null;
+  currentSection = null;
+  currentSectionIdx = 0;
+  renderSubjects();
+  document.getElementById('score-view').style.display = 'none';
+  document.getElementById('quiz-view').style.display = 'none';
+  document.getElementById('cards-view').style.display = 'block';
+
+  if(!currentSubjectMeta) return;
+  if(currentSubjectMeta.file === null){
+    document.getElementById('mode-bar').style.display = 'none';
+    document.getElementById('section-bar').style.display = 'none';
+    updateSectionAudio();
+    showCardsEmpty('¡Próximamente, Dasha!', 'Esta materia va a estar lista muy pronto para vos.', '🚀');
+    return;
+  }
+
+  showCardsEmpty('⏳ Cargando...', 'Preparando esta materia para estudiar.', '📚');
+  document.getElementById('mode-bar').style.display = 'none';
+  document.getElementById('section-bar').style.display = 'none';
+
+  try {
+    currentSubject = await loadSubjectFile(currentSubjectMeta);
+    currentMode = 'cards';
+    selectSection(0);
+    renderSubjects();
+  } catch(e) {
+    currentSubject = null;
+    currentSection = null;
+    document.getElementById('mode-bar').style.display = 'none';
+    document.getElementById('section-bar').style.display = 'none';
+    updateSectionAudio();
+    showCardsEmpty('⚠️ No se pudo abrir la materia', 'Probá abrir la app desde GitHub Pages o desde cualquier servidor HTTP.', '⚠️');
+  }
+}
+
+function selectSection(index){
+  if(!currentSubject || !currentSubject.sections.length) return;
+  currentSectionIdx = Math.max(0, Math.min(currentSubject.sections.length - 1, index));
+  currentSection = currentSubject.sections[currentSectionIdx];
+  renderSectionTabs();
+  document.getElementById('mode-bar').style.display = 'flex';
+  updateSectionAudio();
+  setMode(currentMode);
 }
 
 /* ═══════════ MODE ═══════════ */
@@ -528,18 +747,36 @@ function shuffle(arr){
   return a;
 }
 
+function getCurrentFlashcards(){
+  return currentSection && Array.isArray(currentSection.flashcards) ? currentSection.flashcards : [];
+}
+
+function getCurrentQuiz(){
+  return currentSection && Array.isArray(currentSection.quiz) ? currentSection.quiz : [];
+}
+
 /* ═══════════ FLASHCARDS ═══════════ */
 function startCards(){
-  if(!currentSubject) return;
-  cardOrder = shuffle(currentSubject.flashcards);
+  const cards = getCurrentFlashcards();
+  if(!currentSection){
+    showCardsEmpty('Elegí una materia', 'Seleccioná una materia para empezar a estudiar.', '📚');
+    return;
+  }
+  if(!cards.length){
+    showCardsEmpty('Todavía no hay tarjetas', 'Esta sección todavía no tiene tarjetas para repasar.', '🃏');
+    return;
+  }
+  showCardsContent();
+  cardOrder = shuffle(cards);
   currentCardIdx = 0;
   document.getElementById('flip-card').classList.remove('flipped');
   renderCard();
 }
 
 function renderCard(){
-  const total = currentSubject.flashcards.length;
-  const card = currentSubject.flashcards[cardOrder[currentCardIdx]];
+  const cards = getCurrentFlashcards();
+  const total = cards.length;
+  const card = cards[cardOrder[currentCardIdx]];
   const pct = ((currentCardIdx+1)/total*100).toFixed(0);
   document.getElementById('card-progress').style.width = pct+'%';
   document.getElementById('card-counter').textContent = `Tarjeta ${currentCardIdx+1} de ${total}`;
@@ -550,10 +787,9 @@ function renderCard(){
   document.getElementById('btn-prev').disabled = currentCardIdx===0;
   document.getElementById('btn-next').disabled = currentCardIdx===total-1;
 
-  // rhyme
   const rhymeBox = document.getElementById('card-rhyme');
-  if(currentSubject.rhymes && currentSubject.rhymes.length){
-    const r = currentSubject.rhymes[currentCardIdx % currentSubject.rhymes.length];
+  if(currentSection.rhymes && currentSection.rhymes.length){
+    const r = currentSection.rhymes[currentCardIdx % currentSection.rhymes.length];
     rhymeBox.textContent = r;
     rhymeBox.style.display = 'block';
   } else {
@@ -565,19 +801,30 @@ function renderCard(){
 }
 
 function flipCard(){
+  if(!getCurrentFlashcards().length) return;
   document.getElementById('flip-card').classList.toggle('flipped');
 }
 
 function changeCard(dir){
-  const total = currentSubject.flashcards.length;
+  const total = getCurrentFlashcards().length;
+  if(!total) return;
   currentCardIdx = Math.max(0,Math.min(total-1,currentCardIdx+dir));
   renderCard();
 }
 
 /* ═══════════ QUIZ ═══════════ */
 function startQuiz(){
-  if(!currentSubject) return;
-  quizOrder = shuffle(currentSubject.quiz);
+  const quiz = getCurrentQuiz();
+  if(!currentSection){
+    showQuizEmpty('Elegí una materia', 'Seleccioná una materia para empezar con el cuestionario.', '❓');
+    return;
+  }
+  if(!quiz.length){
+    showQuizEmpty('Todavía no hay preguntas', 'Esta sección todavía no tiene preguntas para practicar.', '📝');
+    return;
+  }
+  showQuizContent();
+  quizOrder = shuffle(quiz);
   currentQIdx = 0;
   score = 0;
   answered = false;
@@ -587,30 +834,25 @@ function startQuiz(){
 }
 
 function renderQuestion(){
-  const total = currentSubject.quiz.length;
-  const q = currentSubject.quiz[quizOrder[currentQIdx]];
+  const quiz = getCurrentQuiz();
+  const total = quiz.length;
+  const q = quiz[quizOrder[currentQIdx]];
   const pct = (currentQIdx/total*100).toFixed(0);
   document.getElementById('qp-bar').style.width = pct+'%';
   document.getElementById('qp-label').textContent = `${currentQIdx+1} / ${total}`;
   document.getElementById('q-num').textContent = `Pregunta ${currentQIdx+1}`;
   document.getElementById('q-text').textContent = q.q;
 
-  // shuffle options for this question
   const optOrder = shuffle(q.opts);
-  // find where correct answer ended up
-  const correctText = q.opts[q.correct];
-  const newCorrectIdx = optOrder.findIndex(i=>i===q.opts.indexOf(correctText)||
-    q.opts[i]===correctText );
-
   const grid = document.getElementById('options-grid');
   grid.innerHTML = '';
   const letters = ['A','B','C','D'];
   optOrder.forEach((optIdx, pos)=>{
-    const optText = typeof optIdx==='number' ? q.opts[optIdx] : optIdx;
-    const isCorrect = (typeof optIdx==='number') ? optIdx===q.correct : optIdx===q.opts[q.correct];
     const btn = document.createElement('button');
+    const isCorrect = optIdx === q.correct;
     btn.className = 'option-btn';
-    btn.innerHTML = `<span class="opt-letter">${letters[pos]}</span>${optText}`;
+    btn.dataset.correct = isCorrect ? 'true' : 'false';
+    btn.innerHTML = `<span class="opt-letter">${letters[pos]}</span>${q.opts[optIdx]}`;
     btn.onclick = ()=>selectOption(btn, isCorrect, q.explanation);
     grid.appendChild(btn);
   });
@@ -624,18 +866,14 @@ function renderQuestion(){
   setTimeout(()=>document.getElementById('question-card').classList.remove('pop'),350);
 }
 
-// Proper shuffle for options preserving correct-answer tracking
-function renderQuestion2(){
-  // overrides above — smarter version
-}
-
 function selectOption(btn, isCorrect, explanation){
   if(answered) return;
   answered = true;
-  const allBtns = document.querySelectorAll('.option-btn');
+  const allBtns = [...document.querySelectorAll('.option-btn')];
   allBtns.forEach(b=>b.disabled=true);
 
   const fb = document.getElementById('feedback-box');
+  const correctBtn = allBtns.find(b => b.dataset.correct === 'true');
 
   if(isCorrect){
     btn.classList.add('correct');
@@ -647,38 +885,21 @@ function selectOption(btn, isCorrect, explanation){
     fb.textContent = '✅ ¡Muy bien, Dasha! ' + explanation;
   } else {
     btn.classList.add('wrong');
-    btn.closest('.options-grid').querySelectorAll('.option-btn').forEach(b=>{
-      // find correct and highlight it
-    });
-    // highlight correct answer
-    allBtns.forEach(b=>{
-      if(!b.classList.contains('wrong')){
-        // check text matches correct
-        const txt = b.querySelector('.option-btn') ? b.textContent.trim() : b.textContent.replace(/^[ABCD]/,'').trim();
-      }
-    });
-    btn.closest('#options-grid').querySelectorAll('.option-btn').forEach(b=>{
-      if(!b.classList.contains('wrong')){
-        b.classList.add('correct');
-      }
-    });
+    if(correctBtn) correctBtn.classList.add('correct');
     fb.className = 'feedback-box nope show';
     fb.textContent = '💪 Casi, Dasha! ' + explanation;
-    btn.classList.remove('correct');
-    btn.classList.add('wrong');
-    // shake
     document.getElementById('question-card').classList.add('shake');
     setTimeout(()=>document.getElementById('question-card').classList.remove('shake'),350);
   }
 
   document.getElementById('btn-next-q').classList.add('show');
-  const isLast = currentQIdx >= currentSubject.quiz.length - 1;
+  const isLast = currentQIdx >= getCurrentQuiz().length - 1;
   document.getElementById('btn-next-q').textContent = isLast ? '🌟 Ver mi resultado' : 'Siguiente pregunta →';
 }
 
 function nextQuestion(){
   currentQIdx++;
-  if(currentQIdx >= currentSubject.quiz.length){
+  if(currentQIdx >= getCurrentQuiz().length){
     showScore();
   } else {
     renderQuestion();
@@ -691,7 +912,7 @@ function showScore(){
   sv.style.display='block';
   sv.classList.add('pop');
 
-  const total = currentSubject.quiz.length;
+  const total = getCurrentQuiz().length;
   const pct = Math.round(score/total*100);
   let emoji,title,msg,stars;
 
@@ -715,10 +936,9 @@ function showScore(){
   document.getElementById('score-stars').textContent = stars;
   document.getElementById('score-msg').textContent = msg;
 
-  // racha y mejor puntaje
   const streak = markActivityToday();
-  const isNew  = saveBestPct(currentSubject.id, pct);
-  const bestPct = getBestPct(currentSubject.id);
+  const isNew  = saveBestPct(currentSubjectMeta.id, pct);
+  const bestPct = getBestPct(currentSubjectMeta.id);
   const streakDays = `🔥 Racha: <strong>${streak} día${streak!==1?'s':''}</strong>`;
   const bestLabel  = isNew
     ? `🏅 Mejor: <strong>${bestPct}%</strong> <span class="new-record">¡Nuevo récord!</span>`
@@ -745,7 +965,7 @@ async function loadData(){
     const res = await fetch('materias.json');
     if(!res.ok) throw new Error('fetch failed');
     const json = await res.json();
-    SUBJECTS = json.subjects;
+    SUBJECTS = Array.isArray(json.subjects) ? json.subjects : [];
     init();
   } catch(e) {
     grid.innerHTML = '<div style="padding:24px;color:var(--coral);font-weight:700;text-align:center">⚠️ No se pudo cargar materias.json.<br><small>Servir desde un servidor HTTP (no file://).</small></div>';

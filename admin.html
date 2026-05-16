@@ -8,591 +8,716 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --coral:#FF6B6B;--coral-light:#FFE5E5;--coral-dark:#CC4444;
-  --yellow:#FFD93D;--yellow-light:#FFFBE6;
-  --mint:#6BCB77;--mint-light:#E6F9E8;--mint-dark:#3A8A44;
-  --purple:#A855F7;--purple-light:#F5F0FF;
-  --gray:#6B7280;--gray-light:#F9FAFB;--gray-border:#E5E7EB;
-  --text:#1F2937;--text-soft:#6B7280;
-  --radius:16px;--radius-sm:10px;
-  --shadow:0 4px 20px rgba(0,0,0,.10);
+  --bg:#F5F7FB;--panel:#FFFFFF;--panel-soft:#F9FAFB;--line:#D7DEEA;
+  --text:#152033;--muted:#5B6475;--accent:#2563EB;--accent-soft:#DBEAFE;
+  --success:#059669;--success-soft:#D1FAE5;--danger:#DC2626;--danger-soft:#FEE2E2;
+  --shadow:0 10px 30px rgba(15,23,42,.08);--radius:18px;--radius-sm:12px;
 }
-body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FFF5F0 0%,#FFF9E6 50%,#F0FFF4 100%);min-height:100vh;color:var(--text)}
-h1,h2,h3{font-family:'Fredoka One',cursive}
-
-/* ── HEADER ── */
-.admin-header{background:white;border-bottom:2px solid var(--gray-border);padding:12px 20px;display:flex;align-items:center;gap:10px;box-shadow:var(--shadow);position:sticky;top:0;z-index:100}
-.admin-header h1{font-size:19px;color:var(--coral-dark);flex:1}
-.btn-export{background:var(--mint);color:white;border:none;border-radius:var(--radius-sm);padding:8px 14px;font-family:'Fredoka One',cursive;font-size:14px;cursor:pointer}
-.btn-export:hover{background:var(--mint-dark)}
-.btn-app{background:white;color:var(--coral);border:2px solid var(--coral);border-radius:var(--radius-sm);padding:6px 12px;font-family:'Fredoka One',cursive;font-size:14px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
-.btn-app:hover{background:var(--coral-light)}
-
-/* ── LAYOUT ── */
-.admin-wrap{max-width:720px;margin:0 auto;padding:20px 16px 60px}
-
-/* ── SUBJECT LIST ── */
-.subject-row{background:white;border:2px solid var(--gray-border);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow);transition:all .18s}
-.subject-row:hover{border-color:var(--coral);transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.12)}
-.s-icon{font-size:26px;flex-shrink:0}
-.s-info{flex:1;min-width:0}
-.s-name{font-family:'Fredoka One',cursive;font-size:15px}
-.s-sub{font-size:12px;color:var(--text-soft)}
-.s-counts{font-size:11px;color:var(--text-soft);margin-top:2px}
-.row-actions{display:flex;gap:6px;flex-shrink:0}
-
-/* ── BUTTONS ── */
-.btn{border:none;border-radius:var(--radius-sm);padding:8px 16px;font-family:'Fredoka One',cursive;font-size:15px;cursor:pointer;transition:all .18s}
-.btn-primary{background:var(--coral);color:white}
-.btn-primary:hover{background:var(--coral-dark)}
-.btn-sm{padding:6px 12px;font-size:13px}
-.btn-outline{background:white;color:var(--coral);border:2px solid var(--coral)}
-.btn-outline:hover{background:var(--coral-light)}
-.btn-danger{background:white;color:#DC2626;border:2px solid #DC2626}
-.btn-danger:hover{background:#FEE2E2}
-.btn-success{background:var(--mint);color:white}
-.btn-success:hover{background:var(--mint-dark)}
-.btn-ghost{background:transparent;color:var(--text-soft);border:2px solid var(--gray-border)}
-.btn-ghost:hover{border-color:var(--coral);color:var(--coral)}
-.btn-dashed{width:100%;background:white;border:2px dashed var(--coral);border-radius:var(--radius);padding:12px;font-family:'Fredoka One',cursive;font-size:15px;color:var(--coral);cursor:pointer;margin-top:8px;transition:all .18s}
-.btn-dashed:hover{background:var(--coral-light)}
-
-/* ── EDITOR ── */
-.btn-back{background:none;border:none;color:var(--coral);font-family:'Fredoka One',cursive;font-size:16px;cursor:pointer;padding:0;margin-bottom:10px;display:flex;align-items:center;gap:4px}
-.editor-heading{font-size:22px;color:var(--text);margin-bottom:14px}
-
-.tabs{display:flex;gap:6px;margin-bottom:18px;background:white;padding:5px;border-radius:var(--radius);border:2px solid var(--gray-border);box-shadow:var(--shadow)}
-.tab{flex:1;padding:8px 4px;border:none;border-radius:calc(var(--radius) - 4px);font-family:'Fredoka One',cursive;font-size:14px;cursor:pointer;color:var(--text-soft);background:transparent;transition:all .2s}
-.tab.active{background:var(--coral);color:white}
-.tab-panel{display:none}
-.tab-panel.active{display:block}
-
-/* ── FORMS ── */
-.card-form{background:white;border:2px solid var(--gray-border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);margin-bottom:16px}
-.form-group{margin-bottom:12px}
-.form-group label{display:block;font-size:12px;font-weight:800;color:var(--text-soft);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
-.form-group input,.form-group textarea,.form-group select{width:100%;border:2px solid var(--gray-border);border-radius:var(--radius-sm);padding:9px 12px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--text);transition:border-color .18s;background:white}
-.form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--coral)}
-.form-group textarea{min-height:70px;resize:vertical}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.form-row-3{display:grid;grid-template-columns:80px 1fr 80px;gap:10px}
-.btn-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
-
-/* ── ITEM CARDS (flashcards/quiz list) ── */
-.item-card{background:white;border:2px solid var(--gray-border);border-radius:var(--radius-sm);margin-bottom:8px;overflow:hidden}
-.item-header{display:flex;align-items:center;gap:10px;padding:11px 14px}
-.item-icon{font-size:18px;flex-shrink:0;width:28px;text-align:center}
-.item-main{flex:1;min-width:0}
-.item-title{font-size:14px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.item-sub{font-size:11px;color:var(--text-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
-.item-btns{display:flex;gap:5px;flex-shrink:0}
-.item-edit-form{padding:14px;border-top:2px solid var(--gray-border);background:#FAFAFA;display:none}
-.item-edit-form.open{display:block}
-
-/* ── QUIZ OPTIONS ── */
-.opts-grid{display:flex;flex-direction:column;gap:6px;margin-top:4px}
-.opt-row{display:flex;align-items:center;gap:8px}
-.opt-row input[type=text]{flex:1;border:2px solid var(--gray-border);border-radius:8px;padding:7px 10px;font-family:'Nunito',sans-serif;font-size:13px}
-.opt-row input[type=text]:focus{outline:none;border-color:var(--coral)}
-.opt-row input[type=radio]{width:16px;height:16px;cursor:pointer;accent-color:var(--mint);flex-shrink:0}
-.opt-row .opt-label{font-family:'Fredoka One',cursive;font-size:13px;color:var(--text-soft);width:18px;flex-shrink:0;text-align:center}
-.opt-hint{font-size:11px;color:var(--text-soft);margin-top:4px}
-
-/* ── RHYMES ── */
-.rhyme-card{background:var(--yellow-light);border:2px solid var(--yellow);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:8px;display:flex;gap:10px;align-items:flex-start}
-.rhyme-card textarea{flex:1;border:none;background:transparent;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;color:#7C5100;resize:vertical;min-height:44px}
-.rhyme-card textarea:focus{outline:none}
-
-/* ── SECTION HEADER ── */
-.sec-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.sec-title{font-family:'Fredoka One',cursive;font-size:17px;color:var(--text)}
-.sec-count{font-size:12px;color:var(--text-soft);font-weight:700;background:var(--gray-light);border:1.5px solid var(--gray-border);border-radius:20px;padding:2px 10px}
-
-/* ── IMPORT ── */
-.import-bar{background:white;border:2px solid var(--gray-border);border-radius:var(--radius);padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px;box-shadow:var(--shadow)}
-.import-bar label{font-size:13px;font-weight:700;color:var(--text-soft);cursor:pointer;display:flex;align-items:center;gap:6px}
-.import-bar input[type=file]{display:none}
-.unsaved{background:var(--yellow-light);border:2px solid var(--yellow);border-radius:var(--radius-sm);padding:8px 14px;font-size:13px;font-weight:700;color:#92400E;display:none}
-.unsaved.show{display:block}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+.app{display:grid;grid-template-columns:320px minmax(0,1fr);min-height:100vh}
+.sidebar{background:#0F172A;color:#E5E7EB;padding:24px 18px;display:flex;flex-direction:column;gap:18px;border-right:1px solid rgba(255,255,255,.08)}
+.sidebar h1{font-family:'Fredoka One',cursive;font-size:24px;color:#fff}
+.sidebar p{font-size:13px;line-height:1.5;color:#CBD5E1}
+.sidebar-top{display:flex;flex-direction:column;gap:10px}
+.sidebar-actions{display:flex;gap:10px;flex-wrap:wrap}
+.sidebar .btn{width:100%;justify-content:center}
+.subject-list{display:flex;flex-direction:column;gap:10px;overflow:auto;padding-right:4px}
+.subject-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px 12px;display:flex;gap:12px;align-items:flex-start;transition:.18s}
+.subject-item:hover{background:rgba(255,255,255,.08);transform:translateY(-1px)}
+.subject-item.active{background:#1D4ED8;border-color:#60A5FA;box-shadow:0 12px 28px rgba(37,99,235,.28)}
+.subject-item .icon{font-size:24px;line-height:1}
+.subject-item .meta{flex:1;min-width:0}
+.subject-item .name{font-weight:800;color:#fff}
+.subject-item .sub{font-size:12px;color:#CBD5E1;margin-top:2px}
+.subject-item .file{font-size:11px;color:#93C5FD;margin-top:6px;word-break:break-word}
+.main{padding:28px;overflow:auto}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+.toolbar h2{font-size:28px;font-weight:900}
+.toolbar p{color:var(--muted);font-size:14px}
+.toolbar-actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn{border:none;border-radius:12px;padding:11px 16px;font-weight:800;display:inline-flex;align-items:center;gap:8px;text-decoration:none;transition:.18s}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#1D4ED8}
+.btn-secondary{background:#fff;color:var(--text);border:1px solid var(--line)}
+.btn-secondary:hover{background:var(--panel-soft)}
+.btn-success{background:var(--success);color:#fff}
+.btn-success:hover{background:#047857}
+.btn-danger{background:#fff;color:var(--danger);border:1px solid #FCA5A5}
+.btn-danger:hover{background:var(--danger-soft)}
+.btn-ghost{background:transparent;color:inherit;border:1px dashed rgba(148,163,184,.45)}
+.btn-ghost:hover{background:rgba(148,163,184,.08)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
+.panel h3{font-size:18px;margin-bottom:14px}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.muted{color:var(--muted)}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.form-grid-3{display:grid;grid-template-columns:110px minmax(0,1fr) 140px;gap:14px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+label{font-size:12px;font-weight:900;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+input,textarea,select{width:100%;border:1px solid var(--line);background:#fff;border-radius:12px;padding:11px 12px;color:var(--text)}
+textarea{min-height:96px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:none;border-color:#60A5FA;box-shadow:0 0 0 4px rgba(96,165,250,.18)}
+.section-list{display:flex;flex-direction:column;gap:14px}
+.section-card{border:1px solid var(--line);border-radius:16px;background:var(--panel-soft);overflow:hidden}
+.section-summary{display:flex;align-items:center;gap:14px;padding:16px 18px;cursor:pointer}
+.section-summary:hover{background:#F3F6FB}
+.section-summary .summary-main{flex:1;min-width:0}
+.section-summary h4{font-size:16px}
+.section-summary p{font-size:13px;color:var(--muted);margin-top:3px}
+.section-actions{display:flex;gap:8px;flex-wrap:wrap}
+.section-body{display:none;padding:0 18px 18px;border-top:1px solid var(--line);background:#fff}
+.section-card.open .section-body{display:block}
+.section-card.open .section-summary{background:#fff}
+.stack{display:flex;flex-direction:column;gap:12px}
+.card-list,.quiz-list{display:flex;flex-direction:column;gap:12px}
+.item-box{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--panel-soft)}
+.item-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.item-head strong{font-size:15px}
+.option-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.toast-wrap{position:fixed;top:20px;right:20px;display:flex;flex-direction:column;gap:10px;z-index:5000}
+.toast{min-width:260px;max-width:360px;padding:14px 16px;border-radius:14px;box-shadow:var(--shadow);border:1px solid var(--line);background:#fff;color:var(--text)}
+.toast.success{border-color:#6EE7B7;background:var(--success-soft)}
+.toast.error{border-color:#FCA5A5;background:var(--danger-soft)}
+.empty{padding:42px 24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:16px;background:#fff}
+.code-note{font-size:12px;color:var(--muted)}
+@media (max-width:1100px){
+  .app{grid-template-columns:1fr}
+  .sidebar{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
+}
+@media (max-width:760px){
+  .main{padding:18px}
+  .form-grid,.form-grid-3,.option-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <h1>Admin</h1>
+      <p>Editor de materias y secciones. Guardá el índice y cada materia por separado usando el servidor local.</p>
+      <div class="sidebar-actions">
+        <button class="btn btn-primary" id="btn-new-subject">+ Nueva materia</button>
+        <a class="btn btn-secondary" href="index.html">Ver app</a>
+      </div>
+    </div>
+    <div class="subject-list" id="subject-list"></div>
+  </aside>
+  <main class="main">
+    <div class="toolbar">
+      <div>
+        <h2 id="editor-title">Seleccioná una materia</h2>
+        <p id="editor-subtitle">Cargá materias.json desde el servidor y editá una materia para comenzar.</p>
+      </div>
+      <div class="toolbar-actions">
+        <button class="btn btn-success" id="btn-save-subject">Guardar materia</button>
+        <button class="btn btn-primary" id="btn-save-index">Guardar índice</button>
+      </div>
+    </div>
 
-<div class="admin-header">
-  <h1>🛠️ Admin · Dasha</h1>
-  <span class="unsaved" id="unsaved-badge">● Cambios sin exportar</span>
-  <a href="index.html" class="btn-app">Ver app →</a>
-  <button class="btn-export" onclick="exportJSON()">⬇️ Exportar JSON</button>
+    <div class="panel" id="subject-panel" style="display:none">
+      <div class="panel-head">
+        <h3>Datos de la materia</h3>
+        <span class="code-note" id="subject-file-label"></span>
+      </div>
+      <div class="form-grid-3">
+        <div class="field">
+          <label for="subject-icon">Ícono</label>
+          <input id="subject-icon" type="text" maxlength="4">
+        </div>
+        <div class="field">
+          <label for="subject-name">Nombre</label>
+          <input id="subject-name" type="text">
+        </div>
+        <div class="field">
+          <label for="subject-color">Color</label>
+          <input id="subject-color" type="color">
+        </div>
+      </div>
+      <div class="form-grid" style="margin-top:14px">
+        <div class="field">
+          <label for="subject-subtitle">Subtítulo</label>
+          <input id="subject-subtitle" type="text">
+        </div>
+        <div class="field">
+          <label for="subject-id">ID</label>
+          <input id="subject-id" type="text">
+        </div>
+        <div class="field">
+          <label for="subject-file">Archivo JSON</label>
+          <input id="subject-file" type="text">
+        </div>
+        <div class="field">
+          <label for="subject-audio">Audio de materia</label>
+          <input id="subject-audio" type="text" placeholder="filename.m4a o vacío">
+        </div>
+        <div class="field full">
+          <label for="subject-audio-title">Título visible del audio de materia</label>
+          <input id="subject-audio-title" type="text">
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="sections-panel" style="display:none">
+      <div class="panel-head">
+        <div>
+          <h3>Secciones</h3>
+          <p class="muted">Cada materia guarda sus tarjetas, preguntas, rimas y audio por sección.</p>
+        </div>
+        <button class="btn btn-secondary" id="btn-add-section">+ Agregar sección</button>
+      </div>
+      <div class="section-list" id="section-list"></div>
+    </div>
+
+    <div class="empty" id="empty-state">
+      Elegí una materia desde la barra lateral o creá una nueva para empezar.
+    </div>
+  </main>
 </div>
-
-<div class="admin-wrap">
-
-  <!-- VIEW: LISTA DE MATERIAS -->
-  <div id="view-list">
-    <div class="import-bar">
-      <span style="font-size:18px">📂</span>
-      <label>
-        <input type="file" id="import-file" accept=".json" onchange="importJSON(event)">
-        <span style="color:var(--coral);font-weight:800;cursor:pointer">Importar materias.json</span>
-      </label>
-      <span style="font-size:12px;color:var(--text-soft)">o cargá desde el repo</span>
-    </div>
-
-    <div class="sec-header">
-      <span class="sec-title">📖 Materias</span>
-      <span class="sec-count" id="subject-count">0 materias</span>
-    </div>
-    <div id="subject-list"></div>
-    <button class="btn-dashed" onclick="newSubject()">+ Nueva materia</button>
-  </div>
-
-  <!-- VIEW: EDITOR DE MATERIA -->
-  <div id="view-editor" style="display:none">
-    <button class="btn-back" onclick="showList()">← Volver a materias</button>
-    <h2 class="editor-heading" id="editor-heading"></h2>
-
-    <div class="tabs">
-      <button class="tab active" onclick="showTab('info')">⚙️ Info</button>
-      <button class="tab" onclick="showTab('cards')">🃏 Tarjetas</button>
-      <button class="tab" onclick="showTab('quiz')">❓ Quiz</button>
-      <button class="tab" onclick="showTab('rhymes')">🎵 Coplas</button>
-    </div>
-
-    <!-- TAB: INFO -->
-    <div id="tab-info" class="tab-panel active">
-      <div class="card-form">
-        <div class="form-row-3">
-          <div class="form-group">
-            <label>Ícono</label>
-            <input type="text" id="f-icon" placeholder="🦋" maxlength="4">
-          </div>
-          <div class="form-group">
-            <label>Nombre de la materia</label>
-            <input type="text" id="f-name" placeholder="Ciudadanía">
-          </div>
-          <div class="form-group">
-            <label>Color</label>
-            <input type="color" id="f-color" style="padding:4px;height:44px">
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Subtítulo / Capítulo</label>
-          <input type="text" id="f-subtitle" placeholder="La Libertad">
-        </div>
-        <div class="form-group">
-          <label>ID (sin espacios, minúsculas)</label>
-          <input type="text" id="f-id" placeholder="ciudadania-cap1">
-        </div>
-        <div class="form-group">
-          <label>Audio — nombre del archivo (opcional)</label>
-          <input type="text" id="f-audio" placeholder="Por_qu%C3%A9_no_somos_como_las_hormigas.m4a">
-        </div>
-        <div class="form-group">
-          <label>Audio — título visible</label>
-          <input type="text" id="f-audio-title" placeholder="¿Por qué no somos como las hormigas?">
-        </div>
-        <div class="btn-row">
-          <button class="btn btn-primary" onclick="saveInfo()">Guardar info</button>
-          <button class="btn btn-danger btn-sm" onclick="deleteSubject()">🗑️ Eliminar materia</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB: TARJETAS -->
-    <div id="tab-cards" class="tab-panel">
-      <div class="sec-header">
-        <span class="sec-title">Tarjetas</span>
-        <span class="sec-count" id="cards-count">0</span>
-      </div>
-      <div id="cards-list"></div>
-      <button class="btn-dashed" onclick="addCard()">+ Agregar tarjeta</button>
-    </div>
-
-    <!-- TAB: QUIZ -->
-    <div id="tab-quiz" class="tab-panel">
-      <div class="sec-header">
-        <span class="sec-title">Preguntas</span>
-        <span class="sec-count" id="quiz-count">0</span>
-      </div>
-      <div id="quiz-list"></div>
-      <button class="btn-dashed" onclick="addQuestion()">+ Agregar pregunta</button>
-    </div>
-
-    <!-- TAB: COPLAS -->
-    <div id="tab-rhymes" class="tab-panel">
-      <div class="sec-header">
-        <span class="sec-title">Coplas / Rimas</span>
-        <span class="sec-count" id="rhymes-count">0</span>
-      </div>
-      <div id="rhymes-list"></div>
-      <button class="btn-dashed" onclick="addRhyme()">+ Agregar copla</button>
-    </div>
-  </div>
-
-</div>
-
+<div class="toast-wrap" id="toast-wrap"></div>
 <script>
-/* ══════ STATE ══════ */
-let data = { subjects: [] };
-let currentIdx = null;
-let currentTab = 'info';
-let dirty = false;
+// @ts-nocheck
+const state = {
+  index: { subjects: [] },
+  subjectDocs: new Map(),
+  selectedSubjectId: null
+};
 
-function subject(){ return data.subjects[currentIdx]; }
+const subjectListEl = document.getElementById('subject-list');
+const subjectPanelEl = document.getElementById('subject-panel');
+const sectionsPanelEl = document.getElementById('sections-panel');
+const emptyStateEl = document.getElementById('empty-state');
+const sectionListEl = document.getElementById('section-list');
 
-function markDirty(){
-  dirty = true;
-  document.getElementById('unsaved-badge').classList.add('show');
+function slugify(value){
+  return String(value || '')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase().trim()
+    .replace(/[^a-z0-9]+/g,'-')
+    .replace(/^-+|-+$/g,'') || 'nueva-materia';
 }
 
-/* ══════ LOAD ══════ */
-async function loadData(){
-  try {
-    const res = await fetch('materias.json');
-    if(!res.ok) throw new Error();
-    data = await res.json();
-  } catch(e){
-    // start with empty data — user can import or create
-  }
-  renderList();
+function esc(value){
+  return String(value || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-function importJSON(e){
-  const file = e.target.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    try {
-      data = JSON.parse(ev.target.result);
-      renderList();
-      markDirty();
-    } catch(err){ alert('JSON inválido'); }
+function showToast(message, type='success'){
+  const wrap = document.getElementById('toast-wrap');
+  const toast = document.createElement('div');
+  toast.className = 'toast ' + type;
+  toast.textContent = message;
+  wrap.appendChild(toast);
+  setTimeout(() => toast.remove(), 3200);
+}
+
+function normalizeCard(card){
+  return {
+    emoji: card && card.emoji ? card.emoji : '❓',
+    front: card && card.front ? card.front : '',
+    back: card && card.back ? card.back : ''
   };
-  reader.readAsText(file);
 }
 
-/* ══════ EXPORT ══════ */
-function exportJSON(){
-  // sync rhymes before export (they use live textareas)
-  if(currentIdx !== null) syncRhymes();
-  const json = JSON.stringify(data, null, 2);
-  const blob = new Blob([json], { type: 'application/json' });
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href = url; a.download = 'materias.json'; a.click();
-  URL.revokeObjectURL(url);
-  dirty = false;
-  document.getElementById('unsaved-badge').classList.remove('show');
-}
-
-/* ══════ VIEWS ══════ */
-function showList(){
-  if(currentIdx !== null) syncRhymes();
-  document.getElementById('view-list').style.display   = 'block';
-  document.getElementById('view-editor').style.display = 'none';
-  renderList();
-}
-
-function renderList(){
-  const list = document.getElementById('subject-list');
-  list.innerHTML = '';
-  document.getElementById('subject-count').textContent = data.subjects.length + ' materia' + (data.subjects.length !== 1 ? 's' : '');
-  data.subjects.forEach((s, i) => {
-    const d = document.createElement('div');
-    d.className = 'subject-row';
-    d.innerHTML = `
-      <div class="s-icon">${s.icon||'📚'}</div>
-      <div class="s-info">
-        <div class="s-name">${s.name||'Sin nombre'}</div>
-        <div class="s-sub">${s.subtitle||''}</div>
-        <div class="s-counts">📖 ${s.flashcards.length} tarjetas · ❓ ${s.quiz.length} preguntas · 🎵 ${(s.rhymes||[]).length} coplas</div>
-      </div>
-      <div class="row-actions">
-        <button class="btn btn-outline btn-sm" onclick="editSubject(${i})">✏️ Editar</button>
-        <button class="btn btn-danger btn-sm" onclick="removeSubject(${i})">🗑️</button>
-      </div>`;
-    list.appendChild(d);
-  });
-}
-
-function editSubject(i){
-  currentIdx = i;
-  const s = subject();
-  document.getElementById('view-list').style.display   = 'none';
-  document.getElementById('view-editor').style.display = 'block';
-  document.getElementById('editor-heading').textContent = (s.icon||'') + ' ' + (s.name||'Nueva materia');
-  // fill info form
-  document.getElementById('f-icon').value        = s.icon||'';
-  document.getElementById('f-name').value        = s.name||'';
-  document.getElementById('f-subtitle').value    = s.subtitle||'';
-  document.getElementById('f-id').value          = s.id||'';
-  document.getElementById('f-color').value       = s.color||'#FF6B6B';
-  document.getElementById('f-audio').value       = s.audio||'';
-  document.getElementById('f-audio-title').value = s.audioTitle||'';
-  showTab(currentTab);
-}
-
-function showTab(tab){
-  currentTab = tab;
-  document.querySelectorAll('.tab').forEach((t,i) => {
-    const tabs = ['info','cards','quiz','rhymes'];
-    t.classList.toggle('active', tabs[i] === tab);
-  });
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('tab-' + (tab === 'cards' ? 'cards' : tab === 'quiz' ? 'quiz' : tab === 'rhymes' ? 'rhymes' : 'info')).classList.add('active');
-  if(tab === 'cards')  renderCards();
-  if(tab === 'quiz')   renderQuiz();
-  if(tab === 'rhymes') renderRhymes();
-}
-
-/* ══════ SUBJECT CRUD ══════ */
-function newSubject(){
-  data.subjects.push({
-    id: 'nueva-materia-' + Date.now(),
-    name: 'Nueva materia', subtitle: '', icon: '📚', color: '#FF6B6B',
-    audio: '', audioTitle: '', flashcards: [], quiz: [], rhymes: []
-  });
-  markDirty();
-  editSubject(data.subjects.length - 1);
-}
-
-function saveInfo(){
-  const s = subject();
-  s.icon       = document.getElementById('f-icon').value.trim();
-  s.name       = document.getElementById('f-name').value.trim();
-  s.subtitle   = document.getElementById('f-subtitle').value.trim();
-  s.id         = document.getElementById('f-id').value.trim().toLowerCase().replace(/\s+/g,'-');
-  s.color      = document.getElementById('f-color').value;
-  s.audio      = document.getElementById('f-audio').value.trim();
-  s.audioTitle = document.getElementById('f-audio-title').value.trim();
-  document.getElementById('editor-heading').textContent = (s.icon||'') + ' ' + (s.name||'');
-  markDirty();
-  alert('✅ Info guardada. Recordá exportar el JSON cuando termines.');
-}
-
-function deleteSubject(){
-  if(!confirm('¿Eliminar esta materia y todo su contenido?')) return;
-  data.subjects.splice(currentIdx, 1);
-  markDirty();
-  showList();
-}
-
-function removeSubject(i){
-  if(!confirm('¿Eliminar "' + data.subjects[i].name + '"?')) return;
-  data.subjects.splice(i, 1);
-  markDirty();
-  renderList();
-}
-
-/* ══════ FLASHCARDS ══════ */
-function renderCards(){
-  const s = subject();
-  const list = document.getElementById('cards-list');
-  document.getElementById('cards-count').textContent = s.flashcards.length;
-  list.innerHTML = '';
-  s.flashcards.forEach((c, i) => {
-    const d = document.createElement('div');
-    d.className = 'item-card';
-    d.id = 'card-item-' + i;
-    d.innerHTML = `
-      <div class="item-header">
-        <div class="item-icon">${c.emoji||'❓'}</div>
-        <div class="item-main">
-          <div class="item-title">${esc(c.front)}</div>
-          <div class="item-sub">${esc(c.back)}</div>
-        </div>
-        <div class="item-btns">
-          <button class="btn btn-outline btn-sm" onclick="toggleCardForm(${i})">✏️</button>
-          <button class="btn btn-danger btn-sm" onclick="deleteCard(${i})">🗑️</button>
-        </div>
-      </div>
-      <div class="item-edit-form" id="card-form-${i}">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Emoji</label>
-            <input type="text" id="cf-emoji-${i}" value="${esc(c.emoji||'')}" maxlength="4" placeholder="🔬">
-          </div>
-          <div class="form-group"></div>
-        </div>
-        <div class="form-group">
-          <label>Pregunta (frente)</label>
-          <textarea id="cf-front-${i}">${esc(c.front)}</textarea>
-        </div>
-        <div class="form-group">
-          <label>Respuesta (dorso)</label>
-          <textarea id="cf-back-${i}">${esc(c.back)}</textarea>
-        </div>
-        <div class="btn-row">
-          <button class="btn btn-success btn-sm" onclick="saveCard(${i})">Guardar</button>
-          <button class="btn btn-ghost btn-sm" onclick="toggleCardForm(${i})">Cancelar</button>
-        </div>
-      </div>`;
-    list.appendChild(d);
-  });
-}
-
-function toggleCardForm(i){
-  const f = document.getElementById('card-form-' + i);
-  f.classList.toggle('open');
-}
-
-function saveCard(i){
-  const s = subject();
-  s.flashcards[i] = {
-    emoji: document.getElementById('cf-emoji-' + i).value.trim(),
-    front: document.getElementById('cf-front-' + i).value.trim(),
-    back:  document.getElementById('cf-back-' + i).value.trim()
-  };
-  markDirty();
-  renderCards();
-}
-
-function deleteCard(i){
-  if(!confirm('¿Eliminar esta tarjeta?')) return;
-  subject().flashcards.splice(i, 1);
-  markDirty();
-  renderCards();
-}
-
-function addCard(){
-  subject().flashcards.push({ emoji: '❓', front: 'Nueva pregunta', back: 'Nueva respuesta' });
-  markDirty();
-  renderCards();
-  const idx = subject().flashcards.length - 1;
-  setTimeout(() => toggleCardForm(idx), 50);
-}
-
-/* ══════ QUIZ ══════ */
-function renderQuiz(){
-  const s = subject();
-  const list = document.getElementById('quiz-list');
-  document.getElementById('quiz-count').textContent = s.quiz.length;
-  list.innerHTML = '';
-  s.quiz.forEach((q, i) => {
-    const d = document.createElement('div');
-    d.className = 'item-card';
-    const correctText = q.opts[q.correct] || '';
-    d.innerHTML = `
-      <div class="item-header">
-        <div class="item-icon">❓</div>
-        <div class="item-main">
-          <div class="item-title">${esc(q.q)}</div>
-          <div class="item-sub">✅ ${esc(correctText)}</div>
-        </div>
-        <div class="item-btns">
-          <button class="btn btn-outline btn-sm" onclick="toggleQuizForm(${i})">✏️</button>
-          <button class="btn btn-danger btn-sm" onclick="deleteQuestion(${i})">🗑️</button>
-        </div>
-      </div>
-      <div class="item-edit-form" id="quiz-form-${i}">
-        <div class="form-group">
-          <label>Pregunta</label>
-          <textarea id="qf-q-${i}">${esc(q.q)}</textarea>
-        </div>
-        <div class="form-group">
-          <label>Opciones — marcá con ● cuál es la correcta</label>
-          <div class="opts-grid">
-            ${['A','B','C','D'].map((l,j) => `
-              <div class="opt-row">
-                <span class="opt-label">${l}</span>
-                <input type="text" id="qf-opt-${i}-${j}" value="${esc(q.opts[j]||'')}">
-                <input type="radio" name="qf-correct-${i}" id="qf-r-${i}-${j}" value="${j}" ${q.correct===j?'checked':''}>
-              </div>`).join('')}
-          </div>
-          <div class="opt-hint">El ● selecciona la respuesta correcta</div>
-        </div>
-        <div class="form-group">
-          <label>Explicación (aparece después de responder)</label>
-          <textarea id="qf-exp-${i}">${esc(q.explanation||'')}</textarea>
-        </div>
-        <div class="btn-row">
-          <button class="btn btn-success btn-sm" onclick="saveQuestion(${i})">Guardar</button>
-          <button class="btn btn-ghost btn-sm" onclick="toggleQuizForm(${i})">Cancelar</button>
-        </div>
-      </div>`;
-    list.appendChild(d);
-  });
-}
-
-function toggleQuizForm(i){
-  document.getElementById('quiz-form-' + i).classList.toggle('open');
-}
-
-function saveQuestion(i){
-  const s = subject();
-  const opts = [0,1,2,3].map(j => document.getElementById('qf-opt-' + i + '-' + j).value.trim());
-  const correctEl = document.querySelector('input[name="qf-correct-' + i + '"]:checked');
-  const correct = correctEl ? parseInt(correctEl.value) : 0;
-  s.quiz[i] = {
-    q: document.getElementById('qf-q-' + i).value.trim(),
+function normalizeQuestion(question){
+  const opts = Array.isArray(question && question.opts) ? question.opts.slice(0,4) : [];
+  while(opts.length < 4) opts.push('');
+  return {
+    q: question && question.q ? question.q : '',
     opts,
-    correct,
-    explanation: document.getElementById('qf-exp-' + i).value.trim()
+    correct: Number.isInteger(question && question.correct) ? question.correct : 0,
+    explanation: question && question.explanation ? question.explanation : ''
   };
-  markDirty();
-  renderQuiz();
 }
 
-function deleteQuestion(i){
-  if(!confirm('¿Eliminar esta pregunta?')) return;
-  subject().quiz.splice(i, 1);
-  markDirty();
-  renderQuiz();
+function normalizeSection(section, fallbackTitle, index){
+  return {
+    id: section && section.id ? section.id : `section-${index+1}`,
+    title: section && section.title ? section.title : fallbackTitle,
+    audio: section && section.audio ? section.audio : null,
+    audioTitle: section && section.audioTitle ? section.audioTitle : null,
+    rhymes: Array.isArray(section && section.rhymes) ? section.rhymes : [],
+    flashcards: Array.isArray(section && section.flashcards) ? section.flashcards.map(normalizeCard) : [],
+    quiz: Array.isArray(section && section.quiz) ? section.quiz.map(normalizeQuestion) : []
+  };
 }
 
-function addQuestion(){
-  subject().quiz.push({ q: 'Nueva pregunta', opts: ['Opción A','Opción B','Opción C','Opción D'], correct: 0, explanation: '' });
-  markDirty();
-  renderQuiz();
-  const idx = subject().quiz.length - 1;
-  setTimeout(() => toggleQuizForm(idx), 50);
+function normalizeSubjectDoc(meta, raw){
+  const doc = raw || {};
+  const sections = Array.isArray(doc.sections) && doc.sections.length
+    ? doc.sections.map((section, index) => normalizeSection(section, meta.subtitle || meta.name || `Sección ${index+1}`, index))
+    : [normalizeSection({}, meta.subtitle || meta.name || 'Sección 1', 0)];
+  return { id: doc.id || meta.id, sections };
 }
 
-/* ══════ RHYMES ══════ */
-function syncRhymes(){
-  if(currentIdx === null) return;
-  const s = subject();
-  document.querySelectorAll('.rhyme-textarea').forEach((ta, i) => {
-    if(i < s.rhymes.length) s.rhymes[i] = ta.value;
+function getSelectedMeta(){
+  return state.index.subjects.find(subject => subject.id === state.selectedSubjectId) || null;
+}
+
+function getSelectedDoc(){
+  const meta = getSelectedMeta();
+  if(!meta || !meta.file) return null;
+  return state.subjectDocs.get(meta.file) || null;
+}
+
+async function loadIndex(){
+  const res = await fetch('materias.json');
+  if(!res.ok) throw new Error('No se pudo cargar materias.json');
+  const json = await res.json();
+  state.index = { subjects: Array.isArray(json.subjects) ? json.subjects : [] };
+}
+
+async function loadSubject(meta){
+  if(!meta || !meta.file) return;
+  if(state.subjectDocs.has(meta.file)) return;
+  const res = await fetch(meta.file);
+  if(!res.ok) throw new Error(`No se pudo cargar ${meta.file}`);
+  const json = await res.json();
+  state.subjectDocs.set(meta.file, normalizeSubjectDoc(meta, json));
+}
+
+function renderSubjectList(){
+  subjectListEl.innerHTML = '';
+  state.index.subjects.forEach(subject => {
+    const item = document.createElement('button');
+    item.type = 'button';
+    item.className = 'subject-item' + (subject.id === state.selectedSubjectId ? ' active' : '');
+    item.innerHTML = `
+      <div class="icon">${esc(subject.icon || '📚')}</div>
+      <div class="meta">
+        <div class="name">${esc(subject.name || 'Sin nombre')}</div>
+        <div class="sub">${esc(subject.subtitle || '')}</div>
+        <div class="file">${esc(subject.file || 'Sin archivo')}</div>
+      </div>`;
+    item.addEventListener('click', () => selectSubject(subject.id));
+    subjectListEl.appendChild(item);
   });
 }
 
-function renderRhymes(){
-  const s = subject();
-  s.rhymes = s.rhymes || [];
-  const list = document.getElementById('rhymes-list');
-  document.getElementById('rhymes-count').textContent = s.rhymes.length;
-  list.innerHTML = '';
-  s.rhymes.forEach((r, i) => {
-    const d = document.createElement('div');
-    d.className = 'rhyme-card';
-    d.innerHTML = `
-      <span style="font-size:18px">🎵</span>
-      <textarea class="rhyme-textarea" rows="2">${esc(r)}</textarea>
-      <button class="btn btn-danger btn-sm" onclick="deleteRhyme(${i})">🗑️</button>`;
-    list.appendChild(d);
+function bindSubjectFields(meta){
+  const assignments = [
+    ['subject-icon', 'icon'],
+    ['subject-name', 'name'],
+    ['subject-subtitle', 'subtitle'],
+    ['subject-id', 'id'],
+    ['subject-file', 'file'],
+    ['subject-audio', 'audio'],
+    ['subject-audio-title', 'audioTitle'],
+    ['subject-color', 'color']
+  ];
+  assignments.forEach(([id, field]) => {
+    const input = document.getElementById(id);
+    input.value = meta[field] ?? (field === 'color' ? '#2563EB' : '');
+    input.oninput = () => {
+      const nextValue = input.value;
+      meta[field] = nextValue === '' && (field === 'audio' || field === 'audioTitle') ? null : nextValue;
+      if(field === 'id' && !meta.file){
+        meta.file = `${slugify(nextValue)}.json`;
+        document.getElementById('subject-file').value = meta.file;
+      }
+      if(field === 'name'){
+        document.getElementById('editor-title').textContent = meta.name || 'Materia sin nombre';
+      }
+      if(field === 'subtitle'){
+        document.getElementById('editor-subtitle').textContent = meta.subtitle || 'Editá la materia, sus secciones y luego guardá los archivos JSON.';
+      }
+      if(field === 'file'){
+        const doc = getSelectedDoc();
+        if(doc){
+          state.subjectDocs.delete(meta.file);
+          state.subjectDocs.set(nextValue, doc);
+        }
+      }
+      document.getElementById('subject-file-label').textContent = meta.file || 'Sin archivo';
+      renderSubjectList();
+    };
   });
 }
 
-function deleteRhyme(i){
-  syncRhymes();
-  subject().rhymes.splice(i, 1);
-  markDirty();
-  renderRhymes();
+function renderSection(section, index){
+  const meta = getSelectedMeta();
+  const card = document.createElement('div');
+  card.className = 'section-card' + (index === 0 ? ' open' : '');
+  card.innerHTML = `
+    <div class="section-summary">
+      <div class="summary-main">
+        <h4>${esc(section.title || `Sección ${index+1}`)}</h4>
+        <p>${section.flashcards.length} tarjetas · ${section.quiz.length} preguntas · ${section.rhymes.length} rimas</p>
+      </div>
+      <div class="section-actions">
+        <button type="button" class="btn btn-secondary btn-toggle">Abrir</button>
+        <button type="button" class="btn btn-danger btn-delete">Eliminar</button>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="stack" style="padding-top:16px">
+        <div class="form-grid">
+          <div class="field">
+            <label>Título</label>
+            <input type="text" class="js-title" value="${esc(section.title)}">
+          </div>
+          <div class="field">
+            <label>ID</label>
+            <input type="text" class="js-id" value="${esc(section.id)}">
+          </div>
+          <div class="field">
+            <label>Audio</label>
+            <input type="text" class="js-audio" value="${esc(section.audio || '')}" placeholder="filename.m4a o vacío">
+          </div>
+          <div class="field">
+            <label>Audio title</label>
+            <input type="text" class="js-audio-title" value="${esc(section.audioTitle || '')}">
+          </div>
+        </div>
+
+        <div class="panel" style="margin-bottom:0">
+          <div class="panel-head">
+            <h3>Rimas</h3>
+          </div>
+          <div class="field">
+            <label>Una rima por línea</label>
+            <textarea class="js-rhymes">${esc(section.rhymes.join('\n'))}</textarea>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-bottom:0">
+          <div class="panel-head">
+            <h3>Tarjetas</h3>
+            <button type="button" class="btn btn-secondary js-add-card">+ Agregar tarjeta</button>
+          </div>
+          <div class="card-list js-card-list"></div>
+        </div>
+
+        <div class="panel" style="margin-bottom:0">
+          <div class="panel-head">
+            <h3>Quiz</h3>
+            <button type="button" class="btn btn-secondary js-add-question">+ Agregar pregunta</button>
+          </div>
+          <div class="quiz-list js-quiz-list"></div>
+        </div>
+      </div>
+    </div>`;
+
+  const toggleBtn = card.querySelector('.btn-toggle');
+  const deleteBtn = card.querySelector('.btn-delete');
+  const summary = card.querySelector('.section-summary');
+  const titleInput = card.querySelector('.js-title');
+  const idInput = card.querySelector('.js-id');
+  const audioInput = card.querySelector('.js-audio');
+  const audioTitleInput = card.querySelector('.js-audio-title');
+  const rhymesInput = card.querySelector('.js-rhymes');
+
+  function refreshSummary(){
+    card.querySelector('h4').textContent = section.title || `Sección ${index+1}`;
+    card.querySelector('p').textContent = `${section.flashcards.length} tarjetas · ${section.quiz.length} preguntas · ${section.rhymes.length} rimas`;
+  }
+
+  function renderCards(){
+    const list = card.querySelector('.js-card-list');
+    list.innerHTML = '';
+    if(!section.flashcards.length){
+      list.innerHTML = '<div class="empty">Sin tarjetas en esta sección.</div>';
+      refreshSummary();
+      return;
+    }
+    section.flashcards.forEach((item, cardIndex) => {
+      const box = document.createElement('div');
+      box.className = 'item-box';
+      box.innerHTML = `
+        <div class="item-head">
+          <strong>Tarjeta ${cardIndex+1}</strong>
+          <button type="button" class="btn btn-danger">Eliminar</button>
+        </div>
+        <div class="form-grid">
+          <div class="field">
+            <label>Emoji</label>
+            <input type="text" class="js-card-emoji" maxlength="4" value="${esc(item.emoji)}">
+          </div>
+          <div class="field full">
+            <label>Frente</label>
+            <textarea class="js-card-front">${esc(item.front)}</textarea>
+          </div>
+          <div class="field full">
+            <label>Dorso</label>
+            <textarea class="js-card-back">${esc(item.back)}</textarea>
+          </div>
+        </div>`;
+      const [emojiInput, frontInput, backInput] = box.querySelectorAll('input,textarea');
+      emojiInput.oninput = () => { item.emoji = emojiInput.value; };
+      frontInput.oninput = () => { item.front = frontInput.value; };
+      backInput.oninput = () => { item.back = backInput.value; };
+      box.querySelector('.btn-danger').onclick = () => {
+        section.flashcards.splice(cardIndex, 1);
+        renderCards();
+      };
+      list.appendChild(box);
+    });
+    refreshSummary();
+  }
+
+  function renderQuiz(){
+    const list = card.querySelector('.js-quiz-list');
+    list.innerHTML = '';
+    if(!section.quiz.length){
+      list.innerHTML = '<div class="empty">Sin preguntas en esta sección.</div>';
+      refreshSummary();
+      return;
+    }
+    section.quiz.forEach((question, questionIndex) => {
+      const box = document.createElement('div');
+      box.className = 'item-box';
+      box.innerHTML = `
+        <div class="item-head">
+          <strong>Pregunta ${questionIndex+1}</strong>
+          <button type="button" class="btn btn-danger">Eliminar</button>
+        </div>
+        <div class="stack">
+          <div class="field">
+            <label>Texto de la pregunta</label>
+            <textarea class="js-q-text">${esc(question.q)}</textarea>
+          </div>
+          <div class="option-grid js-option-grid"></div>
+          <div class="field">
+            <label>Respuesta correcta</label>
+            <select class="js-correct">
+              <option value="0" ${question.correct===0?'selected':''}>Opción 1</option>
+              <option value="1" ${question.correct===1?'selected':''}>Opción 2</option>
+              <option value="2" ${question.correct===2?'selected':''}>Opción 3</option>
+              <option value="3" ${question.correct===3?'selected':''}>Opción 4</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Explicación</label>
+            <textarea class="js-explanation">${esc(question.explanation)}</textarea>
+          </div>
+        </div>`;
+      const optionGrid = box.querySelector('.js-option-grid');
+      question.opts.forEach((opt, optIndex) => {
+        const field = document.createElement('div');
+        field.className = 'field';
+        field.innerHTML = `<label>Opción ${optIndex+1}</label><input type="text" value="${esc(opt)}">`;
+        const input = field.querySelector('input');
+        input.oninput = () => { question.opts[optIndex] = input.value; };
+        optionGrid.appendChild(field);
+      });
+      box.querySelector('.js-q-text').oninput = event => { question.q = event.target.value; };
+      box.querySelector('.js-correct').onchange = event => { question.correct = parseInt(event.target.value, 10) || 0; };
+      box.querySelector('.js-explanation').oninput = event => { question.explanation = event.target.value; };
+      box.querySelector('.btn-danger').onclick = () => {
+        section.quiz.splice(questionIndex, 1);
+        renderQuiz();
+      };
+      list.appendChild(box);
+    });
+    refreshSummary();
+  }
+
+  titleInput.oninput = () => {
+    section.title = titleInput.value;
+    refreshSummary();
+  };
+  idInput.oninput = () => { section.id = idInput.value; };
+  audioInput.oninput = () => { section.audio = audioInput.value.trim() || null; };
+  audioTitleInput.oninput = () => { section.audioTitle = audioTitleInput.value.trim() || null; };
+  rhymesInput.oninput = () => {
+    section.rhymes = rhymesInput.value.split(/\r?\n/).map(line => line.trim()).filter(Boolean);
+    refreshSummary();
+  };
+
+  card.querySelector('.js-add-card').onclick = () => {
+    section.flashcards.push({ emoji:'❓', front:'', back:'' });
+    renderCards();
+  };
+  card.querySelector('.js-add-question').onclick = () => {
+    section.quiz.push({ q:'', opts:['','','',''], correct:0, explanation:'' });
+    renderQuiz();
+  };
+
+  function toggleSection(){
+    card.classList.toggle('open');
+    toggleBtn.textContent = card.classList.contains('open') ? 'Cerrar' : 'Abrir';
+  }
+
+  summary.addEventListener('click', event => {
+    if(event.target.closest('button')) return;
+    toggleSection();
+  });
+  toggleBtn.onclick = toggleSection;
+  deleteBtn.onclick = () => {
+    const doc = getSelectedDoc();
+    if(!doc) return;
+    doc.sections.splice(index, 1);
+    if(doc.sections.length === 0){
+      doc.sections.push({ id:'section-1', title:'Nueva sección', audio:null, audioTitle:null, rhymes:[], flashcards:[], quiz:[] });
+    }
+    renderEditor();
+  };
+
+  renderCards();
+  renderQuiz();
+  return card;
 }
 
-function addRhyme(){
-  syncRhymes();
-  subject().rhymes.push('Nueva copla...');
-  markDirty();
-  renderRhymes();
+function renderSections(){
+  const doc = getSelectedDoc();
+  sectionListEl.innerHTML = '';
+  if(!doc){
+    sectionListEl.innerHTML = '<div class="empty">Esta materia no tiene archivo asociado.</div>';
+    return;
+  }
+  doc.sections.forEach((section, index) => {
+    sectionListEl.appendChild(renderSection(section, index));
+  });
 }
 
-/* ══════ UTILS ══════ */
-function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function renderEditor(){
+  const meta = getSelectedMeta();
+  if(!meta){
+    subjectPanelEl.style.display = 'none';
+    sectionsPanelEl.style.display = 'none';
+    emptyStateEl.style.display = 'block';
+    document.getElementById('editor-title').textContent = 'Seleccioná una materia';
+    document.getElementById('editor-subtitle').textContent = 'Cargá materias.json desde el servidor y editá una materia para comenzar.';
+    return;
+  }
+  emptyStateEl.style.display = 'none';
+  subjectPanelEl.style.display = 'block';
+  sectionsPanelEl.style.display = 'block';
+  document.getElementById('editor-title').textContent = meta.name || 'Materia sin nombre';
+  document.getElementById('editor-subtitle').textContent = meta.subtitle || 'Editá la materia, sus secciones y luego guardá los archivos JSON.';
+  document.getElementById('subject-file-label').textContent = meta.file || 'Sin archivo';
+  bindSubjectFields(meta);
+  renderSections();
+}
 
-/* ══════ START ══════ */
-loadData();
+async function selectSubject(subjectId){
+  state.selectedSubjectId = subjectId;
+  const meta = getSelectedMeta();
+  try {
+    if(meta && meta.file){
+      await loadSubject(meta);
+    }
+    renderSubjectList();
+    renderEditor();
+  } catch (error) {
+    showToast(error.message || 'No se pudo cargar la materia.', 'error');
+  }
+}
+
+function createEmptySubject(){
+  const baseId = `materia-${Date.now()}`;
+  const meta = {
+    id: baseId,
+    file: `${baseId}.json`,
+    name: 'Nueva materia',
+    subtitle: '',
+    icon: '📘',
+    color: '#2563EB',
+    audio: null,
+    audioTitle: null
+  };
+  const doc = {
+    id: baseId,
+    sections: [
+      {
+        id: 'section-1',
+        title: 'Nueva sección',
+        audio: null,
+        audioTitle: null,
+        rhymes: [],
+        flashcards: [],
+        quiz: []
+      }
+    ]
+  };
+  state.index.subjects.push(meta);
+  state.subjectDocs.set(meta.file, doc);
+  renderSubjectList();
+  selectSubject(meta.id);
+}
+
+async function saveJsonFile(fileName, payload){
+  const res = await fetch(`/save?file=${encodeURIComponent(fileName)}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  const json = await res.json().catch(() => ({ ok:false }));
+  if(!res.ok || !json.ok){
+    throw new Error(json.error || `No se pudo guardar ${fileName}`);
+  }
+}
+
+async function saveCurrentSubject(){
+  const meta = getSelectedMeta();
+  const doc = getSelectedDoc();
+  if(!meta || !meta.file || !doc){
+    showToast('La materia seleccionada no tiene un archivo válido.', 'error');
+    return;
+  }
+  doc.id = meta.id;
+  try {
+    await saveJsonFile(meta.file, doc);
+    showToast(`Materia guardada: ${meta.file}`);
+  } catch (error) {
+    showToast(error.message || 'Error al guardar la materia.', 'error');
+  }
+}
+
+async function saveIndex(){
+  try {
+    const payload = {
+      subjects: state.index.subjects.map(subject => ({
+        id: subject.id,
+        file: subject.file || null,
+        name: subject.name || '',
+        subtitle: subject.subtitle || '',
+        icon: subject.icon || '📚',
+        color: subject.color || '#2563EB',
+        audio: subject.audio || null,
+        audioTitle: subject.audioTitle || null
+      }))
+    };
+    await saveJsonFile('materias.json', payload);
+    showToast('Índice guardado: materias.json');
+  } catch (error) {
+    showToast(error.message || 'Error al guardar materias.json.', 'error');
+  }
+}
+
+document.getElementById('btn-new-subject').addEventListener('click', createEmptySubject);
+document.getElementById('btn-add-section').addEventListener('click', () => {
+  const doc = getSelectedDoc();
+  if(!doc) return;
+  const nextIndex = doc.sections.length + 1;
+  doc.sections.push({
+    id: `section-${nextIndex}`,
+    title: `Nueva sección ${nextIndex}`,
+    audio: null,
+    audioTitle: null,
+    rhymes: [],
+    flashcards: [],
+    quiz: []
+  });
+  renderEditor();
+});
+document.getElementById('btn-save-subject').addEventListener('click', saveCurrentSubject);
+document.getElementById('btn-save-index').addEventListener('click', saveIndex);
+
+(async function start(){
+  try {
+    await loadIndex();
+    renderSubjectList();
+    if(state.index.subjects.length){
+      await selectSubject(state.index.subjects[0].id);
+    }
+  } catch (error) {
+    showToast(error.message || 'No se pudo iniciar el editor.', 'error');
+  }
+})();
 </script>
 </body>
 </html>

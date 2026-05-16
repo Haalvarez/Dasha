@@ -4,7 +4,7 @@
     {
       "id": "definicion",
       "title": "¿Qué es un mito?",
-      "audio": "audios/mitos-definicion.m4a",
+      "audio": "mitos-definicion.m4a",
       "audioTitle": "¿Qué es un mito?",
       "rhymes": [
         "Si un pueblo lo quiso contar, un mito te puede explicar. 📜",
@@ -92,7 +92,7 @@
     {
       "id": "tipos",
       "title": "Tipos de mitos",
-      "audio": "audios/mitos-tipos.m4a",
+      "audio": "mitos-tipos.m4a",
       "audioTitle": "Tipos de mitos",
       "rhymes": [
         "Cosmo, teo, antropo también; etiológico y escatológico después. 🌍",
@@ -191,7 +191,7 @@
     {
       "id": "caracteristicas",
       "title": "Características",
-      "audio": "audios/mitos-caracteristicas.m4a",
+      "audio": "mitos-caracteristicas.m4a",
       "audioTitle": "Características del mito",
       "rhymes": [
         "Colectivo y oral, simbólico y sagrado: así viaja el mito de lado a lado. 🗣️",
@@ -328,7 +328,7 @@
     {
       "id": "birmajer",
       "title": "Mitos y Recuerdos — Birmajer",
-      "audio": "audios/Mitos_griegos_y_recuerdos_de_Marcelo_Birmajer.m4a",
+      "audio": "Mitos_griegos_y_recuerdos_de_Marcelo_Birmajer.m4a",
       "audioTitle": "Mitos y recuerdos — Birmajer",
       "rhymes": [
         "Grecia y memoria en un mismo andar: Birmajer las vuelve a mezclar. 🇬🇷",

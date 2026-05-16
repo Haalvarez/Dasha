@@ -81,6 +81,17 @@ h1,h2,h3,.big{font-family:'Fredoka One',cursive}
 .subject-card .s-icon{font-size:32px;margin-bottom:6px}
 .subject-card .s-name{font-family:'Fredoka One',cursive;font-size:14px;line-height:1.3;color:var(--text)}
 .subject-card .s-count{font-size:12px;color:var(--text-soft);margin-top:4px}
+.temas-list{display:flex;flex-direction:column;gap:10px;margin:-6px 0 20px 0}
+.tema-card{
+  background:white;border:2px solid var(--gray-border);border-radius:var(--radius);
+  padding:14px 16px;box-shadow:var(--shadow);cursor:pointer;transition:all .2s;
+  margin-left:18px;
+}
+.tema-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.tema-card.active{border-color:var(--purple);background:var(--purple-light)}
+.tema-card .t-title{font-family:'Fredoka One',cursive;font-size:15px;color:var(--text)}
+.tema-card .t-meta{font-size:12px;color:var(--text-soft);margin-top:4px;font-weight:700}
+.tema-card .t-audio{font-size:12px;color:var(--purple);margin-top:6px;font-weight:800}
 
 /* ─── MODE SELECTOR ─── */
 .mode-bar{
@@ -328,6 +339,7 @@ h1,h2,h3,.big{font-family:'Fredoka One',cursive}
   <!-- SUBJECT SELECTOR -->
   <div class="section-title">📖 Elegí una materia</div>
   <div class="subjects-grid" id="subjects-grid"></div>
+  <div id="temas-list" class="temas-list" style="display:none"></div>
 
   <!-- MODE SELECTOR -->
   <div class="mode-bar" id="mode-bar" style="display:none">
@@ -418,7 +430,7 @@ h1,h2,h3,.big{font-family:'Fredoka One',cursive}
 
 <script>
 // @ts-nocheck
-let SUBJECTS = [];
+let MATERIAS = [];
 const subjectCache = new Map();
 
 /* ═══════════ STREAK & SCORES ═══════════ */
@@ -456,6 +468,7 @@ function saveBestPct(subjectId, pct){
 let currentSubjectMeta = null;
 let currentSubject = null;
 let currentSection = null;
+let currentMateriaId = null;
 let currentSectionIdx = 0;
 let currentMode = 'cards';
 let currentCardIdx = 0;
@@ -469,7 +482,7 @@ let totalStars = parseInt(localStorage.getItem('dasha_stars')||'0');
 /* ═══════════ INIT ═══════════ */
 function init(){
   ensureSectionBar();
-  renderSubjects();
+  renderSelector();
   updateStarDisplay();
   updateStreakDisplay();
 }
@@ -567,9 +580,8 @@ function showQuizContent(){
   box.style.display = 'none';
 }
 
-function getSubjectStats(subjectMeta){
-  if(subjectMeta.file === null) return '🚀 Próximamente';
-  const cached = subjectMeta.file ? subjectCache.get(subjectMeta.file) : null;
+function getTemaStats(temaMeta){
+  const cached = temaMeta.file ? subjectCache.get(temaMeta.file) : null;
   if(!cached) return '✨ Tocá para estudiar';
   const flashcards = cached.sections.reduce((sum, section) => sum + section.flashcards.length, 0);
   const quiz = cached.sections.reduce((sum, section) => sum + section.quiz.length, 0);
@@ -579,19 +591,45 @@ function getSubjectStats(subjectMeta){
   return `📖 ${flashcards} tarjetas · ❓ ${quiz} preguntas`;
 }
 
-function renderSubjects(){
+function renderMaterias(){
   const grid = document.getElementById('subjects-grid');
   grid.innerHTML = '';
-  SUBJECTS.forEach(s => {
+  MATERIAS.forEach(materia => {
     const d = document.createElement('div');
     d.className = 'subject-card';
-    if(currentSubjectMeta && currentSubjectMeta.id === s.id) d.classList.add('active');
-    d.innerHTML = `<div class="s-icon">${s.icon}</div>
-      <div class="s-name">${s.name}<br><span style="font-family:Nunito;font-size:12px;font-weight:600;color:#6B7280">${s.subtitle}</span></div>
-      <div class="s-count">${getSubjectStats(s)}</div>`;
-    d.onclick = () => selectSubject(s.id);
+    if(currentMateriaId === materia.id) d.classList.add('active');
+    d.innerHTML = `<div class="s-icon">${materia.icon}</div>
+      <div class="s-name">${materia.name}</div>
+      <div class="s-count">📚 ${materia.temas.length} tema${materia.temas.length!==1?'s':''}</div>`;
+    d.onclick = () => selectMateria(materia.id);
     grid.appendChild(d);
   });
+}
+
+function renderTemas(){
+  const temasList = document.getElementById('temas-list');
+  temasList.innerHTML = '';
+  const materia = MATERIAS.find(item => item.id === currentMateriaId);
+  if(!materia){
+    temasList.style.display = 'none';
+    return;
+  }
+  materia.temas.forEach(tema => {
+    const card = document.createElement('div');
+    card.className = 'tema-card';
+    if(currentSubjectMeta && currentSubjectMeta.id === tema.id) card.classList.add('active');
+    card.innerHTML = `<div class="t-title">${tema.subtitle}</div>
+      <div class="t-meta">${getTemaStats(tema)}</div>
+      ${tema.audio ? '<div class="t-audio">🎧 Audio disponible</div>' : ''}`;
+    card.onclick = () => selectTema(materia.id, tema.id);
+    temasList.appendChild(card);
+  });
+  temasList.style.display = materia.temas.length ? 'flex' : 'none';
+}
+
+function renderSelector(){
+  renderMaterias();
+  renderTemas();
 }
 
 function normalizeCard(card){
@@ -677,12 +715,30 @@ function updateSectionAudio(){
 }
 
 /* ═══════════ SUBJECT ═══════════ */
-async function selectSubject(id){
-  currentSubjectMeta = SUBJECTS.find(s => s.id === id) || null;
+function selectMateria(id){
+  currentMateriaId = currentMateriaId === id ? id : id;
+  currentSubjectMeta = null;
   currentSubject = null;
   currentSection = null;
   currentSectionIdx = 0;
-  renderSubjects();
+  renderSelector();
+  document.getElementById('mode-bar').style.display = 'none';
+  document.getElementById('section-bar').style.display = 'none';
+  document.getElementById('score-view').style.display = 'none';
+  document.getElementById('quiz-view').style.display = 'none';
+  document.getElementById('cards-view').style.display = 'block';
+  updateSectionAudio();
+  showCardsEmpty('Elegí un tema', 'Primero elegí un tema dentro de la materia para empezar a estudiar.', '📘');
+}
+
+async function selectTema(materiaId, temaId){
+  const materia = MATERIAS.find(item => item.id === materiaId) || null;
+  currentMateriaId = materiaId;
+  currentSubjectMeta = materia ? materia.temas.find(tema => tema.id === temaId) || null : null;
+  currentSubject = null;
+  currentSection = null;
+  currentSectionIdx = 0;
+  renderSelector();
   document.getElementById('score-view').style.display = 'none';
   document.getElementById('quiz-view').style.display = 'none';
   document.getElementById('cards-view').style.display = 'block';
@@ -704,7 +760,7 @@ async function selectSubject(id){
     currentSubject = await loadSubjectFile(currentSubjectMeta);
     currentMode = 'cards';
     selectSection(0);
-    renderSubjects();
+    renderSelector();
   } catch(e) {
     currentSubject = null;
     currentSection = null;
@@ -965,7 +1021,7 @@ async function loadData(){
     const res = await fetch('materias.json');
     if(!res.ok) throw new Error('fetch failed');
     const json = await res.json();
-    SUBJECTS = Array.isArray(json.subjects) ? json.subjects : [];
+    MATERIAS = Array.isArray(json.materias) ? json.materias : [];
     init();
   } catch(e) {
     grid.innerHTML = '<div style="padding:24px;color:var(--coral);font-weight:700;text-align:center">⚠️ No se pudo cargar materias.json.<br><small>Servir desde un servidor HTTP (no file://).</small></div>';

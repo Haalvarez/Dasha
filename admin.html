@@ -24,15 +24,14 @@ a{color:inherit}
 .sidebar-top{display:flex;flex-direction:column;gap:10px}
 .sidebar-actions{display:flex;gap:10px;flex-wrap:wrap}
 .sidebar .btn{width:100%;justify-content:center}
-.subject-list{display:flex;flex-direction:column;gap:10px;overflow:auto;padding-right:4px}
-.subject-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px 12px;display:flex;gap:12px;align-items:flex-start;transition:.18s}
-.subject-item:hover{background:rgba(255,255,255,.08);transform:translateY(-1px)}
-.subject-item.active{background:#1D4ED8;border-color:#60A5FA;box-shadow:0 12px 28px rgba(37,99,235,.28)}
-.subject-item .icon{font-size:24px;line-height:1}
-.subject-item .meta{flex:1;min-width:0}
-.subject-item .name{font-weight:800;color:#fff}
-.subject-item .sub{font-size:12px;color:#CBD5E1;margin-top:2px}
-.subject-item .file{font-size:11px;color:#93C5FD;margin-top:6px;word-break:break-word}
+.materia-list{display:flex;flex-direction:column;gap:10px;overflow:auto;padding-right:4px}
+.materia-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px 12px;display:flex;gap:12px;align-items:flex-start;transition:.18s}
+.materia-item:hover{background:rgba(255,255,255,.08);transform:translateY(-1px)}
+.materia-item.active{background:#1D4ED8;border-color:#60A5FA;box-shadow:0 12px 28px rgba(37,99,235,.28)}
+.materia-item .icon{font-size:24px;line-height:1}
+.materia-item .meta{flex:1;min-width:0}
+.materia-item .name{font-weight:800;color:#fff}
+.materia-item .sub{font-size:12px;color:#CBD5E1;margin-top:2px}
 .main{padding:28px;overflow:auto}
 .toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px;flex-wrap:wrap}
 .toolbar h2{font-size:28px;font-weight:900}
@@ -47,8 +46,6 @@ a{color:inherit}
 .btn-success:hover{background:#047857}
 .btn-danger{background:#fff;color:var(--danger);border:1px solid #FCA5A5}
 .btn-danger:hover{background:var(--danger-soft)}
-.btn-ghost{background:transparent;color:inherit;border:1px dashed rgba(148,163,184,.45)}
-.btn-ghost:hover{background:rgba(148,163,184,.08)}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
 .panel h3{font-size:18px;margin-bottom:14px}
 .panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
@@ -61,6 +58,13 @@ label{font-size:12px;font-weight:900;letter-spacing:.04em;text-transform:upperca
 input,textarea,select{width:100%;border:1px solid var(--line);background:#fff;border-radius:12px;padding:11px 12px;color:var(--text)}
 textarea{min-height:96px;resize:vertical}
 input:focus,textarea:focus,select:focus{outline:none;border-color:#60A5FA;box-shadow:0 0 0 4px rgba(96,165,250,.18)}
+.tema-list{display:flex;flex-direction:column;gap:10px}
+.tema-item{display:flex;align-items:flex-start;gap:12px;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--panel-soft);transition:.18s}
+.tema-item.active{border-color:#60A5A5;background:var(--accent-soft)}
+.tema-main{flex:1;min-width:0}
+.tema-title{font-weight:900;color:var(--text)}
+.tema-meta{font-size:12px;color:var(--muted);margin-top:4px;word-break:break-word}
+.tema-actions{display:flex;gap:8px;flex-wrap:wrap}
 .section-list{display:flex;flex-direction:column;gap:14px}
 .section-card{border:1px solid var(--line);border-radius:16px;background:var(--panel-soft);overflow:hidden}
 .section-summary{display:flex;align-items:center;gap:14px;padding:16px 18px;cursor:pointer}
@@ -99,65 +103,92 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#60A5FA;box-sh
   <aside class="sidebar">
     <div class="sidebar-top">
       <h1>Admin</h1>
-      <p>Editor de materias y secciones. Guardá el índice y cada materia por separado usando el servidor local.</p>
+      <p>Editor de materias y temas. Guardá el índice general y el JSON del tema seleccionado usando el servidor local.</p>
       <div class="sidebar-actions">
-        <button class="btn btn-primary" id="btn-new-subject">+ Nueva materia</button>
+        <button class="btn btn-primary" id="btn-new-materia">+ Nueva materia</button>
         <a class="btn btn-secondary" href="index.html">Ver app</a>
       </div>
     </div>
-    <div class="subject-list" id="subject-list"></div>
+    <div class="materia-list" id="materia-list"></div>
   </aside>
   <main class="main">
     <div class="toolbar">
       <div>
         <h2 id="editor-title">Seleccioná una materia</h2>
-        <p id="editor-subtitle">Cargá materias.json desde el servidor y editá una materia para comenzar.</p>
+        <p id="editor-subtitle">Elegí una materia y después un tema para editar su contenido.</p>
       </div>
       <div class="toolbar-actions">
-        <button class="btn btn-success" id="btn-save-subject">Guardar materia</button>
+        <button class="btn btn-success" id="btn-save-tema">Guardar tema</button>
         <button class="btn btn-primary" id="btn-save-index">Guardar índice</button>
       </div>
     </div>
 
-    <div class="panel" id="subject-panel" style="display:none">
+    <div class="panel" id="materia-panel" style="display:none">
       <div class="panel-head">
         <h3>Datos de la materia</h3>
-        <span class="code-note" id="subject-file-label"></span>
+        <button class="btn btn-danger" id="btn-delete-materia">Eliminar materia</button>
       </div>
       <div class="form-grid-3">
         <div class="field">
-          <label for="subject-icon">Ícono</label>
-          <input id="subject-icon" type="text" maxlength="4">
+          <label for="materia-icon">Ícono</label>
+          <input id="materia-icon" type="text" maxlength="4">
         </div>
         <div class="field">
-          <label for="subject-name">Nombre</label>
-          <input id="subject-name" type="text">
+          <label for="materia-name">Nombre</label>
+          <input id="materia-name" type="text">
         </div>
         <div class="field">
-          <label for="subject-color">Color</label>
-          <input id="subject-color" type="color">
+          <label for="materia-color">Color</label>
+          <input id="materia-color" type="color">
         </div>
       </div>
       <div class="form-grid" style="margin-top:14px">
+        <div class="field full">
+          <label for="materia-id">ID</label>
+          <input id="materia-id" type="text">
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="temas-panel" style="display:none">
+      <div class="panel-head">
+        <div>
+          <h3>Temas</h3>
+          <p class="muted">Cada tema apunta a un archivo JSON independiente.</p>
+        </div>
+        <button class="btn btn-secondary" id="btn-new-tema">+ Nuevo tema</button>
+      </div>
+      <div class="tema-list" id="tema-list"></div>
+    </div>
+
+    <div class="panel" id="tema-panel" style="display:none">
+      <div class="panel-head">
+        <div>
+          <h3>Datos del tema</h3>
+          <span class="code-note" id="tema-file-label"></span>
+        </div>
+        <button class="btn btn-danger" id="btn-delete-tema">Eliminar tema</button>
+      </div>
+      <div class="form-grid">
         <div class="field">
-          <label for="subject-subtitle">Subtítulo</label>
-          <input id="subject-subtitle" type="text">
+          <label for="tema-subtitle">Título / subtítulo</label>
+          <input id="tema-subtitle" type="text">
         </div>
         <div class="field">
-          <label for="subject-id">ID</label>
-          <input id="subject-id" type="text">
+          <label for="tema-id">ID</label>
+          <input id="tema-id" type="text">
         </div>
         <div class="field">
-          <label for="subject-file">Archivo JSON</label>
-          <input id="subject-file" type="text">
+          <label for="tema-file">Archivo JSON</label>
+          <input id="tema-file" type="text">
         </div>
         <div class="field">
-          <label for="subject-audio">Audio de materia</label>
-          <input id="subject-audio" type="text" placeholder="filename.m4a o vacío">
+          <label for="tema-audio">Audio del tema</label>
+          <input id="tema-audio" type="text" placeholder="filename.m4a o vacío">
         </div>
         <div class="field full">
-          <label for="subject-audio-title">Título visible del audio de materia</label>
-          <input id="subject-audio-title" type="text">
+          <label for="tema-audio-title">Título visible del audio</label>
+          <input id="tema-audio-title" type="text">
         </div>
       </div>
     </div>
@@ -166,7 +197,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#60A5FA;box-sh
       <div class="panel-head">
         <div>
           <h3>Secciones</h3>
-          <p class="muted">Cada materia guarda sus tarjetas, preguntas, rimas y audio por sección.</p>
+          <p class="muted">Cada tema guarda sus tarjetas, preguntas, rimas y audio por sección.</p>
         </div>
         <button class="btn btn-secondary" id="btn-add-section">+ Agregar sección</button>
       </div>
@@ -182,15 +213,19 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#60A5FA;box-sh
 <script>
 // @ts-nocheck
 const state = {
-  index: { subjects: [] },
-  subjectDocs: new Map(),
-  selectedSubjectId: null
+  index: { materias: [] },
+  temaDocs: new Map(),
+  selectedMateriaId: null,
+  selectedTemaId: null
 };
 
-const subjectListEl = document.getElementById('subject-list');
-const subjectPanelEl = document.getElementById('subject-panel');
+const materiaListEl = document.getElementById('materia-list');
+const materiaPanelEl = document.getElementById('materia-panel');
+const temasPanelEl = document.getElementById('temas-panel');
+const temaPanelEl = document.getElementById('tema-panel');
 const sectionsPanelEl = document.getElementById('sections-panel');
 const emptyStateEl = document.getElementById('empty-state');
+const temaListEl = document.getElementById('tema-list');
 const sectionListEl = document.getElementById('section-list');
 
 function slugify(value){
@@ -198,7 +233,7 @@ function slugify(value){
     .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
     .toLowerCase().trim()
     .replace(/[^a-z0-9]+/g,'-')
-    .replace(/^-+|-+$/g,'') || 'nueva-materia';
+    .replace(/^-+|-+$/g,'') || 'nuevo-id';
 }
 
 function esc(value){
@@ -223,7 +258,7 @@ function normalizeCard(card){
 }
 
 function normalizeQuestion(question){
-  const opts = Array.isArray(question && question.opts) ? question.opts.slice(0,4) : [];
+  const opts = Array.isArray(question && question.opts) ? question.opts.slice(0, 4) : [];
   while(opts.length < 4) opts.push('');
   return {
     q: question && question.q ? question.q : '',
@@ -245,100 +280,162 @@ function normalizeSection(section, fallbackTitle, index){
   };
 }
 
-function normalizeSubjectDoc(meta, raw){
+function normalizeTemaDoc(tema, raw){
   const doc = raw || {};
   const sections = Array.isArray(doc.sections) && doc.sections.length
-    ? doc.sections.map((section, index) => normalizeSection(section, meta.subtitle || meta.name || `Sección ${index+1}`, index))
-    : [normalizeSection({}, meta.subtitle || meta.name || 'Sección 1', 0)];
-  return { id: doc.id || meta.id, sections };
+    ? doc.sections.map((section, index) => normalizeSection(section, tema.subtitle || `Sección ${index+1}`, index))
+    : [normalizeSection({}, tema.subtitle || 'Sección 1', 0)];
+  return { id: doc.id || tema.id, sections };
 }
 
-function getSelectedMeta(){
-  return state.index.subjects.find(subject => subject.id === state.selectedSubjectId) || null;
+function getSelectedMateria(){
+  return state.index.materias.find(materia => materia.id === state.selectedMateriaId) || null;
 }
 
-function getSelectedDoc(){
-  const meta = getSelectedMeta();
-  if(!meta || !meta.file) return null;
-  return state.subjectDocs.get(meta.file) || null;
+function getSelectedTema(){
+  const materia = getSelectedMateria();
+  if(!materia) return null;
+  return (materia.temas || []).find(tema => tema.id === state.selectedTemaId) || null;
+}
+
+function getSelectedTemaDoc(){
+  const tema = getSelectedTema();
+  if(!tema || !tema.file) return null;
+  return state.temaDocs.get(tema.file) || null;
 }
 
 async function loadIndex(){
   const res = await fetch('materias.json');
   if(!res.ok) throw new Error('No se pudo cargar materias.json');
   const json = await res.json();
-  state.index = { subjects: Array.isArray(json.subjects) ? json.subjects : [] };
+  state.index = { materias: Array.isArray(json.materias) ? json.materias : [] };
 }
 
-async function loadSubject(meta){
-  if(!meta || !meta.file) return;
-  if(state.subjectDocs.has(meta.file)) return;
-  const res = await fetch(meta.file);
-  if(!res.ok) throw new Error(`No se pudo cargar ${meta.file}`);
+async function loadTema(tema){
+  if(!tema || !tema.file) return;
+  if(state.temaDocs.has(tema.file)) return;
+  const res = await fetch(tema.file);
+  if(!res.ok) throw new Error(`No se pudo cargar ${tema.file}`);
   const json = await res.json();
-  state.subjectDocs.set(meta.file, normalizeSubjectDoc(meta, json));
+  state.temaDocs.set(tema.file, normalizeTemaDoc(tema, json));
 }
 
-function renderSubjectList(){
-  subjectListEl.innerHTML = '';
-  state.index.subjects.forEach(subject => {
+function renderMateriaList(){
+  materiaListEl.innerHTML = '';
+  state.index.materias.forEach(materia => {
     const item = document.createElement('button');
     item.type = 'button';
-    item.className = 'subject-item' + (subject.id === state.selectedSubjectId ? ' active' : '');
+    item.className = 'materia-item' + (materia.id === state.selectedMateriaId ? ' active' : '');
     item.innerHTML = `
-      <div class="icon">${esc(subject.icon || '📚')}</div>
+      <div class="icon">${esc(materia.icon || '📚')}</div>
       <div class="meta">
-        <div class="name">${esc(subject.name || 'Sin nombre')}</div>
-        <div class="sub">${esc(subject.subtitle || '')}</div>
-        <div class="file">${esc(subject.file || 'Sin archivo')}</div>
+        <div class="name">${esc(materia.name || 'Sin nombre')}</div>
+        <div class="sub">${(materia.temas || []).length} tema${(materia.temas || []).length !== 1 ? 's' : ''}</div>
       </div>`;
-    item.addEventListener('click', () => selectSubject(subject.id));
-    subjectListEl.appendChild(item);
+    item.addEventListener('click', () => selectMateria(materia.id));
+    materiaListEl.appendChild(item);
   });
 }
 
-function bindSubjectFields(meta){
-  const assignments = [
-    ['subject-icon', 'icon'],
-    ['subject-name', 'name'],
-    ['subject-subtitle', 'subtitle'],
-    ['subject-id', 'id'],
-    ['subject-file', 'file'],
-    ['subject-audio', 'audio'],
-    ['subject-audio-title', 'audioTitle'],
-    ['subject-color', 'color']
+function bindMateriaFields(materia){
+  const bindings = [
+    ['materia-icon', 'icon'],
+    ['materia-name', 'name'],
+    ['materia-id', 'id'],
+    ['materia-color', 'color']
   ];
-  assignments.forEach(([id, field]) => {
+  bindings.forEach(([id, field]) => {
     const input = document.getElementById(id);
-    input.value = meta[field] ?? (field === 'color' ? '#2563EB' : '');
+    input.value = materia[field] || (field === 'color' ? '#2563EB' : '');
     input.oninput = () => {
-      const nextValue = input.value;
-      meta[field] = nextValue === '' && (field === 'audio' || field === 'audioTitle') ? null : nextValue;
-      if(field === 'id' && !meta.file){
-        meta.file = `${slugify(nextValue)}.json`;
-        document.getElementById('subject-file').value = meta.file;
-      }
+      materia[field] = input.value;
       if(field === 'name'){
-        document.getElementById('editor-title').textContent = meta.name || 'Materia sin nombre';
+        document.getElementById('editor-title').textContent = materia.name || 'Materia sin nombre';
       }
-      if(field === 'subtitle'){
-        document.getElementById('editor-subtitle').textContent = meta.subtitle || 'Editá la materia, sus secciones y luego guardá los archivos JSON.';
+      if(field === 'id'){
+        state.selectedMateriaId = input.value;
       }
-      if(field === 'file'){
-        const doc = getSelectedDoc();
-        if(doc){
-          state.subjectDocs.delete(meta.file);
-          state.subjectDocs.set(nextValue, doc);
-        }
-      }
-      document.getElementById('subject-file-label').textContent = meta.file || 'Sin archivo';
-      renderSubjectList();
+      renderMateriaList();
+      renderTemaList();
     };
   });
 }
 
+function bindTemaFields(tema){
+  const bindings = [
+    ['tema-subtitle', 'subtitle'],
+    ['tema-id', 'id'],
+    ['tema-file', 'file'],
+    ['tema-audio', 'audio'],
+    ['tema-audio-title', 'audioTitle']
+  ];
+  bindings.forEach(([id, field]) => {
+    const input = document.getElementById(id);
+    input.value = tema[field] ?? '';
+    input.oninput = () => {
+      const previousFile = tema.file;
+      const nextValue = input.value.trim();
+      tema[field] = nextValue === '' && (field === 'audio' || field === 'audioTitle') ? null : nextValue;
+      if(field === 'id'){
+        state.selectedTemaId = tema.id;
+      }
+      if(field === 'file' && previousFile !== tema.file){
+        const doc = state.temaDocs.get(previousFile);
+        if(doc){
+          state.temaDocs.delete(previousFile);
+          state.temaDocs.set(tema.file, doc);
+        }
+      }
+      document.getElementById('tema-file-label').textContent = tema.file || 'Sin archivo';
+      renderTemaList();
+      updateEditorHeader();
+    };
+  });
+}
+
+function renderTemaList(){
+  const materia = getSelectedMateria();
+  temaListEl.innerHTML = '';
+  if(!materia) return;
+  (materia.temas || []).forEach(tema => {
+    const item = document.createElement('div');
+    item.className = 'tema-item' + (tema.id === state.selectedTemaId ? ' active' : '');
+    item.innerHTML = `
+      <div class="tema-main">
+        <div class="tema-title">${esc(tema.subtitle || 'Sin título')}</div>
+        <div class="tema-meta">${esc(tema.file || 'Sin archivo')}</div>
+      </div>
+      <div class="tema-actions">
+        <button type="button" class="btn btn-secondary js-open">Editar</button>
+        <button type="button" class="btn btn-danger js-delete">Eliminar</button>
+      </div>`;
+    item.querySelector('.js-open').onclick = () => selectTema(tema.id);
+    item.querySelector('.js-delete').onclick = () => deleteTema(tema.id);
+    temaListEl.appendChild(item);
+  });
+  if(!(materia.temas || []).length){
+    temaListEl.innerHTML = '<div class="empty">Esta materia todavía no tiene temas.</div>';
+  }
+}
+
+function updateEditorHeader(){
+  const materia = getSelectedMateria();
+  const tema = getSelectedTema();
+  if(!materia){
+    document.getElementById('editor-title').textContent = 'Seleccioná una materia';
+    document.getElementById('editor-subtitle').textContent = 'Elegí una materia y después un tema para editar su contenido.';
+    return;
+  }
+  if(!tema){
+    document.getElementById('editor-title').textContent = materia.name || 'Materia sin nombre';
+    document.getElementById('editor-subtitle').textContent = 'Elegí o creá un tema para editar sus secciones.';
+    return;
+  }
+  document.getElementById('editor-title').textContent = `${materia.name || 'Materia'} · ${tema.subtitle || 'Tema'}`;
+  document.getElementById('editor-subtitle').textContent = 'Editá el tema, sus secciones y luego guardá los cambios.';
+}
+
 function renderSection(section, index){
-  const meta = getSelectedMeta();
   const card = document.createElement('div');
   card.className = 'section-card' + (index === 0 ? ' open' : '');
   card.innerHTML = `
@@ -434,21 +531,21 @@ function renderSection(section, index){
         <div class="form-grid">
           <div class="field">
             <label>Emoji</label>
-            <input type="text" class="js-card-emoji" maxlength="4" value="${esc(item.emoji)}">
+            <input type="text" maxlength="4" value="${esc(item.emoji)}">
           </div>
           <div class="field full">
             <label>Frente</label>
-            <textarea class="js-card-front">${esc(item.front)}</textarea>
+            <textarea>${esc(item.front)}</textarea>
           </div>
           <div class="field full">
             <label>Dorso</label>
-            <textarea class="js-card-back">${esc(item.back)}</textarea>
+            <textarea>${esc(item.back)}</textarea>
           </div>
         </div>`;
-      const [emojiInput, frontInput, backInput] = box.querySelectorAll('input,textarea');
-      emojiInput.oninput = () => { item.emoji = emojiInput.value; };
-      frontInput.oninput = () => { item.front = frontInput.value; };
-      backInput.oninput = () => { item.back = backInput.value; };
+      const fields = box.querySelectorAll('input,textarea');
+      fields[0].oninput = () => { item.emoji = fields[0].value; };
+      fields[1].oninput = () => { item.front = fields[1].value; };
+      fields[2].oninput = () => { item.back = fields[2].value; };
       box.querySelector('.btn-danger').onclick = () => {
         section.flashcards.splice(cardIndex, 1);
         renderCards();
@@ -528,11 +625,11 @@ function renderSection(section, index){
   };
 
   card.querySelector('.js-add-card').onclick = () => {
-    section.flashcards.push({ emoji:'❓', front:'', back:'' });
+    section.flashcards.push({ emoji: '❓', front: '', back: '' });
     renderCards();
   };
   card.querySelector('.js-add-question').onclick = () => {
-    section.quiz.push({ q:'', opts:['','','',''], correct:0, explanation:'' });
+    section.quiz.push({ q: '', opts: ['', '', '', ''], correct: 0, explanation: '' });
     renderQuiz();
   };
 
@@ -547,11 +644,11 @@ function renderSection(section, index){
   });
   toggleBtn.onclick = toggleSection;
   deleteBtn.onclick = () => {
-    const doc = getSelectedDoc();
+    const doc = getSelectedTemaDoc();
     if(!doc) return;
     doc.sections.splice(index, 1);
     if(doc.sections.length === 0){
-      doc.sections.push({ id:'section-1', title:'Nueva sección', audio:null, audioTitle:null, rhymes:[], flashcards:[], quiz:[] });
+      doc.sections.push({ id: 'section-1', title: 'Nueva sección', audio: null, audioTitle: null, rhymes: [], flashcards: [], quiz: [] });
     }
     renderEditor();
   };
@@ -562,10 +659,10 @@ function renderSection(section, index){
 }
 
 function renderSections(){
-  const doc = getSelectedDoc();
+  const doc = getSelectedTemaDoc();
   sectionListEl.innerHTML = '';
   if(!doc){
-    sectionListEl.innerHTML = '<div class="empty">Esta materia no tiene archivo asociado.</div>';
+    sectionListEl.innerHTML = '<div class="empty">Este tema no tiene archivo asociado.</div>';
     return;
   }
   doc.sections.forEach((section, index) => {
@@ -574,48 +671,81 @@ function renderSections(){
 }
 
 function renderEditor(){
-  const meta = getSelectedMeta();
-  if(!meta){
-    subjectPanelEl.style.display = 'none';
+  const materia = getSelectedMateria();
+  const tema = getSelectedTema();
+  updateEditorHeader();
+
+  if(!materia){
+    materiaPanelEl.style.display = 'none';
+    temasPanelEl.style.display = 'none';
+    temaPanelEl.style.display = 'none';
     sectionsPanelEl.style.display = 'none';
     emptyStateEl.style.display = 'block';
-    document.getElementById('editor-title').textContent = 'Seleccioná una materia';
-    document.getElementById('editor-subtitle').textContent = 'Cargá materias.json desde el servidor y editá una materia para comenzar.';
     return;
   }
+
   emptyStateEl.style.display = 'none';
-  subjectPanelEl.style.display = 'block';
+  materiaPanelEl.style.display = 'block';
+  temasPanelEl.style.display = 'block';
+  bindMateriaFields(materia);
+  renderTemaList();
+
+  if(!tema){
+    temaPanelEl.style.display = 'none';
+    sectionsPanelEl.style.display = 'none';
+    return;
+  }
+
+  temaPanelEl.style.display = 'block';
   sectionsPanelEl.style.display = 'block';
-  document.getElementById('editor-title').textContent = meta.name || 'Materia sin nombre';
-  document.getElementById('editor-subtitle').textContent = meta.subtitle || 'Editá la materia, sus secciones y luego guardá los archivos JSON.';
-  document.getElementById('subject-file-label').textContent = meta.file || 'Sin archivo';
-  bindSubjectFields(meta);
+  document.getElementById('tema-file-label').textContent = tema.file || 'Sin archivo';
+  bindTemaFields(tema);
   renderSections();
 }
 
-async function selectSubject(subjectId){
-  state.selectedSubjectId = subjectId;
-  const meta = getSelectedMeta();
-  try {
-    if(meta && meta.file){
-      await loadSubject(meta);
-    }
-    renderSubjectList();
-    renderEditor();
-  } catch (error) {
-    showToast(error.message || 'No se pudo cargar la materia.', 'error');
+async function selectMateria(materiaId){
+  state.selectedMateriaId = materiaId;
+  const materia = getSelectedMateria();
+  const temas = materia ? (materia.temas || []) : [];
+  state.selectedTemaId = temas.length ? temas[0].id : null;
+  if(temas.length){
+    await loadTema(temas[0]);
   }
+  renderMateriaList();
+  renderEditor();
 }
 
-function createEmptySubject(){
-  const baseId = `materia-${Date.now()}`;
-  const meta = {
-    id: baseId,
-    file: `${baseId}.json`,
+async function selectTema(temaId){
+  state.selectedTemaId = temaId;
+  const tema = getSelectedTema();
+  if(tema && tema.file){
+    await loadTema(tema);
+  }
+  renderMateriaList();
+  renderEditor();
+}
+
+function createEmptyMateria(){
+  const id = `materia-${Date.now()}`;
+  state.index.materias.push({
+    id,
     name: 'Nueva materia',
-    subtitle: '',
     icon: '📘',
     color: '#2563EB',
+    temas: []
+  });
+  renderMateriaList();
+  selectMateria(id);
+}
+
+function createEmptyTema(){
+  const materia = getSelectedMateria();
+  if(!materia) return;
+  const baseId = `tema-${Date.now()}`;
+  const tema = {
+    id: baseId,
+    file: `${baseId}.json`,
+    subtitle: 'Nuevo tema',
     audio: null,
     audioTitle: null
   };
@@ -633,10 +763,39 @@ function createEmptySubject(){
       }
     ]
   };
-  state.index.subjects.push(meta);
-  state.subjectDocs.set(meta.file, doc);
-  renderSubjectList();
-  selectSubject(meta.id);
+  materia.temas = materia.temas || [];
+  materia.temas.push(tema);
+  state.temaDocs.set(tema.file, doc);
+  state.selectedTemaId = tema.id;
+  renderEditor();
+}
+
+function deleteMateria(){
+  const materia = getSelectedMateria();
+  if(!materia) return;
+  if(!confirm(`¿Eliminar la materia "${materia.name}" y sus temas del índice?`)) return;
+  state.index.materias = state.index.materias.filter(item => item.id !== materia.id);
+  state.selectedMateriaId = state.index.materias[0] ? state.index.materias[0].id : null;
+  state.selectedTemaId = null;
+  if(state.selectedMateriaId){
+    selectMateria(state.selectedMateriaId);
+  } else {
+    renderMateriaList();
+    renderEditor();
+  }
+}
+
+function deleteTema(temaId){
+  const materia = getSelectedMateria();
+  if(!materia) return;
+  const tema = (materia.temas || []).find(item => item.id === temaId);
+  if(!tema) return;
+  if(!confirm(`¿Eliminar el tema "${tema.subtitle}"?`)) return;
+  materia.temas = (materia.temas || []).filter(item => item.id !== temaId);
+  if(state.selectedTemaId === temaId){
+    state.selectedTemaId = materia.temas[0] ? materia.temas[0].id : null;
+  }
+  renderEditor();
 }
 
 async function saveJsonFile(fileName, payload){
@@ -645,40 +804,43 @@ async function saveJsonFile(fileName, payload){
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   });
-  const json = await res.json().catch(() => ({ ok:false }));
+  const json = await res.json().catch(() => ({ ok: false }));
   if(!res.ok || !json.ok){
     throw new Error(json.error || `No se pudo guardar ${fileName}`);
   }
 }
 
-async function saveCurrentSubject(){
-  const meta = getSelectedMeta();
-  const doc = getSelectedDoc();
-  if(!meta || !meta.file || !doc){
-    showToast('La materia seleccionada no tiene un archivo válido.', 'error');
+async function saveCurrentTema(){
+  const tema = getSelectedTema();
+  const doc = getSelectedTemaDoc();
+  if(!tema || !tema.file || !doc){
+    showToast('Seleccioná un tema válido para guardar.', 'error');
     return;
   }
-  doc.id = meta.id;
+  doc.id = tema.id;
   try {
-    await saveJsonFile(meta.file, doc);
-    showToast(`Materia guardada: ${meta.file}`);
+    await saveJsonFile(tema.file, doc);
+    showToast(`Tema guardado: ${tema.file}`);
   } catch (error) {
-    showToast(error.message || 'Error al guardar la materia.', 'error');
+    showToast(error.message || 'Error al guardar el tema.', 'error');
   }
 }
 
 async function saveIndex(){
   try {
     const payload = {
-      subjects: state.index.subjects.map(subject => ({
-        id: subject.id,
-        file: subject.file || null,
-        name: subject.name || '',
-        subtitle: subject.subtitle || '',
-        icon: subject.icon || '📚',
-        color: subject.color || '#2563EB',
-        audio: subject.audio || null,
-        audioTitle: subject.audioTitle || null
+      materias: state.index.materias.map(materia => ({
+        id: materia.id || '',
+        name: materia.name || '',
+        icon: materia.icon || '📚',
+        color: materia.color || '#2563EB',
+        temas: (materia.temas || []).map(tema => ({
+          id: tema.id || '',
+          file: tema.file || '',
+          subtitle: tema.subtitle || '',
+          audio: tema.audio || null,
+          audioTitle: tema.audioTitle || null
+        }))
       }))
     };
     await saveJsonFile('materias.json', payload);
@@ -688,9 +850,15 @@ async function saveIndex(){
   }
 }
 
-document.getElementById('btn-new-subject').addEventListener('click', createEmptySubject);
+document.getElementById('btn-new-materia').addEventListener('click', createEmptyMateria);
+document.getElementById('btn-new-tema').addEventListener('click', createEmptyTema);
+document.getElementById('btn-delete-materia').addEventListener('click', deleteMateria);
+document.getElementById('btn-delete-tema').addEventListener('click', () => {
+  const tema = getSelectedTema();
+  if(tema) deleteTema(tema.id);
+});
 document.getElementById('btn-add-section').addEventListener('click', () => {
-  const doc = getSelectedDoc();
+  const doc = getSelectedTemaDoc();
   if(!doc) return;
   const nextIndex = doc.sections.length + 1;
   doc.sections.push({
@@ -704,15 +872,17 @@ document.getElementById('btn-add-section').addEventListener('click', () => {
   });
   renderEditor();
 });
-document.getElementById('btn-save-subject').addEventListener('click', saveCurrentSubject);
+document.getElementById('btn-save-tema').addEventListener('click', saveCurrentTema);
 document.getElementById('btn-save-index').addEventListener('click', saveIndex);
 
 (async function start(){
   try {
     await loadIndex();
-    renderSubjectList();
-    if(state.index.subjects.length){
-      await selectSubject(state.index.subjects[0].id);
+    renderMateriaList();
+    if(state.index.materias.length){
+      await selectMateria(state.index.materias[0].id);
+    } else {
+      renderEditor();
     }
   } catch (error) {
     showToast(error.message || 'No se pudo iniciar el editor.', 'error');
